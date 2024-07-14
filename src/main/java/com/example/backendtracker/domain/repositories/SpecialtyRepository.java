@@ -1,6 +1,6 @@
-package com.example.backendtracker.repositories;
+package com.example.backendtracker.domain.repositories;
 
-import com.example.backendtracker.models.Specialty;
+import com.example.backendtracker.domain.models.Specialty;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

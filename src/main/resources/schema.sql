@@ -101,7 +101,6 @@ CREATE TABLE ClassGroups (
     id_class_group SERIAL PRIMARY KEY,
     id_subject INT,
     description TEXT,
-    quantity INT,
     id_class_format INT,
     id_teacher INT,
     FOREIGN KEY (id_subject) REFERENCES Subjects(id_subject),

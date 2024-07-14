@@ -1,6 +1,6 @@
-package com.example.backendtracker.repositories;
+package com.example.backendtracker.domain.repositories;
 
-import com.example.backendtracker.models.ClassFormat;
+import com.example.backendtracker.domain.models.ClassFormat;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

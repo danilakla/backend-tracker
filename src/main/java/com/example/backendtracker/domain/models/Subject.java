@@ -1,4 +1,4 @@
-package com.example.backendtracker.models;
+package com.example.backendtracker.domain.models;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -8,10 +8,10 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("Disciplines")
-public class Discipline {
+@Table("Subjects")
+public class Subject {
     @Id
+    private Integer idSubject;
     private Integer idDiscipline;
-    private Integer idDean;
-    private String name;
+    private Integer idTeacher;
 }

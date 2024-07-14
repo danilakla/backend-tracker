@@ -1,6 +1,6 @@
-package com.example.backendtracker.repositories;
+package com.example.backendtracker.domain.repositories;
 
-import com.example.backendtracker.models.Subgroup;
+import com.example.backendtracker.domain.models.Subgroup;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
