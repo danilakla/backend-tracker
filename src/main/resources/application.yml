@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+
+
+  docker:
+    compose:
+      stop:
+        command: down
+  sql:
+    init:
+      mode: never
+
+jwt:
+  secret: 956PBFst1FguLr5irJD-aQ
+  expirationMs: 100000
+logging:
+  level:
+    org.springframework.security: trace
