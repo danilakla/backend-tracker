@@ -14,5 +14,4 @@ public class BackendTrackerApplication {
     public static void main(String[] args) {
         SpringApplication.run(BackendTrackerApplication.class, args);
     }
-
 }
