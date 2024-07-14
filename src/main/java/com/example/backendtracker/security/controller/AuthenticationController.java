@@ -25,8 +25,6 @@ import java.util.Objects;
 
 @RestController
 public class AuthenticationController {
-
-
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
