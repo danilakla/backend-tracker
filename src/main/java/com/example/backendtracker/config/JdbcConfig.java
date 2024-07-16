@@ -1,4 +1,4 @@
-package com.example.backendtracker.security.config;
+package com.example.backendtracker.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
