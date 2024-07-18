@@ -1,5 +1,5 @@
 package com.example.backendtracker.security.dto;
 
-public record UserRegistrationRequestDTO(String username, String password, String role, Integer id) {
+public record UserRegistrationRequestDTO(String login, String password, String role) {
 
 }

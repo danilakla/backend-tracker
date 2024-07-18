@@ -11,11 +11,29 @@
 --     c_username varchar not null unique,
 --     c_password varchar not null
 -- );
+CREATE TABLE UserRole (
+id_role SERIAL PRIMARY KEY,
+role_name varchar(50)
+);
+INSERT INTO UserRole (role_name) VALUES
+('ADMIN'),
+('STUDENT'),
+('TEACHER'),
+('DEAN');
+CREATE TABLE UserAccount (
+    id_account SERIAL PRIMARY KEY,
+    login VARCHAR(50),
+    password VARCHAR(50),
+    id_role INT,
+    FOREIGN KEY (id_role) REFERENCES UserRole(id_role)
+);
 
 CREATE TABLE Admins (
     id_admin SERIAL PRIMARY KEY,
     first_name VARCHAR(30),
-    last_name VARCHAR(30)
+    last_name VARCHAR(30),
+    id_account INT,
+    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
 );
 
 CREATE TABLE Universities (
@@ -24,6 +42,7 @@ CREATE TABLE Universities (
     description TEXT,
     id_admin INT,
     FOREIGN KEY (id_admin) REFERENCES Admins(id_admin)
+
 );
 
 CREATE TABLE Deans (
@@ -33,7 +52,10 @@ CREATE TABLE Deans (
     patronymic VARCHAR(50),
     faculty VARCHAR(70),
     id_university INT,
-    FOREIGN KEY (id_university) REFERENCES Universities(id_university)
+    id_account INT,
+    FOREIGN KEY (id_university) REFERENCES Universities(id_university),
+    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
+
 );
 
 CREATE TABLE Specialties (
@@ -64,7 +86,9 @@ CREATE TABLE Teachers (
     last_name VARCHAR(50),
     first_name VARCHAR(50),
     patronymic VARCHAR(50),
-    FOREIGN KEY (id_university) REFERENCES Universities(id_university)
+    id_account INT,
+    FOREIGN KEY (id_university) REFERENCES Universities(id_university),
+    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
 );
 
 CREATE TABLE Subgroups (
@@ -83,10 +107,10 @@ CREATE TABLE Students (
     last_name VARCHAR(50),
     first_name VARCHAR(50),
     patronymic VARCHAR(50),
-    login VARCHAR(50),
-    password VARCHAR(50),
     key_student_parents TEXT,
-    FOREIGN KEY (id_subgroup) REFERENCES Subgroups(id_subgroup)
+    id_account INT,
+    FOREIGN KEY (id_subgroup) REFERENCES Subgroups(id_subgroup),
+    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
 );
 
 CREATE TABLE Subjects (
