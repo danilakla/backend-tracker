@@ -1,4 +1,4 @@
-package com.example.backendtracker.security.service;
+package com.example.backendtracker.security.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

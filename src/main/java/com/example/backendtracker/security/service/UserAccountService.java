@@ -1,43 +1,70 @@
 package com.example.backendtracker.security.service;
 
+import com.example.backendtracker.domain.models.UserAccount;
 import com.example.backendtracker.domain.repositories.UserAccountRepository;
-import com.example.backendtracker.domain.repositories.UserRoleRepository;
+import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
+import com.example.backendtracker.security.exception.UserAlreadyExistsException;
+import com.example.backendtracker.security.util.JwtService;
+import com.example.backendtracker.security.util.UserPasswordManager;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-//TODO REVIEW AFTER INIT ENTITY FOR ALL PROJECT
 
+@AllArgsConstructor
 @Service
 public class UserAccountService {
 
-    @Autowired
-    public UserAccountService(UserAccountRepository userAccountRepository, UserRoleRepository userRoleRepository, UserPasswordManager userPasswordManager) {
-        this.userAccountRepository = userAccountRepository;
-        this.userRoleRepository = userRoleRepository;
-        this.userPasswordManager = userPasswordManager;
-    }
+
+    private final JwtService jwtService;
     private final UserAccountRepository userAccountRepository;
-    private final UserRoleRepository userRoleRepository;
+    private final RoleService roleService;
 
     private final UserPasswordManager userPasswordManager;
 
+    private final AuthenticationManager authenticationManager;
+
+    public String authenticateUser(AuthenticationRequestDTO authenticationRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authenticationRequest.login(), authenticationRequest.password()));
 
 
-
-    public void registerUser(UserRegistrationRequestDTO userRegistrationRequest, String sql) {
-        String encryptedPassword = userPasswordManager.encode(userRegistrationRequest.password());
-
+        return obtainJwtToken(authentication);
+    }
 
 
-//        userAccountRepository.findByLogin(userRegistrationRequest.login()).stream().findFirst().orElseThrow(e->new );
-//        User user = userService.createNewUser(registrationUserDto);
+    public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) {
 
+        checkUserExist(userRegistrationRequest);
+        createUserAccount(userRegistrationRequest);
 
+    }
+
+    private String obtainJwtToken(Authentication authentication) {
+        final String role = authentication.getAuthorities().iterator().next().getAuthority();
+        return jwtService.generateToken(authentication.getName(), role);
+
+    }
+
+    private void checkUserExist(UserRegistrationRequestDTO userRegistrationRequestDTO) {
+        userAccountRepository.findByLogin(userRegistrationRequestDTO.login())
+                .ifPresent(existingUser -> {
+                    throw new UserAlreadyExistsException("User with login " + existingUser.getLogin() + " already exists.");
+                });
+    }
+
+    private void createUserAccount(UserRegistrationRequestDTO userRegistrationRequest) {
+        Integer roleId = roleService.getRoleIdByRoleName(userRegistrationRequest.role());
+        UserAccount userAccount = new UserAccount(null,
+                userPasswordManager.encode(userRegistrationRequest.password()),
+                userRegistrationRequest.login(), roleId);
+
+        userAccountRepository.save(userAccount);
     }
 
 

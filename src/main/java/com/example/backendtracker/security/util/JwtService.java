@@ -1,11 +1,10 @@
-package com.example.backendtracker.security.service;
+package com.example.backendtracker.security.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -18,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 @Service
-public class JwtUtil {
+public class JwtService {
 
     @Value("${jwt.secret}")
     private String secret; // Securely manage this value
