@@ -19,4 +19,5 @@ public class Student {
     private String login;
     private String password;
     private String keyStudentParents;
+    private Integer idAccount;
 }

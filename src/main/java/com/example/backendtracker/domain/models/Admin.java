@@ -14,4 +14,5 @@ public class Admin {
     private Integer idAdmin;
     private String firstName;
     private String lastName;
+    private Integer idAccount;
 }

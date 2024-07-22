@@ -16,4 +16,5 @@ public class Teacher {
     private String lastName;
     private String firstName;
     private String patronymic;
+    private Integer idAccount;
 }

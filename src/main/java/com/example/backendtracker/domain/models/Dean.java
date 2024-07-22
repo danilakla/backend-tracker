@@ -17,4 +17,5 @@ public class Dean {
     private String patronymic;
     private String faculty;
     private Integer idUniversity;
+    private Integer idAccount;
 }

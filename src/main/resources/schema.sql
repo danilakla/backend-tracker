@@ -12,14 +12,16 @@
 --     c_password varchar not null
 -- );
 CREATE TABLE UserRole (
-id_role SERIAL PRIMARY KEY,
-role_name varchar(50)
+    id_role SERIAL PRIMARY KEY,
+    role_name varchar(50)
 );
+
 INSERT INTO UserRole (role_name) VALUES
 ('ADMIN'),
 ('STUDENT'),
 ('TEACHER'),
 ('DEAN');
+
 CREATE TABLE UserAccount (
     id_account SERIAL PRIMARY KEY,
     login VARCHAR(50),
