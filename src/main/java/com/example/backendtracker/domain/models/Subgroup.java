@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("Subgroups")
+@Table("subgroups")
 public class Subgroup {
     @Id
     private Integer idSubgroup;

@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("ClassGroups")
+@Table("classgroups")
 public class ClassGroup {
     @Id
     private Integer idClassGroup;

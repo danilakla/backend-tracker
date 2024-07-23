@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("StudentGrades")
+@Table("studentgrades")
 public class StudentGrade {
     @Id
     private Integer idStudent;

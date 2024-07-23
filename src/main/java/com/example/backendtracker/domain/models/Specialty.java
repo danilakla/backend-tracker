@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("Specialties")
+@Table("specialties")
 public class Specialty {
     @Id
     private Integer idSpecialty;
