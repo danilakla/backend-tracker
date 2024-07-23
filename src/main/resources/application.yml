@@ -19,4 +19,8 @@ jwt:
   expirationMs: 100000
 logging:
   level:
-    org.springframework.security: trace
+    org.springframework.data.jdbc: trace
+#    org.springframework.security: trace
+springdoc:
+  api-docs:
+    path: /api-docs

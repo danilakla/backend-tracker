@@ -15,9 +15,8 @@ import org.springframework.data.relational.core.mapping.Table;
 public class UserAccount {
     @Id
     private Integer idAccount;
-    private String password;
     private String login;
-
+    private String password;
     private Integer idRole;
 
 }

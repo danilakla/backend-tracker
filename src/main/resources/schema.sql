@@ -26,7 +26,7 @@ INSERT INTO UserRoles (role_name) VALUES
 CREATE TABLE UserAccounts (
     id_account SERIAL PRIMARY KEY,
     login VARCHAR(50),
-    password VARCHAR(50),
+    password VARCHAR(250),
     id_role INT,
     FOREIGN KEY (id_role) REFERENCES UserRoles(id_role)
 );
