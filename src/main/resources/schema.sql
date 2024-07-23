@@ -11,23 +11,24 @@
 --     c_username varchar not null unique,
 --     c_password varchar not null
 -- );
-CREATE TABLE UserRole (
+
+CREATE TABLE UserRoles (
     id_role SERIAL PRIMARY KEY,
     role_name varchar(50)
 );
 
-INSERT INTO UserRole (role_name) VALUES
+INSERT INTO UserRoles (role_name) VALUES
 ('ADMIN'),
 ('STUDENT'),
 ('TEACHER'),
 ('DEAN');
 
-CREATE TABLE UserAccount (
+CREATE TABLE UserAccounts (
     id_account SERIAL PRIMARY KEY,
     login VARCHAR(50),
     password VARCHAR(50),
     id_role INT,
-    FOREIGN KEY (id_role) REFERENCES UserRole(id_role)
+    FOREIGN KEY (id_role) REFERENCES UserRoles(id_role)
 );
 
 CREATE TABLE Admins (
@@ -35,7 +36,7 @@ CREATE TABLE Admins (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     id_account INT,
-    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
+    FOREIGN KEY (id_account) REFERENCES UserAccounts(id_account)
 );
 
 CREATE TABLE Universities (
@@ -56,7 +57,7 @@ CREATE TABLE Deans (
     id_university INT,
     id_account INT,
     FOREIGN KEY (id_university) REFERENCES Universities(id_university),
-    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
+    FOREIGN KEY (id_account) REFERENCES UserAccounts(id_account)
 
 );
 
@@ -90,7 +91,7 @@ CREATE TABLE Teachers (
     patronymic VARCHAR(50),
     id_account INT,
     FOREIGN KEY (id_university) REFERENCES Universities(id_university),
-    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
+    FOREIGN KEY (id_account) REFERENCES UserAccounts(id_account)
 );
 
 CREATE TABLE Subgroups (
@@ -112,7 +113,7 @@ CREATE TABLE Students (
     key_student_parents TEXT,
     id_account INT,
     FOREIGN KEY (id_subgroup) REFERENCES Subgroups(id_subgroup),
-    FOREIGN KEY (id_account) REFERENCES UserAccount(id_account)
+    FOREIGN KEY (id_account) REFERENCES UserAccounts(id_account)
 );
 
 CREATE TABLE Subjects (
