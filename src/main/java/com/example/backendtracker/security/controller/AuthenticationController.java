@@ -25,7 +25,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDTO authenticationRequest) throws Exception {
+    public ResponseEntity<AuthenticationResponseDTO> createAuthenticationToken(@RequestBody AuthenticationRequestDTO authenticationRequest) throws Exception {
 
         String jwtAccessToken = userService.authenticateUser(authenticationRequest);
         return ResponseEntity.ok(new AuthenticationResponseDTO(jwtAccessToken));

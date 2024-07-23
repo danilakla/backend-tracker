@@ -3,6 +3,7 @@ package com.example.backendtracker.security.service;
 import com.example.backendtracker.domain.models.UserRole;
 import com.example.backendtracker.domain.repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;

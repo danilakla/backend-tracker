@@ -11,13 +11,12 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("UserAccount")
+@Table("UserAccounts")
 public class UserAccount {
     @Id
     private Integer idAccount;
-    private String password;
     private String login;
-
+    private String password;
     private Integer idRole;
 
 }

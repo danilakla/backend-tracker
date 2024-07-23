@@ -32,8 +32,7 @@ public class WebSecurityConfig {
 
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
-    @Autowired
-    private JwtService jwtService;
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -55,9 +54,16 @@ public class WebSecurityConfig {
                         .requestMatchers("/teacher").hasRole("Teacher")
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers("/register").permitAll()
-
                         .requestMatchers("/student").hasRole("Student")
                         .requestMatchers("/home").permitAll()
+                        .requestMatchers("/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/swagger-resources/**",
+                                "/webjars/**",
+                                "/swagger-ui/index.html",
+                                "/favicon-32x32.png",
+                                "/favicon-16x16.png").permitAll()
 
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
