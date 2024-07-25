@@ -8,6 +8,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.NoSuchElementException;
@@ -17,16 +18,22 @@ import java.util.NoSuchElementException;
 public class AuthenticationControllerAdvice {
 
 
-    @ExceptionHandler({UserAlreadyExistsException.class, NoSuchElementException.class})
-    public ResponseEntity<HttpClientErrorException.BadRequest> handlerBadCredentialsForRegistration() {
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<String> handlerBadCredentialsForRegistration(UserAlreadyExistsException exception) {
 
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+
+    @ExceptionHandler( NoSuchElementException.class)
+    public ResponseEntity<String> handlerBadCredentialsForRegistration(NoSuchElementException exception) {
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<HttpClientErrorException.Unauthorized> handleUnAuthorizedUser() {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> handleUnAuthorizedUser(AuthenticationException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
     }
 }
 

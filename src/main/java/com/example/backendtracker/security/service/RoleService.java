@@ -20,7 +20,7 @@ public class RoleService {
 
     public Integer getRoleIdByRoleName(String roleName) {
         return finedRoleByRoleName(roleName)
-                .orElseThrow(() -> new NoSuchElementException("role: " + roleName + "is not founded")
+                .orElseThrow(() -> new NoSuchElementException("The role: " + roleName + " has not been  found")
                 ).getIdRole();
 
     }

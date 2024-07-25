@@ -38,6 +38,7 @@ public class AuthenticationController {
         return ResponseEntity.status(201).build();
     }
 
+
     @GetMapping("/student")
     public String student() {
         return "ok student";

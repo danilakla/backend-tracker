@@ -5,6 +5,8 @@ import com.example.backendtracker.domain.repositories.UserAccountRepository;
 import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.exception.UserAlreadyExistsException;
+import com.example.backendtracker.security.service.data.UserStoringKeys;
+import com.example.backendtracker.security.service.helper.UserServiceFactory;
 import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.util.UserPasswordManager;
 import lombok.AllArgsConstructor;
@@ -25,8 +27,9 @@ public class UserAccountService {
     private final RoleService roleService;
 
     private final UserPasswordManager userPasswordManager;
-
     private final AuthenticationManager authenticationManager;
+
+    private final UserServiceFactory userServiceFactory;
 
     public String authenticateUser(AuthenticationRequestDTO authenticationRequest) {
 
@@ -41,8 +44,13 @@ public class UserAccountService {
     public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) {
 
         checkUserExist(userRegistrationRequest);
-        createUserAccount(userRegistrationRequest);
+        Integer idAccount = createUserAccount(userRegistrationRequest);
+        initUserEntity(new UserStoringKeys(idAccount, userRegistrationRequest.key()), userRegistrationRequest.role());
 
+    }
+
+    private void initUserEntity(UserStoringKeys userStoringKeys, String role) {
+        userServiceFactory.initUser(userStoringKeys, role);
     }
 
     private String obtainJwtToken(Authentication authentication) {
@@ -58,13 +66,12 @@ public class UserAccountService {
                 });
     }
 
-    private void createUserAccount(UserRegistrationRequestDTO userRegistrationRequest) {
+    private Integer createUserAccount(UserRegistrationRequestDTO userRegistrationRequest) {
         Integer roleId = roleService.getRoleIdByRoleName(userRegistrationRequest.role());
         UserAccount userAccount = new UserAccount(null,
-                userPasswordManager.encode(userRegistrationRequest.password()),
-                userRegistrationRequest.login(), roleId);
+                userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
 
-        userAccountRepository.save(userAccount);
+        return  userAccountRepository.save(userAccount).getIdAccount();
     }
 
 

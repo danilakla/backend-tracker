@@ -1,5 +1,7 @@
 package com.example.backendtracker.security.dto;
 
-public record UserRegistrationRequestDTO(String login, String password, String role) {
+import jakarta.annotation.Nullable;
+
+public record UserRegistrationRequestDTO(String login, String password, String role, @Nullable String key) {
 
 }
