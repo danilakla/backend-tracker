@@ -16,3 +16,4 @@ public class ClassFormat {
     private String description;
     private Integer idDean;
 }
+
