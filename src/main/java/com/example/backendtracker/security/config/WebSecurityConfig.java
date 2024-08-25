@@ -52,6 +52,9 @@ public class WebSecurityConfig {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/teacher").hasRole("Teacher")
+                        .requestMatchers("/dean/**").hasRole("Dean")
+                        .requestMatchers("/admin/**").permitAll()
+
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/student").hasRole("Student")

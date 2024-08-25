@@ -1,5 +1,6 @@
 package com.example.backendtracker.domain.repositories;
 
+import com.example.backendtracker.domain.models.Dean;
 import com.example.backendtracker.domain.models.Student;
 import com.example.backendtracker.domain.models.UserRole;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -11,7 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends CrudRepository<Student, Integer> {
-
+    @Query(value = "SELECT * FROM Students WHERE id_account = :id_account")
+    Optional<Student> findByIdAccount(@Param("id_account") Integer id_account);
     @Query(value = "SELECT * FROM students WHERE name = :name")
     Student findStudentByName(@Param("name") String name);
 }

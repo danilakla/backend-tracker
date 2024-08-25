@@ -3,6 +3,7 @@ package com.example.backendtracker.security.controller;
 import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.AuthenticationResponseDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
+import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.service.UserAccountService;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-//TODO REVIEW AFTER INIT ENTITY FOR ALL PROJECT
 @AllArgsConstructor
 @RestController
 public class AuthenticationController {
@@ -33,7 +33,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationRequestDTO userRegistrationRequest) {
+    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
         userService.registerUser(userRegistrationRequest);
         return ResponseEntity.status(201).build();
     }

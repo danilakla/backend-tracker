@@ -1,5 +1,7 @@
 package com.example.backendtracker.security.controller.advicer;
 
+import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
+import com.example.backendtracker.security.exception.InvalidEncryptionProcessException;
 import com.example.backendtracker.security.exception.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +21,15 @@ public class AuthenticationControllerAdvice {
 
 
     @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<String> handlerBadCredentialsForRegistration(UserAlreadyExistsException exception) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 
-    @ExceptionHandler( NoSuchElementException.class)
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+
     public ResponseEntity<String> handlerBadCredentialsForRegistration(NoSuchElementException exception) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
@@ -34,6 +39,18 @@ public class AuthenticationControllerAdvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<String> handleUnAuthorizedUser(AuthenticationException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidEncryptionProcessException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handleInvalidEncryptionProcess(InvalidEncryptionProcessException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidEncryptedDataException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleInvalidEncryptionData(InvalidEncryptedDataException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 }
 

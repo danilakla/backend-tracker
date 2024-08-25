@@ -16,15 +16,15 @@ spring:
 
 jwt:
   secret: e.eh7Nxr]zH1QwGP4;s'57@a}p|eW~^"iZNniT8opo,49/bJMs39sb[JDP6jD>#
-  expirationMs: 100000
-logging:
-  level:
-    org.springframework.data.jdbc: debug
-    org.springframework.jdbc: debug
+  expirationMs: 100000000
+#logging:
+#  level:
+#    org.springframework.data.jdbc: debug
+#    org.springframework.jdbc: debug
 #    org.springframework.security: trace
 springdoc:
   api-docs:
     path: /api-docs
 encryption:
-  key: YOUR_BASE64_ENCODED_KEY_HERE
+  key: KtZG4c2YJo0rz0p21iTXV8YYUGvJMb30JQOkvpXpRk8=
   algorithm: AES

@@ -12,4 +12,7 @@ import java.util.List;
 public interface SpecialtyRepository extends CrudRepository<Specialty, Integer> {
     @Query("SELECT * FROM Specialty WHERE idDean = :idDean")
     List<Specialty> findByDeanId(@Param("idDean") Integer idDean);
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.backendtracker.security.service.helper;
 
+import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.service.UserInitializer;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserServiceFactory {
         }
     }
 
-    public void initUser(UserStoringKeys userStoringKeys, String role) {
+    public void initUser(UserStoringKeys userStoringKeys, String role) throws InvalidEncryptedDataException {
          serviceMap.get(role.toUpperCase()).init(userStoringKeys);
     }
 }

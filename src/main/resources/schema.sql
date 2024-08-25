@@ -96,7 +96,7 @@ CREATE TABLE Teachers (
 
 CREATE TABLE Subgroups (
     id_subgroup SERIAL PRIMARY KEY,
-    subgroup_number INT,
+    subgroup_number VARCHAR(50),
     admission_date DATE,
     id_dean INT,
     id_specialty INT,

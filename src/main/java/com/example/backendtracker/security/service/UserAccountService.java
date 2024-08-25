@@ -4,6 +4,7 @@ import com.example.backendtracker.domain.models.UserAccount;
 import com.example.backendtracker.domain.repositories.UserAccountRepository;
 import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
+import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.exception.UserAlreadyExistsException;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
 import com.example.backendtracker.security.service.helper.UserServiceFactory;
@@ -15,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @AllArgsConstructor
@@ -40,8 +42,8 @@ public class UserAccountService {
         return obtainJwtToken(authentication);
     }
 
-
-    public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) {
+@Transactional
+    public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
 
         checkUserExist(userRegistrationRequest);
         Integer idAccount = createUserAccount(userRegistrationRequest);
@@ -49,7 +51,7 @@ public class UserAccountService {
 
     }
 
-    private void initUserEntity(UserStoringKeys userStoringKeys, String role) {
+    private void initUserEntity(UserStoringKeys userStoringKeys, String role) throws InvalidEncryptedDataException {
         userServiceFactory.initUser(userStoringKeys, role);
     }
 

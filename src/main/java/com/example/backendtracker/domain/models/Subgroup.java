@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Subgroup {
     @Id
     private Integer idSubgroup;
-    private Integer subgroupNumber;
+    private String subgroupNumber;
     private LocalDate admissionDate;
     private Integer idDean;
     private Integer idSpecialty;

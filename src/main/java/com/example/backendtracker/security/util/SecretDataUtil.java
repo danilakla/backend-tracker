@@ -1,8 +1,11 @@
 package com.example.backendtracker.security.util;
 
 
-public interface SecretDataUtil {
-    public String encrypt(String data) throws Exception;
+import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
+import com.example.backendtracker.security.exception.InvalidEncryptionProcessException;
 
-    public String decrypt(String encryptedData) throws Exception;
+public interface SecretDataUtil {
+    public String encrypt(String data) throws InvalidEncryptionProcessException;
+
+    public String decrypt(String encryptedData) throws InvalidEncryptedDataException;
 }

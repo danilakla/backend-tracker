@@ -2,12 +2,21 @@ package com.example.backendtracker.entities.dean.controller;
 import com.example.backendtracker.entities.dean.dto.CreateClassFormatRequestDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/dean")
 public class DeanController {
+
+
+    @PostMapping("/students/create")
+    public String createStudentAccounts(@AuthenticationPrincipal UserDetails userDetails){
+
+        return "";
+    }
     @PostMapping("/class-format/create")
     @ResponseStatus(HttpStatus.OK)
     public String createClassFormat(@RequestBody CreateClassFormatRequestDTO createClassFormatRequestDTO) {
