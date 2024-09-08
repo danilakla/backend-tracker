@@ -17,11 +17,12 @@ public class TeacherInitializer implements UserInitializer {
     private final SecretDataUtil secretDataUtil;
 
     @Override
-    public void init(UserStoringKeys userStoringKeys) throws InvalidEncryptedDataException {
-        Integer idUniversity = Integer.valueOf(secretDataUtil.decrypt(userStoringKeys.secKey()));
+    public void init(String role, UserStoringKeys userStoringKeys) throws InvalidEncryptedDataException {
+        Integer universityId = getUniversityId(secretDataUtil.decrypt(userStoringKeys.secKey()), role);
+
         teacherRepository.save(Teacher
                 .builder()
-                .idUniversity(idUniversity)
+                .idUniversity(universityId)
                 .idAccount(userStoringKeys.idAccount()).build());
     }
 }

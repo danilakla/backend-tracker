@@ -7,6 +7,8 @@ import com.example.backendtracker.security.service.UserInitializer;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
 import com.example.backendtracker.security.util.SecretDataUtil;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.BadRequestException;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,10 +20,15 @@ public class DeanInitializer implements UserInitializer {
     private final DeanRepository deanRepository;
 
     @Override
-    public void init(UserStoringKeys userStoringKeys) throws InvalidEncryptedDataException {
-        Integer idUniversity = Integer.valueOf(secretDataUtil.decrypt(userStoringKeys.secKey()));
+    public void init(String role, UserStoringKeys userStoringKeys) throws InvalidEncryptedDataException {
+
+        Integer universityId = getUniversityId(secretDataUtil.decrypt(userStoringKeys.secKey()), role);
+
         deanRepository.save(Dean.builder()
-                .idUniversity(idUniversity)
+                .idUniversity(universityId)
                 .idAccount(userStoringKeys.idAccount()).build());
+
     }
+
+
 }

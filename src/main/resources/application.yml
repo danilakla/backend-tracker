@@ -6,10 +6,10 @@ spring:
     driver-class-name: org.postgresql.Driver
 
 
-  docker:
-    compose:
-      stop:
-        command: down
+#  docker:
+#    compose:
+#      stop:
+#        command: down
   sql:
     init:
       mode: always
@@ -17,11 +17,11 @@ spring:
 jwt:
   secret: e.eh7Nxr]zH1QwGP4;s'57@a}p|eW~^"iZNniT8opo,49/bJMs39sb[JDP6jD>#
   expirationMs: 100000000
-#logging:
-#  level:
+logging:
+  level:
 #    org.springframework.data.jdbc: debug
 #    org.springframework.jdbc: debug
-#    org.springframework.security: trace
+    org.springframework.security: trace
 springdoc:
   api-docs:
     path: /api-docs

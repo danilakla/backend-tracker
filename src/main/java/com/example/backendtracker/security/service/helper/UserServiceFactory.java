@@ -29,6 +29,6 @@ public class UserServiceFactory {
     }
 
     public void initUser(UserStoringKeys userStoringKeys, String role) throws InvalidEncryptedDataException {
-         serviceMap.get(role.toUpperCase()).init(userStoringKeys);
+         serviceMap.get(role.toUpperCase()).init(role,userStoringKeys);
     }
 }

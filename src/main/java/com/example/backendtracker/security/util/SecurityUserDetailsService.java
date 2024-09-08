@@ -37,6 +37,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
                 builder()
                 .username(userAccount.getLogin())
                 .password(userAccount.getPassword())
-                .authorities(userRole).build();
+                .authorities("ROLE_"+userRole).build();
     }
 }

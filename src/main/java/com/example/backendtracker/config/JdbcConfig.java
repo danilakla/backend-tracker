@@ -8,7 +8,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
-//TODO REVIEW AFTER INIT ENTITY FOR ALL PROJECT
 
 @Configuration
 public class JdbcConfig {

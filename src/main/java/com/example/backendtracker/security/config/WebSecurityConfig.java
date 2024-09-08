@@ -21,8 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.List;
-//TODO REVIEW AFTER INIT ENTITY FOR ALL PROJECT
-
+//TODO TEST FOR AUTH TESTING
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -51,9 +50,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/teacher").hasRole("Teacher")
-                        .requestMatchers("/dean/**").hasRole("Dean")
-                        .requestMatchers("/admin/**").permitAll()
+                        .requestMatchers("/teacher").hasRole("TEACHER")
+                        .requestMatchers("/dean/**").hasRole("DEAN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers("/register").permitAll()

@@ -1,5 +1,8 @@
 package com.example.backendtracker.entities.dean.controller;
 import com.example.backendtracker.entities.dean.dto.CreateClassFormatRequestDTO;
+import com.example.backendtracker.entities.dean.dto.CreateSpecialtyDto;
+import com.example.backendtracker.entities.dean.service.DeanService;
+import com.example.backendtracker.util.AccountInformationRetriever;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -8,11 +11,24 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/dean")
+@RequestMapping("dean")
 public class DeanController {
 
+    private final AccountInformationRetriever accountInformationRetriever;
+    private final DeanService deanService;
 
-    @PostMapping("/students/create")
+
+    @PostMapping("specialty/create")
+    public String createSpecialty(@RequestBody CreateSpecialtyDto specialtyDto,  @AuthenticationPrincipal UserDetails userDetails){
+
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+
+        deanService.createSpecialty(specialtyDto,accountId);
+        return "create specialty successful";
+    }
+
+
+    @PostMapping("students/create")
     public String createStudentAccounts(@AuthenticationPrincipal UserDetails userDetails){
 
         return "";

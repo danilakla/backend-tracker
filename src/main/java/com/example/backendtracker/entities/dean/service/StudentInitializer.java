@@ -22,4 +22,6 @@ public class StudentInitializer {
                 .idDean(deanId).build());
 
     }
+
+
 }

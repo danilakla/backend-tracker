@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 
 public class BackendTrackerApplication {
-
     public static void main(String[] args) {
+
 
         SpringApplication.run(BackendTrackerApplication.class, args);
     }

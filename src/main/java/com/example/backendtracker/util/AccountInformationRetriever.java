@@ -20,16 +20,16 @@ public class AccountInformationRetriever {
         String role = userDetails.getAuthorities().iterator().next().toString();
         Integer AccountId = null;
         Integer userAccount = userAccountRepository.findByLogin(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("Can't retrieve user account by the account id")).getIdAccount();
-        if (Objects.equals(role, "ADMIN")) {
-            AccountId = adminRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdAccount();
-        } else if (Objects.equals(role, "DEAN")) {
-            AccountId = deanRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdAccount();
+        if (Objects.equals(role, "ROLE_ADMIN")) {
+            AccountId = adminRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdAdmin();
+        } else if (Objects.equals(role, "ROLE_DEAN")) {
+            AccountId = deanRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdDean();
 
-        } else if (Objects.equals(role, "TEACHER")) {
-            AccountId = teacherRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdAccount();
+        } else if (Objects.equals(role, "ROLE_TEACHER")) {
+            AccountId = teacherRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdTeacher();
 
-        } else if (Objects.equals(role, "STUDENT")) {
-            AccountId = studentRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdAccount();
+        } else if (Objects.equals(role, "ROLE_STUDENT")) {
+            AccountId = studentRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdStudent();
 
         }
 

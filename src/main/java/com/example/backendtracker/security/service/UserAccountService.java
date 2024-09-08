@@ -42,7 +42,7 @@ public class UserAccountService {
         return obtainJwtToken(authentication);
     }
 
-@Transactional
+@Transactional(rollbackFor=Exception.class)
     public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
 
         checkUserExist(userRegistrationRequest);
