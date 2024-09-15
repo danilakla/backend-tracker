@@ -1,12 +1,16 @@
 package com.example.backendtracker.security.config;
 
 
+import com.example.backendtracker.reliability.model.ErrorResponse;
 import com.example.backendtracker.security.filter.JwtRequestFilter;
 import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.util.SecurityUserDetailsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -32,7 +36,8 @@ public class WebSecurityConfig {
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
 
-
+    @Autowired
+    private ObjectMapper objectMapper;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -78,7 +83,32 @@ public class WebSecurityConfig {
                     config.setAllowedHeaders(List.of("*"));
                     config.setAllowedOriginPatterns(List.of("*"));
                     return config;
-                }));
+                }))
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.setContentType("application/json");
+                            ErrorResponse errorResponse = new ErrorResponse(
+                                    HttpStatus.UNAUTHORIZED.value(),
+                                    "Unauthorized",
+                                    "You are not authorized to access this resource.",
+                                    request.getRequestURI()
+                            );
+                            response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
+                        })
+                        .accessDeniedHandler((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            response.setContentType("application/json");
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            ErrorResponse errorResponse = new ErrorResponse(
+                                    HttpStatus.FORBIDDEN.value(),
+                                    "Forbidden",
+                                    "You do not have permission to access this resource.",
+                                    request.getRequestURI()
+                            );
+                            response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
+                        })
+                );
 
 
         return http.build();
