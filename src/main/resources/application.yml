@@ -12,7 +12,7 @@ spring:
 #        command: down
   sql:
     init:
-      mode: always
+      mode: never
 
 jwt:
   secret: e.eh7Nxr]zH1QwGP4;s'57@a}p|eW~^"iZNniT8opo,49/bJMs39sb[JDP6jD>#
@@ -23,6 +23,8 @@ logging:
 #    org.springframework.jdbc: debug
     org.springframework.security: trace
 springdoc:
+  swagger-ui:
+    path: /swagger-ui
   api-docs:
     path: /api-docs
 encryption:
