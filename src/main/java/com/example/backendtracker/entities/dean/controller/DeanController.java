@@ -1,4 +1,5 @@
 package com.example.backendtracker.entities.dean.controller;
+import com.example.backendtracker.domain.mapper.UniversalMapper;
 import com.example.backendtracker.entities.dean.dto.CreateClassFormatRequestDTO;
 import com.example.backendtracker.entities.dean.dto.CreateSpecialtyDto;
 import com.example.backendtracker.entities.dean.service.DeanService;
@@ -22,6 +23,9 @@ public class DeanController {
     public String createSpecialty(@RequestBody CreateSpecialtyDto specialtyDto,  @AuthenticationPrincipal UserDetails userDetails){
 
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+
+
+        UniversalMapper universalMapper = new UniversalMapper();
 
         deanService.createSpecialty(specialtyDto,accountId);
         return "create specialty successful";
