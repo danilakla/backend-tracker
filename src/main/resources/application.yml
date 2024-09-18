@@ -12,7 +12,7 @@ spring:
 #        command: down
   sql:
     init:
-      mode: never
+      mode: always
 
 jwt:
   secret: e.eh7Nxr]zH1QwGP4;s'57@a}p|eW~^"iZNniT8opo,49/bJMs39sb[JDP6jD>#
