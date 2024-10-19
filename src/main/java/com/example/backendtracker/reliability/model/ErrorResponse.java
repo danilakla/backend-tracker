@@ -19,7 +19,7 @@ public class ErrorResponse {
     private String path;
 
     public ErrorResponse(int status, String error, String message, String path) {
-        this.timestamp = Instant.now(); // автоматическое задание времени ошибки
+        this.timestamp = Instant.now();
         this.status = status;
         this.error = error;
         this.message = message;
