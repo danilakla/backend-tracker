@@ -13,9 +13,7 @@ public class Student {
     @Id
     private Integer idStudent;
     private Integer idSubgroup;
-    private String lastName;
-    private String firstName;
-    private String patronymic;
+    private String flpName;
     private String login;
     private String password;
     private String keyStudentParents;

@@ -6,8 +6,10 @@ import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.exception.UserAlreadyExistsException;
+import com.example.backendtracker.security.service.data.StudentExcelDto;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
 import com.example.backendtracker.security.service.helper.UserServiceFactory;
+import com.example.backendtracker.security.service.helper.student.StudentInitializer;
 import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.util.UserPasswordManager;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -42,7 +46,7 @@ public class UserAccountService {
         return obtainJwtToken(authentication);
     }
 
-@Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
 
         checkUserExist(userRegistrationRequest);
@@ -68,12 +72,12 @@ public class UserAccountService {
                 });
     }
 
-    private Integer createUserAccount(UserRegistrationRequestDTO userRegistrationRequest) {
+    public Integer createUserAccount(UserRegistrationRequestDTO userRegistrationRequest) {
         Integer roleId = roleService.getRoleIdByRoleName(userRegistrationRequest.role());
         UserAccount userAccount = new UserAccount(null,
                 userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
 
-        return  userAccountRepository.save(userAccount).getIdAccount();
+        return userAccountRepository.save(userAccount).getIdAccount();
     }
 
 

@@ -107,9 +107,7 @@ CREATE TABLE Subgroups (
 CREATE TABLE Students (
     id_student SERIAL PRIMARY KEY,
     id_subgroup INT,
-    last_name VARCHAR(50),
-    first_name VARCHAR(50),
-    patronymic VARCHAR(50),
+    flp_name VARCHAR(200),
     key_student_parents TEXT,
     id_account INT,
     FOREIGN KEY (id_subgroup) REFERENCES Subgroups(id_subgroup),

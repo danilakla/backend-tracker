@@ -12,7 +12,7 @@ public class DeanService {
     private final SpecialtyRepository specialtyRepository;
 
 
-    public void createSpecialty(CreateSpecialtyDto specialtyDto, Integer accountId){
+    public void createSpecialty(CreateSpecialtyDto specialtyDto, Integer accountId) {
         checkExistenceOfSpecialty(specialtyDto.name());
         specialtyRepository.save(Specialty.builder()
                 .name(specialtyDto.name())
@@ -20,8 +20,10 @@ public class DeanService {
 
     }
 
-    public void checkExistenceOfSpecialty(String name){
-        specialtyRepository.findByName(name).ifPresent(specialty -> {throw new RuntimeException("The specialty already exists");});
+    public void checkExistenceOfSpecialty(String name) {
+        specialtyRepository.findByName(name).ifPresent(specialty -> {
+            throw new RuntimeException("The specialty already exists");
+        });
 
     }
 }
