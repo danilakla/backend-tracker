@@ -14,13 +14,23 @@ import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.util.UserPasswordManager;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -34,6 +44,8 @@ public class UserAccountService {
 
     private final UserPasswordManager userPasswordManager;
     private final AuthenticationManager authenticationManager;
+    private final JdbcTemplate jdbcTemplate;
+
 
     private final UserServiceFactory userServiceFactory;
 
@@ -78,6 +90,41 @@ public class UserAccountService {
                 userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
 
         return userAccountRepository.save(userAccount).getIdAccount();
+    }
+
+    public List<Integer> createUserAccountsInBatch(List<UserRegistrationRequestDTO> userRegistrationRequests) {
+        String sql = "INSERT INTO user_account (login, password, role_id) VALUES (?, ?, ?)";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        // Use batchUpdate with a PreparedStatementCreator and BatchPreparedStatementSetter
+        jdbcTemplate.batchUpdate(
+                connection -> connection.prepareStatement(sql, new String[]{"id_account"}), // PreparedStatementCreator
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        UserRegistrationRequestDTO userRequest = userRegistrationRequests.get(i);
+                        Integer roleId = roleService.getRoleIdByRoleName(userRequest.role());
+
+                        ps.setString(1, userRequest.login());
+                        ps.setString(2, userPasswordManager.encode(userRequest.password()));
+                        ps.setInt(3, roleId);
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return userRegistrationRequests.size();
+                    }
+                },
+                keyHolder // KeyHolder to capture generated keys
+        );
+
+        // Retrieve generated IDs
+        List<Integer> generatedIds = keyHolder.getKeyList().stream()
+                .map(keyMap -> (Integer) keyMap.get("id_account"))
+                .collect(Collectors.toList());
+
+        return generatedIds;
     }
 
 
