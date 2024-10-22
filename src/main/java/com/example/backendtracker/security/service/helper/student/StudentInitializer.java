@@ -27,6 +27,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -69,21 +70,26 @@ public class StudentInitializer {
                 ));
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void initStudent(List<StudentExcelDto> studentExcelDtos, Integer idDean) {
+try {
 
-        // Step 1: Group students by group and specialty
-        Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos);
+    // Step 1: Group students by group and specialty
+    Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos);
 
-        // Step 2: Batch insert subgroups and collect generated subgroup IDs
-        List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);
+    // Step 2: Batch insert subgroups and collect generated subgroup IDs
+    List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);
 
-        // Step 3: Batch insert students with their corresponding account IDs
-        batchInsertStudents(map, subgroupIds);
+    // Step 3: Batch insert students with their corresponding account IDs
+    batchInsertStudents(map, subgroupIds);
+} catch (Exception e) {
+    e.printStackTrace();
+    throw new RuntimeException(e);
+}
     }
 
     private List<Integer> batchInsertSubgroups(Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map, Integer idDean) {
-        String sql = "INSERT INTO subgroup (admission_date, id_dean, id_specialty, subgroup_number) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO subgroups (admission_date, id_dean, id_specialty, subgroup_number) VALUES (?, ?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         List<GroupAndSpecialtyKey> groupKeys = new ArrayList<>(map.keySet());
@@ -114,43 +120,50 @@ public class StudentInitializer {
     }
 
     private void batchInsertStudents(Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map, List<Integer> subgroupIds) {
-        String sql = "INSERT INTO student (flp_name, login, password, id_account, key_student_parents, id_subgroup) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO students (flp_name, id_account, key_student_parents, id_subgroup) VALUES (?, ?, ?, ?)";
+
+        // Создаем соответствие между GroupAndSpecialtyKey и сгенерированными subgroupIds
+        List<GroupAndSpecialtyKey> groupKeys = new ArrayList<>(map.keySet());
+        Map<GroupAndSpecialtyKey, Integer> groupToSubgroupIdMap = new HashMap<>();
+        for (int i = 0; i < groupKeys.size(); i++) {
+            groupToSubgroupIdMap.put(groupKeys.get(i), subgroupIds.get(i));
+        }
 
         List<StudentWithCredentials> allStudents = new ArrayList<>();
-        List<Integer> allSubgroupIds = new ArrayList<>();
 
-        // Flatten the map to get all students with their respective subgroup IDs
-        List<GroupAndSpecialtyKey> groupKeys = new ArrayList<>(map.keySet());
-        for (int i = 0; i < groupKeys.size(); i++) {
-            GroupAndSpecialtyKey key = groupKeys.get(i);
-            List<StudentWithCredentials> students = map.get(key);
-            allStudents.addAll(students);
-
-            // Assign the corresponding subgroup ID to all students in the group
-            for (int j = 0; j < students.size(); j++) {
-                allSubgroupIds.add(subgroupIds.get(i));
-            }
-        }
+        // Собираем всех студентов в один список
+        map.values().forEach(allStudents::addAll);
 
         // Batch insert user accounts and retrieve account IDs
         List<UserRegistrationRequestDTO> registrationRequests = allStudents.stream()
-                .map(student -> UserRegistrationRequestDTO.builder().password(student.password()).role("STUDENT").login(student.login()).build())
+                .map(student -> UserRegistrationRequestDTO.builder()
+                        .password(student.password())
+                        .role("STUDENT")
+                        .login(student.login())
+                        .build())
                 .collect(Collectors.toList());
 
         List<Integer> accountIds = userAccountService.createUserAccountsInBatch(registrationRequests);
 
-        // Batch insert students with the generated account IDs and subgroup IDs
-        jdbcTemplate.batchUpdate(sql, // PreparedStatementCreator
+        // Batch insert students with the generated account IDs and correct subgroup IDs
+        jdbcTemplate.batchUpdate(sql,
                 new BatchPreparedStatementSetter() {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         StudentWithCredentials student = allStudents.get(i);
+
+                        // Найдем ключ группы для этого студента
+                        GroupAndSpecialtyKey groupKey = map.keySet().stream()
+                                .filter(key -> map.get(key).contains(student))
+                                .findFirst()
+                                .orElseThrow(() -> new IllegalStateException("Group key not found for student"));
+
+                        Integer subgroupId = groupToSubgroupIdMap.get(groupKey); // Получаем id подгруппы
+
                         ps.setString(1, student.studentExcelDto().lastname() + "_" + student.studentExcelDto().name() + "_" + student.studentExcelDto().surname());
-                        ps.setString(2, student.login());
-                        ps.setString(3, student.password());
-                        ps.setInt(4, accountIds.get(i)); // Use generated account ID
-                        ps.setString(5, student.parentKey());
-                        ps.setInt(6, allSubgroupIds.get(i)); // Use generated subgroup ID
+                        ps.setInt(2, accountIds.get(i)); // Используем сгенерированный id аккаунта
+                        ps.setString(3, student.parentKey());
+                        ps.setInt(4, subgroupId); // Привязываем правильный id подгруппы
                     }
 
                     @Override

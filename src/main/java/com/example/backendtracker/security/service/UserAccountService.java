@@ -93,7 +93,7 @@ public class UserAccountService {
     }
 
     public List<Integer> createUserAccountsInBatch(List<UserRegistrationRequestDTO> userRegistrationRequests) {
-        String sql = "INSERT INTO user_account (login, password, role_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO useraccounts (login, password, id_role) VALUES (?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
