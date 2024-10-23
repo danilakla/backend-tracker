@@ -4,9 +4,19 @@ spring:
     username: myuser
     password: secret
     driver-class-name: org.postgresql.Driver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: danilakartuzov5@gmail.com
+    password: ccosxltorqxvrbpr
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
-
-#  docker:
+  #  docker:
 #    compose:
 #      stop:
 #        command: down

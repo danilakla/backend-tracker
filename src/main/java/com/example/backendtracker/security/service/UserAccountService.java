@@ -6,14 +6,11 @@ import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.exception.UserAlreadyExistsException;
-import com.example.backendtracker.security.service.data.StudentExcelDto;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
 import com.example.backendtracker.security.service.helper.UserServiceFactory;
-import com.example.backendtracker.security.service.helper.student.StudentInitializer;
 import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.util.UserPasswordManager;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -26,9 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

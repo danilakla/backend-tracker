@@ -2,14 +2,13 @@ package com.example.backendtracker.security.service.helper.student;
 
 
 import com.example.backendtracker.domain.models.Specialty;
-import com.example.backendtracker.domain.models.Student;
-import com.example.backendtracker.domain.models.Subgroup;
 import com.example.backendtracker.domain.repositories.SpecialtyRepository;
 import com.example.backendtracker.domain.repositories.StudentRepository;
 import com.example.backendtracker.domain.repositories.SubgroupRepository;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.service.UserAccountService;
-import com.example.backendtracker.security.service.data.StudentExcelDto;
+import com.example.backendtracker.security.service.helper.student.dto.StudentExcelDto;
+import com.example.backendtracker.security.service.helper.student.dto.StudentResultDto;
 import com.example.backendtracker.security.util.LoginGenerator;
 import com.example.backendtracker.security.util.PasswordGenerator;
 import lombok.AllArgsConstructor;
@@ -22,10 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,21 +67,21 @@ public class StudentInitializer {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void initStudent(List<StudentExcelDto> studentExcelDtos, Integer idDean) {
-try {
+    public List<StudentResultDto> initStudent(List<StudentExcelDto> studentExcelDtos, Integer idDean) {
+        try {
 
-    // Step 1: Group students by group and specialty
-    Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos);
+            // Step 1: Group students by group and specialty
+            Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos);
 
-    // Step 2: Batch insert subgroups and collect generated subgroup IDs
-    List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);
+            // Step 2: Batch insert subgroups and collect generated subgroup IDs
+            List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);
 
-    // Step 3: Batch insert students with their corresponding account IDs
-    batchInsertStudents(map, subgroupIds);
-} catch (Exception e) {
-    e.printStackTrace();
-    throw new RuntimeException(e);
-}
+            // Step 3: Batch insert students with their corresponding account IDs
+            return batchInsertStudents(map, subgroupIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     private List<Integer> batchInsertSubgroups(Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map, Integer idDean) {
@@ -119,7 +115,7 @@ try {
                 .collect(Collectors.toList());
     }
 
-    private void batchInsertStudents(Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map, List<Integer> subgroupIds) {
+    private List<StudentResultDto> batchInsertStudents(Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map, List<Integer> subgroupIds) {
         String sql = "INSERT INTO students (flp_name, id_account, key_student_parents, id_subgroup) VALUES (?, ?, ?, ?)";
 
         // Создаем соответствие между GroupAndSpecialtyKey и сгенерированными subgroupIds
@@ -144,6 +140,7 @@ try {
                 .collect(Collectors.toList());
 
         List<Integer> accountIds = userAccountService.createUserAccountsInBatch(registrationRequests);
+        List<StudentResultDto> result = new ArrayList<>();
 
         // Batch insert students with the generated account IDs and correct subgroup IDs
         jdbcTemplate.batchUpdate(sql,
@@ -164,6 +161,16 @@ try {
                         ps.setInt(2, accountIds.get(i)); // Используем сгенерированный id аккаунта
                         ps.setString(3, student.parentKey());
                         ps.setInt(4, subgroupId); // Привязываем правильный id подгруппы
+                        result.add(new StudentResultDto(
+                                student.studentExcelDto().name(),
+                                student.studentExcelDto().lastname(),
+                                student.studentExcelDto().surname(),
+                                student.studentExcelDto().numberOfGroup(),
+                                student.studentExcelDto().specialty(),
+                                student.login(),
+                                student.password(),
+                                student.parentKey()
+                        ));
                     }
 
                     @Override
@@ -172,6 +179,7 @@ try {
                     }
                 }
         );
+        return result;
     }
 
 }

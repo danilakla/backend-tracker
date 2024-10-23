@@ -1,6 +1,6 @@
 package com.example.backendtracker.security.service.helper.student;
 
-import com.example.backendtracker.security.service.data.StudentExcelDto;
+import com.example.backendtracker.security.service.helper.student.dto.StudentExcelDto;
 import lombok.Builder;
 
 @Builder
