@@ -1,5 +1,6 @@
 package com.example.backendtracker.security.service.helper;
 
+import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.service.UserInitializer;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
@@ -28,7 +29,7 @@ public class UserServiceFactory {
         }
     }
 
-    public void initUser(UserStoringKeys userStoringKeys, String role) throws InvalidEncryptedDataException {
-         serviceMap.get(role.toUpperCase()).init(role,userStoringKeys);
+    public void initUser(UserStoringKeys userStoringKeys, UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
+         serviceMap.get(userRegistrationRequest.role().toUpperCase()).init(userRegistrationRequest,userStoringKeys);
     }
 }

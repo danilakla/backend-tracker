@@ -15,11 +15,11 @@ spring:
           auth: true
           starttls:
             enable: true
-
-  #  docker:
+#
+#  docker:
 #    compose:
 #      stop:
-#        command: down
+#        command:
   sql:
     init:
       mode: never

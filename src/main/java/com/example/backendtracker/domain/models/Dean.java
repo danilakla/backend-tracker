@@ -12,9 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Dean {
     @Id
     private Integer idDean;
-    private String lastName;
-    private String firstName;
-    private String patronymic;
+    private String flpName;
     private String faculty;
     private Integer idUniversity;
     private Integer idAccount;

@@ -57,12 +57,12 @@ public class UserAccountService {
 
         checkUserExist(userRegistrationRequest);
         Integer idAccount = createUserAccount(userRegistrationRequest);
-        initUserEntity(new UserStoringKeys(idAccount, userRegistrationRequest.key()), userRegistrationRequest.role());
+        initUserEntity(new UserStoringKeys(idAccount, userRegistrationRequest.key()), userRegistrationRequest);
 
     }
 
-    private void initUserEntity(UserStoringKeys userStoringKeys, String role) throws InvalidEncryptedDataException {
-        userServiceFactory.initUser(userStoringKeys, role);
+    private void initUserEntity(UserStoringKeys userStoringKeys, UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
+        userServiceFactory.initUser(userStoringKeys, userRegistrationRequest);
     }
 
     private String obtainJwtToken(Authentication authentication) {
@@ -90,7 +90,7 @@ public class UserAccountService {
         String sql = "INSERT INTO useraccounts (login, password, id_role) VALUES (?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-
+        Integer roleId = roleService.getRoleIdByRoleName("STUDENT");
         // Use batchUpdate with a PreparedStatementCreator and BatchPreparedStatementSetter
         jdbcTemplate.batchUpdate(
                 connection -> connection.prepareStatement(sql, new String[]{"id_account"}), // PreparedStatementCreator
@@ -98,7 +98,7 @@ public class UserAccountService {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         UserRegistrationRequestDTO userRequest = userRegistrationRequests.get(i);
-                        Integer roleId = roleService.getRoleIdByRoleName(userRequest.role());
+
 
                         ps.setString(1, userRequest.login());
                         ps.setString(2, userPasswordManager.encode(userRequest.password()));

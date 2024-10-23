@@ -12,7 +12,6 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Admin {
     @Id
     private Integer idAdmin;
-    private String firstName;
-    private String lastName;
+    private String flpName;
     private Integer idAccount;
 }

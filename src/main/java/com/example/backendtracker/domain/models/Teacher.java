@@ -12,9 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Teacher {
     @Id
     private Integer idTeacher;
-    private Integer idUniversity;
-    private String lastName;
-    private String firstName;
-    private String patronymic;
+    private String flpName;
     private Integer idAccount;
+    private Integer idUniversity;
 }

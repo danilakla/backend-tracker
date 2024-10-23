@@ -33,8 +33,7 @@ CREATE TABLE UserAccounts (
 
 CREATE TABLE Admins (
     id_admin SERIAL PRIMARY KEY,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
+    flp_name VARCHAR(200),
     id_account INT,
     FOREIGN KEY (id_account) REFERENCES UserAccounts(id_account)
 );
@@ -50,9 +49,7 @@ CREATE TABLE Universities (
 
 CREATE TABLE Deans (
     id_dean SERIAL PRIMARY KEY,
-    last_name VARCHAR(50),
-    first_name VARCHAR(50),
-    patronymic VARCHAR(50),
+    flp_name VARCHAR(200),
     faculty VARCHAR(70),
     id_university INT,
     id_account INT,
@@ -86,9 +83,7 @@ CREATE TABLE ClassFormats (
 CREATE TABLE Teachers (
     id_teacher SERIAL PRIMARY KEY,
     id_university INT,
-    last_name VARCHAR(50),
-    first_name VARCHAR(50),
-    patronymic VARCHAR(50),
+    flp_name VARCHAR(200),
     id_account INT,
     FOREIGN KEY (id_university) REFERENCES Universities(id_university),
     FOREIGN KEY (id_account) REFERENCES UserAccounts(id_account)

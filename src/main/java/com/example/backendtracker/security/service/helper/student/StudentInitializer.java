@@ -11,6 +11,7 @@ import com.example.backendtracker.security.service.helper.student.dto.StudentExc
 import com.example.backendtracker.security.service.helper.student.dto.StudentResultDto;
 import com.example.backendtracker.security.util.LoginGenerator;
 import com.example.backendtracker.security.util.PasswordGenerator;
+import com.example.backendtracker.util.NameConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -157,7 +158,7 @@ public class StudentInitializer {
 
                         Integer subgroupId = groupToSubgroupIdMap.get(groupKey); // Получаем id подгруппы
 
-                        ps.setString(1, student.studentExcelDto().lastname() + "_" + student.studentExcelDto().name() + "_" + student.studentExcelDto().surname());
+                        ps.setString(1, NameConverter.convertNameToDb(student.studentExcelDto().lastname(), student.studentExcelDto().name(), student.studentExcelDto().surname()));
                         ps.setInt(2, accountIds.get(i)); // Используем сгенерированный id аккаунта
                         ps.setString(3, student.parentKey());
                         ps.setInt(4, subgroupId); // Привязываем правильный id подгруппы
