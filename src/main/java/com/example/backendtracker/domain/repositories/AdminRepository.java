@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface AdminRepository extends CrudRepository<Admin, Integer> {
     @Query(value = "SELECT * FROM Admins WHERE id_account = :id_account")
     Optional<Admin> findByIdAccount(@Param("id_account") Integer id_account);
+
 }

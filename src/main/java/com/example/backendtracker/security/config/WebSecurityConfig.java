@@ -25,6 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.List;
+
 //TODO TEST FOR AUTH TESTING
 @Configuration
 @EnableWebSecurity
@@ -38,6 +39,7 @@ public class WebSecurityConfig {
 
     @Autowired
     private ObjectMapper objectMapper;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -58,6 +60,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/teacher").hasRole("TEACHER")
                         .requestMatchers("/dean/**").hasRole("DEAN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").authenticated()
 
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers("/register").permitAll()

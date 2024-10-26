@@ -13,6 +13,7 @@ import com.example.backendtracker.security.util.LoginGenerator;
 import com.example.backendtracker.security.util.PasswordGenerator;
 import com.example.backendtracker.util.NameConverter;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -39,20 +40,22 @@ public class StudentInitializer {
     private final StudentRepository studentRepository;
     private final JdbcTemplate jdbcTemplate;
 
-    private Map<String, Integer> getSpecialtyIdsFromDatabase(List<String> specialtyNames) {
-        List<Specialty> specialties = specialtyRepository.findAllByNameIn(specialtyNames);
-
+    private Map<String, Integer> getSpecialtyIdsFromDatabase(List<String> specialtyNames, Integer deanId) throws BadRequestException {
+        List<Specialty> specialties = specialtyRepository.findAllByNameInAndIdDean(specialtyNames, deanId).orElseThrow(() -> new BadRequestException("The specialties weren't found, or the dean doesn't have permission to add the students to some of the specialties, so review specialties "));
+        if (specialties.isEmpty()) {
+            throw new BadRequestException("The specialties weren't found, or the dean doesn't have permission to add the students to some of the specialties, so review specialties ");
+        }
         return specialties.stream().collect(Collectors.toMap(Specialty::getName, Specialty::getIdSpecialty));
     }
 
-    public Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> convertListToMapWithCredentials(List<StudentExcelDto> students) {
+    public Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> convertListToMapWithCredentials(List<StudentExcelDto> students, Integer deanId) throws BadRequestException {
         // Собираем уникальные названия специальностей
         List<String> specialtyNames = students.stream()
                 .map(StudentExcelDto::specialty)
                 .distinct()
                 .collect(Collectors.toList());
 
-        Map<String, Integer> specialtyIdMap = getSpecialtyIdsFromDatabase(specialtyNames);
+        Map<String, Integer> specialtyIdMap = getSpecialtyIdsFromDatabase(specialtyNames, deanId);
 
         return students.stream()
                 .map(student ->
@@ -72,7 +75,7 @@ public class StudentInitializer {
         try {
 
             // Step 1: Group students by group and specialty
-            Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos);
+            Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos, idDean);
 
             // Step 2: Batch insert subgroups and collect generated subgroup IDs
             List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);

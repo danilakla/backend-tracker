@@ -14,7 +14,7 @@ public interface SpecialtyRepository extends CrudRepository<Specialty, Integer> 
     @Query("SELECT * FROM Specialty WHERE idDean = :idDean")
     List<Specialty> findByDeanId(@Param("idDean") Integer idDean);
 
-    List<Specialty> findAllByNameIn(List<String> names);
+    Optional<List<Specialty>> findAllByNameInAndIdDean(List<String> names, Integer idDean);
 
     Optional<Specialty> findByName(String name);
 

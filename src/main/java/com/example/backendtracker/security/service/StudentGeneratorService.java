@@ -17,10 +17,9 @@ public class StudentGeneratorService {
     private final StudentInitializer studentInitializer;
     private final EmailService emailService;
 
-    public void generateStudents(List<StudentExcelDto> studentExcelDtoList, Integer deanId) throws MessagingException, IOException {
+    public void generateStudents(List<StudentExcelDto> studentExcelDtoList, String deanEmail, Integer deanId) throws MessagingException, IOException {
 
         List<StudentResultDto> studentResultDtos = studentInitializer.initStudent(studentExcelDtoList, deanId);
-        //TODO REPLACE EMAIL TO DEAN EMAIL
-        emailService.sendEmailWithAttachment("danilakartuzov5@gmail.com", studentResultDtos);
+        emailService.sendEmailWithAttachment(deanEmail, studentResultDtos);
     }
 }
