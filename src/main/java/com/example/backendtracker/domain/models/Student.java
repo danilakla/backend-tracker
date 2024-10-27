@@ -14,8 +14,6 @@ public class Student {
     private Integer idStudent;
     private Integer idSubgroup;
     private String flpName;
-    private String login;
-    private String password;
     private String keyStudentParents;
     private Integer idAccount;
 }

@@ -2,6 +2,8 @@ package com.example.backendtracker.security.service;
 
 import com.example.backendtracker.domain.models.UserAccount;
 import com.example.backendtracker.domain.repositories.UserAccountRepository;
+import com.example.backendtracker.reliability.exception.BadRequestException;
+import com.example.backendtracker.security.controller.dto.ParentToken;
 import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
@@ -39,7 +41,7 @@ public class UserAccountService {
     private final UserPasswordManager userPasswordManager;
     private final AuthenticationManager authenticationManager;
     private final JdbcTemplate jdbcTemplate;
-
+    private final ParentService parentService;
 
     private final UserServiceFactory userServiceFactory;
 
@@ -47,9 +49,16 @@ public class UserAccountService {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationRequest.login(), authenticationRequest.password()));
+        final String role = authentication.getAuthorities().iterator().next().getAuthority();
 
 
-        return obtainJwtToken(authentication);
+        return obtainJwtToken(authentication.getName(), role);
+    }
+
+    public String authenticateParent(ParentToken parentToken) {
+        String login = parentService.getLoginForParentToken(parentToken);
+
+        return obtainJwtToken(login, parentToken.role());
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -65,9 +74,8 @@ public class UserAccountService {
         userServiceFactory.initUser(userStoringKeys, userRegistrationRequest);
     }
 
-    private String obtainJwtToken(Authentication authentication) {
-        final String role = authentication.getAuthorities().iterator().next().getAuthority();
-        return jwtService.generateToken(authentication.getName(), role);
+    private String obtainJwtToken(String login, String role) {
+        return jwtService.generateToken(login, role);
 
     }
 
@@ -85,6 +93,23 @@ public class UserAccountService {
 
         return userAccountRepository.save(userAccount).getIdAccount();
     }
+
+    public Integer changeEmail(String currentEmail, String newEmail) {
+        UserAccount userAccount = userAccountRepository.findByLogin(currentEmail).orElseThrow();
+        userAccount.setLogin(newEmail);
+        return userAccountRepository.save(userAccount).getIdAccount();
+    }
+
+    public Integer changePassword(String email, String currentPassword, String newPassword) {
+        UserAccount userAccount = userAccountRepository.findByLogin(email).orElseThrow();
+
+        if (!userPasswordManager.matches(currentPassword, userAccount.getPassword()))
+            throw new BadRequestException("Original password is wrong");
+        userAccount.setPassword(userPasswordManager.encode(newPassword));
+
+        return userAccountRepository.save(userAccount).getIdAccount();
+    }
+
 
     public List<Integer> createUserAccountsInBatch(List<UserRegistrationRequestDTO> userRegistrationRequests) {
         String sql = "INSERT INTO useraccounts (login, password, id_role) VALUES (?, ?, ?)";

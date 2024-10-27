@@ -1,5 +1,6 @@
 package com.example.backendtracker.security.controller;
 
+import com.example.backendtracker.security.controller.dto.ParentToken;
 import com.example.backendtracker.security.dto.AuthenticationRequestDTO;
 import com.example.backendtracker.security.dto.AuthenticationResponseDTO;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
@@ -28,6 +29,14 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponseDTO> createAuthenticationToken(@RequestBody AuthenticationRequestDTO authenticationRequest) throws Exception {
 
         String jwtAccessToken = userService.authenticateUser(authenticationRequest);
+        return ResponseEntity.ok(new AuthenticationResponseDTO(jwtAccessToken));
+    }
+
+    @PostMapping("/authenticate/parent")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<AuthenticationResponseDTO> authenticationParent(@RequestBody ParentToken parentToken) throws Exception {
+
+        String jwtAccessToken = userService.authenticateParent(parentToken);
         return ResponseEntity.ok(new AuthenticationResponseDTO(jwtAccessToken));
     }
 

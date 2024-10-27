@@ -14,6 +14,9 @@ import java.util.Optional;
 public interface StudentRepository extends CrudRepository<Student, Integer> {
     @Query(value = "SELECT * FROM Students WHERE id_account = :id_account")
     Optional<Student> findByIdAccount(@Param("id_account") Integer id_account);
+
     @Query(value = "SELECT * FROM students WHERE name = :name")
     Student findStudentByName(@Param("name") String name);
+
+    Optional<Student> findStudentByKeyStudentParents(String parentsKey);
 }
