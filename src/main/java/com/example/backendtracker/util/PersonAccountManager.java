@@ -20,7 +20,7 @@ public class PersonAccountManager {
     private final UserAccountRepository userAccountRepository;
 
 
-    public void updateUserInfo(UserDetails userDetails, UserInfoDto userUpdateInfoDto) {
+    public void updateUserInfo(UserDetails userDetails, UserInfo userInfo) {
 
         String role = userDetails.getAuthorities().iterator().next().toString();
 
@@ -28,19 +28,20 @@ public class PersonAccountManager {
         Integer userAccountId = userAccount.getIdAccount();
         if (Objects.equals(role, "ROLE_ADMIN")) {
             Admin adminAccount = adminRepository.findByIdAccount(userAccountId).orElseThrow(() -> new RuntimeException("Can't retrieve the account id"));
-            adminAccount.setFlpName(NameConverter.convertNameToDb(userUpdateInfoDto.getLastname(), userUpdateInfoDto.getName(), userUpdateInfoDto.getSurname()));
+            adminAccount.setFlpName(NameConverter.convertNameToDb(userInfo.lastname(), userInfo.name(), userInfo.surname()));
             adminRepository.save(adminAccount);
         } else if (Objects.equals(role, "ROLE_DEAN")) {
             Dean deanAccount = deanRepository.findByIdAccount(userAccountId).orElseThrow(() -> new RuntimeException("Can't retrieve the account id"));
-            deanAccount.setFlpName(NameConverter.convertNameToDb(userUpdateInfoDto.getLastname(), userUpdateInfoDto.getName(), userUpdateInfoDto.getSurname()));
+            deanAccount.setFlpName(NameConverter.convertNameToDb(userInfo.lastname(), userInfo.name(), userInfo.surname()));
             deanRepository.save(deanAccount);
         } else if (Objects.equals(role, "ROLE_TEACHER")) {
             Teacher teacherAccount = teacherRepository.findByIdAccount(userAccountId).orElseThrow(() -> new RuntimeException("Can't retrieve the account id"));
-            teacherAccount.setFlpName(NameConverter.convertNameToDb(userUpdateInfoDto.getLastname(), userUpdateInfoDto.getName(), userUpdateInfoDto.getSurname()));
+            teacherAccount.setFlpName(NameConverter.convertNameToDb(userInfo.lastname(), userInfo.name(), userInfo.surname()));
             teacherRepository.save(teacherAccount);
         } else if (Objects.equals(role, "ROLE_STUDENT")) {
             Student studentAccount = studentRepository.findByIdAccount(userAccountId).orElseThrow(() -> new RuntimeException("Can't retrieve the account id"));
-            studentAccount.setFlpName(NameConverter.convertNameToDb(userUpdateInfoDto.getLastname(), userUpdateInfoDto.getName(), userUpdateInfoDto.getSurname()));
+            studentAccount.setFlpName(NameConverter.convertNameToDb(userInfo.lastname(), userInfo.name(), userInfo.surname()));
+
             studentRepository.save(studentAccount);
         }
 
