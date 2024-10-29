@@ -1,11 +1,15 @@
 package com.example.backendtracker.entities.admin.controller;
 
-import com.example.backendtracker.entities.admin.dto.DeanInfoForKeyDto;
-import com.example.backendtracker.entities.admin.dto.TeacherInfoForKeyDto;
-import com.example.backendtracker.entities.admin.dto.UniversityCreateDto;
+import com.example.backendtracker.domain.models.University;
+import com.example.backendtracker.entities.admin.dto.*;
 import com.example.backendtracker.entities.admin.service.AdminService;
+import com.example.backendtracker.entities.common.CommonService;
+import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.util.AccountInformationRetriever;
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -36,4 +40,34 @@ public class AdminController {
         adminService.createUniversity(universityCreateDto, accountInformationRetriever.getAccountId(userDetails));
         return "ok";
     }
+
+    @PostMapping("university/update")
+    public ResponseEntity<ResponseUniversityDto> updateUniversity(@RequestBody UniversityUpdateDto universityUpdateDto) {
+        University university = adminService.updateUniversity(universityUpdateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ResponseUniversityDto
+                .builder()
+                .idUniversity(university.getIdUniversity())
+                .name(university.getName())
+                .description(university.getDescription())
+                .build());
+    }
+
+    @GetMapping("university/get")
+    public ResponseEntity<ResponseUniversityDto> getUniversity(@AuthenticationPrincipal UserDetails userDetails) {
+
+        University university = adminService.getUniversity(accountInformationRetriever.getAccountId(userDetails));
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseUniversityDto
+                .builder()
+                .idUniversity(university.getIdUniversity())
+                .name(university.getName())
+                .description(university.getDescription())
+                .build());
+    }
+
+    @GetMapping("members/get")
+    public ResponseEntity<MemberOfSystem> getMemberOfSystem(@AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.status(HttpStatus.OK).body(adminService.getMembers(accountInformationRetriever.getAccountId(userDetails)));
+    }
+
+
 }
