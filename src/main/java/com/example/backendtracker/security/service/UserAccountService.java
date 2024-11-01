@@ -11,7 +11,9 @@ import com.example.backendtracker.security.exception.UserAlreadyExistsException;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
 import com.example.backendtracker.security.service.helper.UserServiceFactory;
 import com.example.backendtracker.security.util.JwtService;
+import com.example.backendtracker.security.util.PasswordGenerator;
 import com.example.backendtracker.security.util.UserPasswordManager;
+import com.example.backendtracker.util.PersonAccountManager;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,6 +42,7 @@ public class UserAccountService {
 
     private final UserPasswordManager userPasswordManager;
     private final AuthenticationManager authenticationManager;
+    private final PersonAccountManager personAccountManager;
     private final JdbcTemplate jdbcTemplate;
     private final ParentService parentService;
 
@@ -100,6 +103,14 @@ public class UserAccountService {
         return userAccountRepository.save(userAccount).getIdAccount();
     }
 
+    public String recoveryPassword(Integer idAccount) {
+        UserAccount userAccount = userAccountRepository.findById(idAccount).orElseThrow(() -> new BadRequestException("there's no account with this email"));
+        String password = PasswordGenerator.generatePassword();
+        userAccount.setPassword(userPasswordManager.encode(password));
+        userAccountRepository.save(userAccount);
+        return password;
+    }
+
     public Integer changePassword(String email, String currentPassword, String newPassword) {
         UserAccount userAccount = userAccountRepository.findByLogin(email).orElseThrow();
 
@@ -110,6 +121,13 @@ public class UserAccountService {
         return userAccountRepository.save(userAccount).getIdAccount();
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteAccount(Integer idAccount) {
+
+        userAccountRepository.deleteById(idAccount);
+
+
+    }
 
     public List<Integer> createUserAccountsInBatch(List<UserRegistrationRequestDTO> userRegistrationRequests) {
         String sql = "INSERT INTO useraccounts (login, password, id_role) VALUES (?, ?, ?)";

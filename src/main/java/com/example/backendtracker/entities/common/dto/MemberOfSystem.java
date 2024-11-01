@@ -15,6 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MemberOfSystem {
 
-    private List<DeanMemberDto> deanMemberDtos;
-    private List<Teacher> teacherMemberDtos;
+    private List<Dean> deanList;
+    private List<Teacher> teacherList;
 }

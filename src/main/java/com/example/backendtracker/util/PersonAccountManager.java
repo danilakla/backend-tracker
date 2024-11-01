@@ -47,5 +47,19 @@ public class PersonAccountManager {
 
     }
 
+    public void deletePerson(Integer idAccount, String role) {
+        role = "ROLE_" + role.toUpperCase();
+        if (Objects.equals(role, "ROLE_ADMIN")) {
+            adminRepository.deleteById(idAccount);
+        } else if (Objects.equals(role, "ROLE_DEAN")) {
+            deanRepository.deleteById(idAccount);
+        } else if (Objects.equals(role, "ROLE_TEACHER")) {
+            teacherRepository.deleteById(idAccount);
+        } else if (Objects.equals(role, "ROLE_STUDENT")) {
+            studentRepository.deleteById(idAccount);
+        }
+
+    }
+
 
 }

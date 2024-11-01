@@ -48,13 +48,17 @@ public class CommonService {
         return subgroupRepository.findAllByIdDean(idDean);
     }
 
-    public MemberOfSystem getMemberSystem(Integer iduniversity) {
+    public MemberOfSystem getMemberSystemForAdmin(Integer iduniversity) {
         MemberOfSystem memberOfSystem = new MemberOfSystem();
-        memberOfSystem.setTeacherMemberDtos(getListTeachers(iduniversity));
-        memberOfSystem.setDeanMemberDtos(getDeanMembers(iduniversity));
+        memberOfSystem.setTeacherList(getListTeachers(iduniversity));
+        memberOfSystem.setDeanList(getListDeans(iduniversity));
         return memberOfSystem;
     }
 
+    public List<SubGroupMember> getMemberSystemForDean(Integer idDean) {
+
+        return getSubgroupMember(idDean);
+    }
 
 
     public List<DeanMemberDto> getDeanMembers(Integer idUniversity) {

@@ -23,4 +23,6 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
     Optional<Student> findStudentByKeyStudentParents(String parentsKey);
 
     List<Student> findAllByIdSubgroup(Integer idSubgroup);
+
+    void deleteByIdAccount(Integer idAccount);
 }

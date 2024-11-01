@@ -26,7 +26,6 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.List;
 
-//TODO TEST FOR AUTH TESTING
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {

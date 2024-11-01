@@ -1,16 +1,20 @@
 package com.example.backendtracker.entities.admin.service;
 
+import com.example.backendtracker.domain.models.Dean;
+import com.example.backendtracker.domain.models.Teacher;
 import com.example.backendtracker.domain.models.University;
-import com.example.backendtracker.domain.repositories.UniversityRepository;
+import com.example.backendtracker.domain.repositories.*;
 import com.example.backendtracker.entities.admin.dto.UniversityCreateDto;
 import com.example.backendtracker.entities.admin.dto.UniversityUpdateDto;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.reliability.exception.BadRequestException;
+import com.example.backendtracker.security.service.UserAccountService;
 import com.example.backendtracker.security.util.SecretDataUtil;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 
@@ -20,6 +24,15 @@ public class AdminService {
     private final UniversityRepository universityRepository;
     private final SecretDataUtil secretDataUtil;
     private final CommonService commonService;
+    private final UserAccountService userAccountService;
+    private final DeanRepository deanRepository;
+    private final SpecialtyRepository specialtyRepository;
+    private final DisciplineRepository disciplineRepository;
+    private final ClassFormatRepository classFormatRepository;
+    private final SubgroupRepository subgroupRepository;
+    private final TeacherRepository teacherRepository;
+    private final SubjectRepository subjectRepository;
+    private final ClassGroupRepository classGroupRepository;
 
     public String generateKey(Integer adminId, String... data) throws Exception {
         University university = universityRepository.findByAdminId(adminId)
@@ -46,7 +59,7 @@ public class AdminService {
 
     public MemberOfSystem getMembers(Integer adminId) {
         Integer universityId = getUniversity(adminId).getIdUniversity();
-        return commonService.getMemberSystem(universityId);
+        return commonService.getMemberSystemForAdmin(universityId);
     }
 
     public void createUniversity(UniversityCreateDto universityCreateDto, Integer adminId) {
@@ -62,4 +75,37 @@ public class AdminService {
                 .build());
     }
 
+    public void reassignAndDeleteDean(Integer oldDeanId, Integer newDeanId) {
+        specialtyRepository.updateDeanId(newDeanId, oldDeanId);
+        disciplineRepository.updateDeanId(newDeanId, oldDeanId);
+        classFormatRepository.updateDeanId(newDeanId, oldDeanId);
+        subgroupRepository.updateDeanId(newDeanId, oldDeanId);
+        deanRepository.deleteById(oldDeanId);
+    }
+
+    @Transactional
+    public void deleteDean(Integer deanId, Integer newDeanId) {
+        Dean deanDeleted = deanRepository.findById(deanId).orElseThrow(() -> new BadRequestException("There is no dean, by id"));
+        deanRepository.findById(newDeanId).orElseThrow(() -> new BadRequestException("There is no dean, by id"));
+        reassignAndDeleteDean(deanId, newDeanId);
+        deanRepository.deleteById(deanId);
+        userAccountService.deleteAccount(deanDeleted.getIdAccount());
+    }
+
+    @Transactional
+    public void deleteTeacher(Integer teacherId, Integer newTeacherId) {
+        Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(() -> new BadRequestException("There is no teacher, by id"));
+        teacherRepository.findById(newTeacherId).orElseThrow(() -> new BadRequestException("There is no teacher, by id"));
+        reassignTeacher(teacherId, newTeacherId);
+        teacherRepository.deleteById(teacherId);
+        userAccountService.deleteAccount(teacher.getIdAccount());
+
+    }
+
+
+    public void reassignTeacher(int oldTeacherId, int newTeacherId) {
+        subjectRepository.updateTeacherId(newTeacherId, oldTeacherId);
+        classGroupRepository.updateTeacherId(newTeacherId, oldTeacherId);
+        teacherRepository.deleteById(oldTeacherId);
+    }
 }

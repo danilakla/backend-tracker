@@ -1,5 +1,6 @@
 package com.example.backendtracker.entities.admin.controller;
 
+import com.example.backendtracker.domain.models.Teacher;
 import com.example.backendtracker.domain.models.University;
 import com.example.backendtracker.entities.admin.dto.*;
 import com.example.backendtracker.entities.admin.service.AdminService;
@@ -69,5 +70,15 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.getMembers(accountInformationRetriever.getAccountId(userDetails)));
     }
 
+    @DeleteMapping("delete/teacher")
+    public ResponseEntity<TypeResolutionContext.Empty> deleteTeacher(@RequestBody TeacherDeleteDto teacherDeleteDto) {
+        adminService.deleteTeacher(teacherDeleteDto.teacherId(), teacherDeleteDto.newTeacherId());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
+    @DeleteMapping("delete/dean")
+    public ResponseEntity<TypeResolutionContext.Empty> deleteDean(@RequestBody DeanDeleteDto deanDeleteDto) {
+        adminService.deleteDean(deanDeleteDto.deanId(), deanDeleteDto.newDeanId());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
