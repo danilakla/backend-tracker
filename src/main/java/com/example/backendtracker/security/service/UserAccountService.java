@@ -64,6 +64,12 @@ public class UserAccountService {
         return obtainJwtToken(login, parentToken.role());
     }
 
+    public String changeToken(String login, String role) {
+
+        return obtainJwtToken(login, role);
+    }
+
+
     @Transactional(rollbackFor = Exception.class)
     public void registerUser(UserRegistrationRequestDTO userRegistrationRequest) throws InvalidEncryptedDataException {
 
@@ -97,10 +103,11 @@ public class UserAccountService {
         return userAccountRepository.save(userAccount).getIdAccount();
     }
 
-    public Integer changeEmail(String currentEmail, String newEmail) {
+    public String changeEmail(String currentEmail, String newEmail, String role) {
         UserAccount userAccount = userAccountRepository.findByLogin(currentEmail).orElseThrow();
         userAccount.setLogin(newEmail);
-        return userAccountRepository.save(userAccount).getIdAccount();
+        userAccountRepository.save(userAccount);
+        return this.changeToken(newEmail, role);
     }
 
     public String recoveryPassword(Integer idAccount) {

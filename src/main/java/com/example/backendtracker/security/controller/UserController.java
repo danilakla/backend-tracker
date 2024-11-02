@@ -2,6 +2,7 @@ package com.example.backendtracker.security.controller;
 
 import com.example.backendtracker.security.controller.dto.LoginChangerDto;
 import com.example.backendtracker.security.controller.dto.PasswordChangerDto;
+import com.example.backendtracker.security.controller.dto.UpdateLoginDto;
 import com.example.backendtracker.security.controller.dto.UserInfoDto;
 import com.example.backendtracker.security.service.UserAccountService;
 import com.example.backendtracker.util.AccountInformationRetriever;
@@ -46,14 +47,21 @@ public class UserController {
     }
 
     @PostMapping("update-login")
-    public void updateLogin(@RequestBody LoginChangerDto loginChangerDto, @AuthenticationPrincipal UserDetails userDetails) {
-        userAccountService.changeEmail(userDetails.getUsername(), loginChangerDto.newLogin());
-
+    public ResponseEntity<UpdateLoginDto> updateLogin(@RequestBody LoginChangerDto loginChangerDto, @AuthenticationPrincipal UserDetails userDetails) {
+        UserInfoDto userInfoDto = accountInformationRetriever.getAccountInfo(userDetails);
+        String jwtToken = userAccountService.changeEmail(userDetails.getUsername(), loginChangerDto.newLogin(), userInfoDto.getRole());
+        return ResponseEntity.status(HttpStatus.OK).body(UpdateLoginDto
+                .builder()
+                .jwt(jwtToken)
+                .userInfoDto(userInfoDto)
+                .build());
     }
 
     @PostMapping("update-user-info")
-    public void updateUserInfo(@RequestBody UserInfo userInfo, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<UserInfoDto> updateUserInfo(@RequestBody UserInfo userInfo, @AuthenticationPrincipal UserDetails userDetails) {
         personAccountManager.updateUserInfo(userDetails, userInfo);
+        UserInfoDto userInfoDto = accountInformationRetriever.getAccountInfo(userDetails);
+        return ResponseEntity.status(HttpStatus.OK).body(userInfoDto);
 
     }
 
