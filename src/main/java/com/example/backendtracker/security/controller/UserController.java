@@ -50,6 +50,7 @@ public class UserController {
     public ResponseEntity<UpdateLoginDto> updateLogin(@RequestBody LoginChangerDto loginChangerDto, @AuthenticationPrincipal UserDetails userDetails) {
         UserInfoDto userInfoDto = accountInformationRetriever.getAccountInfo(userDetails);
         String jwtToken = userAccountService.changeEmail(userDetails.getUsername(), loginChangerDto.newLogin(), userInfoDto.getRole());
+        userInfoDto.setLogin(loginChangerDto.newLogin());
         return ResponseEntity.status(HttpStatus.OK).body(UpdateLoginDto
                 .builder()
                 .jwt(jwtToken)
