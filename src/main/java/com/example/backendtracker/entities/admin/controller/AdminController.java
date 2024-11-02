@@ -23,13 +23,13 @@ public class AdminController {
     private final AccountInformationRetriever accountInformationRetriever;
     private final AdminService adminService;
 
-    @GetMapping("dean/key")
+    @PostMapping("dean/key")
     public String generateKeyWithUniversityIdForDean(@RequestBody DeanInfoForKeyDto deanInfoForKeyDto, @AuthenticationPrincipal UserDetails userDetails) throws Exception {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         return adminService.generateKey(accountId, deanInfoForKeyDto.roleName(), deanInfoForKeyDto.faculty());
     }
 
-    @GetMapping("teacher/key")
+    @PostMapping("teacher/key")
     public String generateKeyWithUniversityIdForTeacher(@RequestBody TeacherInfoForKeyDto teacherInfoForKeyDto, @AuthenticationPrincipal UserDetails userDetails) throws Exception {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         return adminService.generateKey(accountId, teacherInfoForKeyDto.roleName());
