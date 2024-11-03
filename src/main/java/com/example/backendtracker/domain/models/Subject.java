@@ -12,6 +12,8 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Subject {
     @Id
     private Integer idSubject;
-    private Integer idDiscipline;
-    private Integer idTeacher;
+    private String name;
+    private String description;
+    private Integer idDean;
 }
+

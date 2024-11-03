@@ -1,5 +1,6 @@
 package com.example.backendtracker.security.service;
 
+import com.example.backendtracker.reliability.exception.BadRequestException;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.exception.InvalidEncryptedDataException;
 import com.example.backendtracker.security.service.data.UserStoringKeys;
@@ -22,7 +23,7 @@ public interface UserInitializer {
     default void checkRoleConsistency(String roleFromKey, String roleUser) {
 
         if (!roleFromKey.equals(roleUser)) {
-            throw new RuntimeException("Check you role, Key must be applied to different role");
+            throw new BadRequestException("Check you role, Key must be applied to different role");
         }
     }
 }

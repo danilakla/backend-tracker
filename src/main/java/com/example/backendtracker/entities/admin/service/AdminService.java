@@ -65,7 +65,7 @@ public class AdminService {
 
 
         universityRepository.findByAdminId(adminId).ifPresent(university -> {
-            throw new RuntimeException("The university already exists");
+            throw new BadRequestException("The university already exists");
         });
         universityRepository.save(University.builder()
                 .idAdmin(adminId)
