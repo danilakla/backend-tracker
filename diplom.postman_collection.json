@@ -1,0 +1,1316 @@
+{
+	"info": {
+		"_postman_id": "015d66e2-bba9-4826-a622-056fb3967e3a",
+		"name": "diplom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20053866"
+	},
+	"item": [
+		{
+			"name": "ADMIN ENDPOINT",
+			"item": [
+				{
+					"name": "GENERATE KEYS",
+					"item": [
+						{
+							"name": "DEAN, generate key based on university id",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNjQ4ODc3LCJleHAiOjE3MzA3NDg4Nzd9.6sK8aQty7Nv612nOKaNhGZ2AIVlBm3U-Pfbxz0OrMkU",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleName\" :\"DEAN\",\r\n    \"faculty\":\"Факультет информационных технологий\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/dean/key",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"dean",
+										"key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEACHER , generate key based on university id Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNDg3NDA0LCJleHAiOjE3MzA1ODc0MDR9.Cu7UIQvM5WOQZ2Igo8rasqXcwy0TGV_6nNY972gkco0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleName\" :\"TEACHER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/teacher/key",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"teacher",
+										"key"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD UNIVERSITY",
+					"item": [
+						{
+							"name": "create university",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNjQ4ODc3LCJleHAiOjE3MzA3NDg4Nzd9.6sK8aQty7Nv612nOKaNhGZ2AIVlBm3U-Pfbxz0OrMkU",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"БГТУ\",\r\n    \"description\":\"бгту тест универ\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/university/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"university",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get university",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwMTM4NTU1LCJleHAiOjE3MzAyMzg1NTV9.dhZAhlm4OKBMco79ONVpZOmRojEoA9nz9knlyzIFEfA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/university/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"university",
+										"get"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update university",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwMTM4NTU1LCJleHAiOjE3MzAyMzg1NTV9.dhZAhlm4OKBMco79ONVpZOmRojEoA9nz9knlyzIFEfA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"БГТУ\",\r\n    \"description\":\"бгту тест универ\",\r\n    \"id\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/admin/university/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"university",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REGISTRATION ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\":\"admin@gmail.ru\",\r\n    \"password\":\"123\",\r\n    \"role\":\"ADMIN\",\r\n    \"name\":\"Евгений\",\r\n    \"lastname\":\"Жук\",\r\n    \"surname\":\"Андреевич\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"login\":\"admin@gmail.ru\",\r\n    \"password\":\"123\"\r\n    \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get member for admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNDg3NzcwLCJleHAiOjE3MzA1ODc3NzB9.02WHrtr72Wc3xdcix8eOoHdbKh85e1uQVTUxqQMkth4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/members/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"members",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recovery password by account id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBnbWFpbC5ydSIsImlhdCI6MTczMDIyNTYzNiwiZXhwIjoxNzMwMzI1NjM2fQ.NMQfBW11JsIiNFBgtCRy-R9aqnZLGNl2Z9PwqpbYGL8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/user/recovery-password/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"recovery-password",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete dean, assign new one",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNDg4MDQ1LCJleHAiOjE3MzA1ODgwNDV9.RHRXFRBhikK4pSV5HIFmZcIxC4hwsNn3Ba0jWAtXOXA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deanId\":\"1\",\r\n    \"newDeanId\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/delete/dean",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"delete",
+								"dean"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete teacher, assign new one",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNDg4MDQ1LCJleHAiOjE3MzA1ODgwNDV9.RHRXFRBhikK4pSV5HIFmZcIxC4hwsNn3Ba0jWAtXOXA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacherId\":\"1\",\r\n    \"newTeacherId\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/delete/teacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"delete",
+								"teacher"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DEAN ENDPOINTS",
+			"item": [
+				{
+					"name": "CRUD SPECIALTY",
+					"item": [
+						{
+							"name": "Create specialty",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"ПОИ1Т\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/specialty/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"specialty",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get specialty",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/specialty/get/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"specialty",
+										"get",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete specialty",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/specialty/delete/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"specialty",
+										"delete",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update specialty",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":2,\r\n    \"name\":\"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/specialty/put",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"specialty",
+										"put"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD SUBJECT",
+					"item": [
+						{
+							"name": "create subject",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Физика2\",\r\n    \"description\":\"удалить чем то\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/subject/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"subject",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get subject",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/subject/get/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"subject",
+										"get",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete subject",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/subject/delete/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"subject",
+										"delete",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update subject",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Физика2\",\r\n    \"description\":\"удалить чем тод да да \",\r\n    \"id\":2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/subject/put",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"subject",
+										"put"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD CLASS-FORMAT",
+					"item": [
+						{
+							"name": "create class-format",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"formatName\": \"лекциnя\",\r\n    \"description\":\" вот всякая ерунда\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/class-format/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"class-format",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get class-format",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/class-format/get/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"class-format",
+										"get",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete class-format",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/class-format/delete/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"class-format",
+										"delete",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update class-format",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"formatName\": \"лекциnя 213\",\r\n    \"description\":\" вот всякая ерунда\",\r\n    \"id\" :2 \r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/class-format/put",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"class-format",
+										"put"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REGISTRATION DEAN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\":\"danilakartuzov5@gmail.com\",\r\n    \"password\":\"123\",\r\n    \"name\":\"Дмитриц\",\r\n    \"lastname\":\"Шиман\",\r\n    \"surname\":\"Васльевич\",\r\n    \"role\":\"DEAN\",\r\n    \"key\" : \"D1Jk9BPsxgpFLdo9/4Du+z7W4ZvQVqOVWDhkZHvdr0XpBPzS41dxTE5x4I7SJxpD4uTsW3oQK1U2xeEEy7u81vVF3Ig8/2fq3o6sFg6wsXU=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEAN Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"login\":\"danilakartuzov5@gmail.com\",\r\n    \"password\":\"123\"\r\n    \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate students",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDQ4NzUwMCwiZXhwIjoxNzMwNTg3NTAwfQ.TczBth-nQHxkWWMrXLtPbjSGrqtjx6JhFG6MPtEjrbw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n      {\r\n        \"name\": \"Данила\",\r\n        \"lastname\": \"Картузов\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"ЛЕС\"\r\n    },\r\n       {\r\n        \"name\": \"Влад\",\r\n        \"lastname\": \"Вакуленчик\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"ДУБ\"\r\n    },\r\n    {\r\n        \"name\": \"Никита\",\r\n        \"lastname\": \"Шумский\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"ЛЕС\"\r\n    },\r\n\r\n      {\r\n        \"name\": \"Александр\",\r\n        \"lastname\": \"Бекишь\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"ЛЕС\"\r\n    },\r\n        {\r\n        \"name\": \"Артем\",\r\n        \"lastname\": \"Абрамович\",\r\n        \"surname\": \"Пермедов\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"ДУБ\"\r\n    },\r\n    {\r\n        \"name\": \"Арсений\",\r\n        \"lastname\": \"Шилов\",\r\n        \"surname\": \"Тихон\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"ЛЕС\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/generate-student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"generate-student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get member for dean",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FyM3R1em92NUBnbWFpbC5jb20iLCJpYXQiOjE3MzA0ODgxNjcsImV4cCI6MTczMDU4ODE2N30._q6hMnfASVhFycn77jILKQnEAFLGuyu4nF0HcvYCGMw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/dean/members/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"members",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recovery password by account id Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBnbWFpbC5ydSIsImlhdCI6MTczMDIyNTYzNiwiZXhwIjoxNzMwMzI1NjM2fQ.NMQfBW11JsIiNFBgtCRy-R9aqnZLGNl2Z9PwqpbYGL8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/user/recovery-password/31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"recovery-password",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete student by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDQ4Nzc5NSwiZXhwIjoxNzMwNTg3Nzk1fQ.xp5J_ozxk6M-V27jSqSXJe8eGfuByKFHRoYBycrGTps",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"login\":\"Абрамович_Артем_Пермедов85aa794b\",\r\n    \"password\":\"NMgJLIsKkY\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/delete/student/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"delete",
+								"student",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create one student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FyM3R1em92NUBnbWFpbC5jb20iLCJpYXQiOjE3MzA0ODk4MjAsImV4cCI6MTczMDU4OTgyMH0.ym0GDC1FcHGnwmD8lLOa4uzJ4nyFe3E1K9bIDAXvBY4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "     {\r\n        \"name\": \"Добавить\",\r\n        \"lastname\": \"Студента\",\r\n        \"surname\": \"Туда\",\r\n        \"numberOfGroupId\": \"3\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/students/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"students",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TEACHER ENDPOINTS",
+			"item": [
+				{
+					"name": "REGISTRATION TEACHER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\":\"teacher@gmail.ru\",\r\n    \"password\":\"123\",\r\n    \"name\":\"Егор\",\r\n    \"lastname\":\"Гончар\",\r\n    \"surname\":\"Александрович\",\r\n    \"role\":\"TEACHER\",\r\n    \"key\" : \"zGEQo7oEf2e/haN69MgxyQ==\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Techer Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"login\":\"teacher1@gmail.ru\",\r\n    \"password\":\"1234\"\r\n    \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STUDENTS ENDPOINTS",
+			"item": [
+				{
+					"name": "Student login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"login\":\"vlad@mail.ru\",\r\n    \"password\":\"123\"\r\n    \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GENERAL ENDPOINTS",
+			"item": [
+				{
+					"name": "get user info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40Yc5ZTg3ODNkMCIsImlhdCI6MTcyOTk0OTA5MCwiZXhwIjoxNzMwMDQ5MDkwfQ.aRX39oMe7g27-r8ngfjK7rnL-6Wa4l1LqhKDr-UqqKY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMDA0NzM4MSwiZXhwIjoxNzMwMTQ3MzgxfQ.d6h2gOiDTsi5rZp-qZSa8tiEApay_YbV89uVg3K9nUo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\":\"123\",\r\n    \"newPassword\":\"1234\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/update-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMDA0NzM4MSwiZXhwIjoxNzMwMTQ3MzgxfQ.d6h2gOiDTsi5rZp-qZSa8tiEApay_YbV89uVg3K9nUo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newLogin\":\"teacher1@gmail.ru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/update-login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"update-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update name lastname surname ",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoidmxhZEBtYWlsLnJ1IiwiaWF0IjoxNzMwMDQ4MDM3LCJleHAiOjE3MzAxNDgwMzd9.1S-_gaiOFIddKpyDOos-ZlQPgyDc14brmmumxK3FAnY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastname\":\"Не влад\",\r\n    \"name\":\"не вакуленчик\",\r\n    \"surname\":\"не алекс\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PARENTS ENDPOINTS",
+			"item": [
+				{
+					"name": "PARENT LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"token\":\"Картузов_Данила_Александрович1eb71a04LZBVfWHKGs\",\r\n    \"role\":\"ROLE_PARENTS\"\r\n\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authenticate/parent",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authenticate",
+								"parent"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
