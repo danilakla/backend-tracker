@@ -27,7 +27,7 @@ VALUES ('ADMIN'),
 CREATE TABLE UserAccounts
 (
     id_account SERIAL PRIMARY KEY,
-    login      VARCHAR(50),
+    login      VARCHAR(50) unique ,
     password   VARCHAR(250),
     id_role    INT,
     FOREIGN KEY (id_role) REFERENCES UserRoles (id_role)
@@ -123,10 +123,10 @@ CREATE TABLE Students
 CREATE TABLE Subjects
 (
     id_subject    SERIAL PRIMARY KEY,
-    id_discipline INT,
-    id_teacher    INT,
-    FOREIGN KEY (id_discipline) REFERENCES Disciplines (id_discipline),
-    FOREIGN KEY (id_teacher) REFERENCES Teachers (id_teacher)
+    id_dean       INT,
+    name          VARCHAR(100),
+    description          VARCHAR(500),
+    FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
 CREATE TABLE ClassGroups

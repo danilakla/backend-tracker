@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubjectRepository extends CrudRepository<Subject, Integer> {
     @Modifying
-    @Query("UPDATE Subjects SET id_teacher = :newTeacherId WHERE id_teacher = :oldTeacherId")
-    void updateTeacherId(@Param("newTeacherId") int newTeacherId, @Param("oldTeacherId") int oldTeacherId);
+    @Query("UPDATE Subjects SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")
+    void updateDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
 }

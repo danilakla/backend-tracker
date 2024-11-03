@@ -27,7 +27,6 @@ public class AdminService {
     private final UserAccountService userAccountService;
     private final DeanRepository deanRepository;
     private final SpecialtyRepository specialtyRepository;
-    private final DisciplineRepository disciplineRepository;
     private final ClassFormatRepository classFormatRepository;
     private final SubgroupRepository subgroupRepository;
     private final TeacherRepository teacherRepository;
@@ -77,9 +76,9 @@ public class AdminService {
 
     public void reassignAndDeleteDean(Integer oldDeanId, Integer newDeanId) {
         specialtyRepository.updateDeanId(newDeanId, oldDeanId);
-        disciplineRepository.updateDeanId(newDeanId, oldDeanId);
         classFormatRepository.updateDeanId(newDeanId, oldDeanId);
         subgroupRepository.updateDeanId(newDeanId, oldDeanId);
+        subjectRepository.updateDeanId(newDeanId,oldDeanId);
         deanRepository.deleteById(oldDeanId);
     }
 
@@ -88,7 +87,6 @@ public class AdminService {
         Dean deanDeleted = deanRepository.findById(deanId).orElseThrow(() -> new BadRequestException("There is no dean, by id"));
         deanRepository.findById(newDeanId).orElseThrow(() -> new BadRequestException("There is no dean, by id"));
         reassignAndDeleteDean(deanId, newDeanId);
-        deanRepository.deleteById(deanId);
         userAccountService.deleteAccount(deanDeleted.getIdAccount());
     }
 
@@ -97,15 +95,12 @@ public class AdminService {
         Teacher teacher = teacherRepository.findById(teacherId).orElseThrow(() -> new BadRequestException("There is no teacher, by id"));
         teacherRepository.findById(newTeacherId).orElseThrow(() -> new BadRequestException("There is no teacher, by id"));
         reassignTeacher(teacherId, newTeacherId);
-        teacherRepository.deleteById(teacherId);
         userAccountService.deleteAccount(teacher.getIdAccount());
 
     }
 
 
     public void reassignTeacher(int oldTeacherId, int newTeacherId) {
-        subjectRepository.updateTeacherId(newTeacherId, oldTeacherId);
         classGroupRepository.updateTeacherId(newTeacherId, oldTeacherId);
-        teacherRepository.deleteById(oldTeacherId);
     }
 }
