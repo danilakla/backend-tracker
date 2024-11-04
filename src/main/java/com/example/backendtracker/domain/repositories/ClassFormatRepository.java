@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,4 +18,6 @@ public interface ClassFormatRepository extends CrudRepository<ClassFormat, Integ
     void updateDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
 
     Optional<ClassFormat> findClassFormatByFormatName(String formatName);
+
+    List<ClassFormat> findAllByIdDean(Integer idDean);
 }

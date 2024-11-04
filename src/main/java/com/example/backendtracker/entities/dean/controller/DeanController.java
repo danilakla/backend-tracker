@@ -7,6 +7,7 @@ import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
 import com.example.backendtracker.entities.dean.service.DeanService;
 import com.example.backendtracker.util.AccountInformationRetriever;
+import com.example.backendtracker.util.UserInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,26 @@ public class DeanController {
 
         Specialty specialty = deanService.createSpecialty(specialtyDto, accountId);
         return ResponseEntity.status(HttpStatus.CREATED).body(specialty);
+    }
+
+    @GetMapping("subject/get/all")
+    public ResponseEntity<List<Subject>> getAllSubject(@AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.status(HttpStatus.OK).body(deanService.getListSubjects(accountId));
+    }
+
+
+    @GetMapping("class-format/get/all")
+    public ResponseEntity<List<ClassFormat>> getAllClassFormat(@AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.status(HttpStatus.OK).body(deanService.getListClassFormat(accountId));
+    }
+
+
+    @GetMapping("specialty/get/all")
+    public ResponseEntity<List<Specialty>> getAllSpecialty(@AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.status(HttpStatus.OK).body(deanService.getSetSpecialty(accountId));
     }
 
     @GetMapping("specialty/get/{id}")
@@ -160,6 +181,12 @@ public class DeanController {
     public ResponseEntity<Student> createStudentAccounts(@RequestBody StudentAddDto studentAddDto, @AuthenticationPrincipal UserDetails userDetails) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(deanService.addStudent(studentAddDto));
+    }
+
+    @PostMapping("students/update/{id}")
+    public ResponseEntity<Student> updateStudentAccounts(@PathVariable("id") Integer id, @RequestBody UserInfo userInfo, @AuthenticationPrincipal UserDetails userDetails) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(deanService.updateStudentInfo(userInfo, id));
     }
 
 

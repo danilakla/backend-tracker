@@ -286,7 +286,7 @@
 					"response": []
 				},
 				{
-					"name": "recovery password by account id",
+					"name": "recovery password by account id to dean and teacher",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -519,6 +519,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDc0MzM0MCwiZXhwIjoxNzMwODQzMzQwfQ.ADG3ejR7WB_QW3f-ZjAxltXxpm8qWV210_Vl9GbksiY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/specialty/get/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"specialty",
+										"get",
+										"all"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -648,6 +676,34 @@
 										"dean",
 										"subject",
 										"put"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDc0MzM0MCwiZXhwIjoxNzMwODQzMzQwfQ.ADG3ejR7WB_QW3f-ZjAxltXxpm8qWV210_Vl9GbksiY",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/subject/get/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"subject",
+										"get",
+										"all"
 									]
 								}
 							},
@@ -789,6 +845,210 @@
 					]
 				},
 				{
+					"name": "manage students",
+					"item": [
+						{
+							"name": "generate students",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDc0MTg1NywiZXhwIjoxNzMwODQxODU3fQ.ra5l3xTEXXc3gj578rrumFGmUBf51k4zT__gabqSuu4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n      {\r\n        \"name\": \"Данила\",\r\n        \"lastname\": \"Картузов\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"test\"\r\n    },\r\n       {\r\n        \"name\": \"Влад\",\r\n        \"lastname\": \"Вакуленчик\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"test\"\r\n    },\r\n    {\r\n        \"name\": \"Никита\",\r\n        \"lastname\": \"Шумский\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"test\"\r\n    },\r\n\r\n      {\r\n        \"name\": \"Александр\",\r\n        \"lastname\": \"Бекишь\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"test\"\r\n    },\r\n        {\r\n        \"name\": \"Артем\",\r\n        \"lastname\": \"Абрамович\",\r\n        \"surname\": \"Пермедов\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"test\"\r\n    },\r\n    {\r\n        \"name\": \"Арсений\",\r\n        \"lastname\": \"Шилов\",\r\n        \"surname\": \"Тихон\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"test\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/generate-student",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"generate-student"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get member for dean",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDc0MTg1NywiZXhwIjoxNzMwODQxODU3fQ.ra5l3xTEXXc3gj578rrumFGmUBf51k4zT__gabqSuu4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/members/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"members",
+										"get"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "recovery password by account id to studeent",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBnbWFpbC5ydSIsImlhdCI6MTczMDIyNTYzNiwiZXhwIjoxNzMwMzI1NjM2fQ.NMQfBW11JsIiNFBgtCRy-R9aqnZLGNl2Z9PwqpbYGL8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/user/recovery-password/31",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"recovery-password",
+										"31"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete student by id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDQ4Nzc5NSwiZXhwIjoxNzMwNTg3Nzk1fQ.xp5J_ozxk6M-V27jSqSXJe8eGfuByKFHRoYBycrGTps",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"login\":\"Абрамович_Артем_Пермедов85aa794b\",\r\n    \"password\":\"NMgJLIsKkY\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/delete/student/21",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"delete",
+										"student",
+										"21"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create one student",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FyM3R1em92NUBnbWFpbC5jb20iLCJpYXQiOjE3MzA0ODk4MjAsImV4cCI6MTczMDU4OTgyMH0.ym0GDC1FcHGnwmD8lLOa4uzJ4nyFe3E1K9bIDAXvBY4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "     {\r\n        \"name\": \"Добавить\",\r\n        \"lastname\": \"Студента\",\r\n        \"surname\": \"Туда\",\r\n        \"numberOfGroupId\": \"3\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/students/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"students",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update students fio",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDc0MTg1NywiZXhwIjoxNzMwODQxODU3fQ.ra5l3xTEXXc3gj578rrumFGmUBf51k4zT__gabqSuu4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"lastname\":\"Не влад\",\r\n    \"name\":\"не вакуленчик\",\r\n    \"surname\":\"не алекс\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/students/update/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"students",
+										"update",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "REGISTRATION DEAN",
 					"request": {
 						"method": "POST",
@@ -839,168 +1099,6 @@
 							"port": "8080",
 							"path": [
 								"authenticate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "generate students",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDQ4NzUwMCwiZXhwIjoxNzMwNTg3NTAwfQ.TczBth-nQHxkWWMrXLtPbjSGrqtjx6JhFG6MPtEjrbw",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n      {\r\n        \"name\": \"Данила\",\r\n        \"lastname\": \"Картузов\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"ЛЕС\"\r\n    },\r\n       {\r\n        \"name\": \"Влад\",\r\n        \"lastname\": \"Вакуленчик\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"ДУБ\"\r\n    },\r\n    {\r\n        \"name\": \"Никита\",\r\n        \"lastname\": \"Шумский\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"ЛЕС\"\r\n    },\r\n\r\n      {\r\n        \"name\": \"Александр\",\r\n        \"lastname\": \"Бекишь\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"ЛЕС\"\r\n    },\r\n        {\r\n        \"name\": \"Артем\",\r\n        \"lastname\": \"Абрамович\",\r\n        \"surname\": \"Пермедов\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"ДУБ\"\r\n    },\r\n    {\r\n        \"name\": \"Арсений\",\r\n        \"lastname\": \"Шилов\",\r\n        \"surname\": \"Тихон\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"ЛЕС\"\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/dean/generate-student",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"dean",
-								"generate-student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get member for dean",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FyM3R1em92NUBnbWFpbC5jb20iLCJpYXQiOjE3MzA0ODgxNjcsImV4cCI6MTczMDU4ODE2N30._q6hMnfASVhFycn77jILKQnEAFLGuyu4nF0HcvYCGMw",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/dean/members/get",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"dean",
-								"members",
-								"get"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "recovery password by account id Copy",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBnbWFpbC5ydSIsImlhdCI6MTczMDIyNTYzNiwiZXhwIjoxNzMwMzI1NjM2fQ.NMQfBW11JsIiNFBgtCRy-R9aqnZLGNl2Z9PwqpbYGL8",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/user/recovery-password/31",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"user",
-								"recovery-password",
-								"31"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete student by id",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDQ4Nzc5NSwiZXhwIjoxNzMwNTg3Nzk1fQ.xp5J_ozxk6M-V27jSqSXJe8eGfuByKFHRoYBycrGTps",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"login\":\"Абрамович_Артем_Пермедов85aa794b\",\r\n    \"password\":\"NMgJLIsKkY\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/user/delete/student/21",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"user",
-								"delete",
-								"student",
-								"21"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create one student",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FyM3R1em92NUBnbWFpbC5jb20iLCJpYXQiOjE3MzA0ODk4MjAsImV4cCI6MTczMDU4OTgyMH0.ym0GDC1FcHGnwmD8lLOa4uzJ4nyFe3E1K9bIDAXvBY4",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "     {\r\n        \"name\": \"Добавить\",\r\n        \"lastname\": \"Студента\",\r\n        \"surname\": \"Туда\",\r\n        \"numberOfGroupId\": \"3\"\r\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/dean/students/create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"dean",
-								"students",
-								"create"
 							]
 						}
 					},
@@ -1144,7 +1242,7 @@
 					"response": []
 				},
 				{
-					"name": "change password",
+					"name": "change own password, in profile",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1215,11 +1313,8 @@
 				},
 				{
 					"name": "update name lastname surname ",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
@@ -1237,7 +1332,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/user/info",
+							"raw": "http://localhost:8080/user/update-user-info",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1245,7 +1340,7 @@
 							"port": "8080",
 							"path": [
 								"user",
-								"info"
+								"update-user-info"
 							]
 						}
 					},

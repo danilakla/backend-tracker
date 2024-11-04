@@ -14,6 +14,8 @@ import com.example.backendtracker.security.service.UserAccountService;
 import com.example.backendtracker.security.util.LoginGenerator;
 import com.example.backendtracker.security.util.PasswordGenerator;
 import com.example.backendtracker.util.NameConverter;
+import com.example.backendtracker.util.PersonAccountManager;
+import com.example.backendtracker.util.UserInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,7 @@ public class DeanService {
     private final UserAccountService userAccountService;
     private final ClassFormatRepository classFormatRepository;
     private final SubjectRepository subjectRepository;
+    private final PersonAccountManager personAccountManager;
 
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
@@ -91,6 +94,10 @@ public class DeanService {
 
     }
 
+    public List<Specialty> getSetSpecialty(Integer accountId) {
+        return specialtyRepository.findByDeanId(accountId);
+    }
+
     public ClassFormat createClassFormat(CreateClassFormatRequestDTO createClassFormatRequestDTO, Integer deanId) {
         classFormatRepository.findClassFormatByFormatName(createClassFormatRequestDTO.formatName()).ifPresent((e) -> {
             throw new BadRequestException("there's classFormat");
@@ -102,7 +109,9 @@ public class DeanService {
                 .description(createClassFormatRequestDTO.description())
                 .build());
     }
-
+    public List<ClassFormat> getListClassFormat(Integer deanId){
+        return classFormatRepository.findAllByIdDean(deanId);
+    }
     public ClassFormat getClassFormat(Integer classFormatId, Integer deanId) {
 
         ClassFormat classFormat = classFormatRepository.findById(classFormatId).orElseThrow(() -> new BadRequestException("there's no classFormat"));
@@ -126,6 +135,9 @@ public class DeanService {
     }
 
 
+    public List<Subject> getListSubjects(Integer deanId) {
+        return subjectRepository.findAllByIdDean(deanId);
+    }
     public Subject createSubject(CreateSubjectDto createSubjectDto, Integer deanId) {
         subjectRepository.findByName(createSubjectDto.name()).ifPresent((e) -> {
             throw new BadRequestException("there's subject");
@@ -158,6 +170,14 @@ public class DeanService {
         subject.setName(updateSubjectDto.name());
         subject.setDescription(updateSubjectDto.description());
         return subjectRepository.save(subject);
+    }
+
+
+    public Student updateStudentInfo(UserInfo userInfo, Integer id) {
+        Student studentAccount = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Can't retrieve the student"));
+        studentAccount.setFlpName(NameConverter.convertNameToDb(userInfo.lastname(), userInfo.name(), userInfo.surname()));
+
+        return studentRepository.save(studentAccount);
     }
 
     private void hasBelongToDean(Integer entityIdDean, Integer requestedDeanId) {
