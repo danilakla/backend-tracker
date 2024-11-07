@@ -25,6 +25,13 @@ public class DeanController {
     private final AccountInformationRetriever accountInformationRetriever;
     private final DeanService deanService;
 
+    @PostMapping("class-group/create")
+    public ResponseEntity<ClassGroup> createClassGroup(@RequestBody CreateSubjectToTeacherWithFormat createSubjectToTeacherWithFormat, @AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        Integer universityId = accountInformationRetriever.getUniversityId(userDetails);
+
+        return ResponseEntity.status(HttpStatus.OK).body(deanService.createClassGroup(createSubjectToTeacherWithFormat, accountId, universityId));
+    }
 
     @PostMapping("specialty/create")
     public ResponseEntity<Specialty> createSpecialty(@RequestBody CreateSpecialtyDto specialtyDto, @AuthenticationPrincipal UserDetails userDetails) {

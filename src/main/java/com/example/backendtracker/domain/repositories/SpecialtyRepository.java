@@ -22,7 +22,4 @@ public interface SpecialtyRepository extends CrudRepository<Specialty, Integer> 
     @Modifying
     @Query("UPDATE Specialties SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")
     void updateDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
-
-
-
 }

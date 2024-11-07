@@ -11,6 +11,8 @@ import com.example.backendtracker.util.NameConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+//todo admin facultyes - create/get all get one/delete/update
+//todo dean get one, update
 @Service
 @AllArgsConstructor
 public class TeacherInitializer implements UserInitializer {

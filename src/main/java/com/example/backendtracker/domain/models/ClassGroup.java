@@ -16,4 +16,5 @@ public class ClassGroup {
     private String description;
     private Integer idClassFormat;
     private Integer idTeacher;
+    private Integer idDean;
 }

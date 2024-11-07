@@ -34,10 +34,23 @@ public class AccountInformationRetriever {
             AccountId = studentRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdStudent();
 
         }
-
         return AccountId;
     }
 
+    public Integer getUniversityId(UserDetails userDetails) {
+        String role = userDetails.getAuthorities().iterator().next().toString();
+        Integer univerId = null;
+        Integer userAccount = userAccountRepository.findByLogin(userDetails.getUsername()).orElseThrow(() -> new RuntimeException("Can't retrieve user account by the account id")).getIdAccount();
+        if (Objects.equals(role, "ROLE_DEAN")) {
+            univerId = deanRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdUniversity();
+
+        } else if (Objects.equals(role, "ROLE_TEACHER")) {
+            univerId = teacherRepository.findByIdAccount(userAccount).orElseThrow(() -> new RuntimeException("Can't retrieve the account id")).getIdUniversity();
+
+        }
+        return univerId;
+
+    }
 
     public UserInfoDto getAccountInfo(UserDetails userDetails) {
 

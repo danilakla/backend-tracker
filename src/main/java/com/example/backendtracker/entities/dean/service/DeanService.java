@@ -1,10 +1,7 @@
 package com.example.backendtracker.entities.dean.service;
 
 import com.example.backendtracker.domain.models.*;
-import com.example.backendtracker.domain.repositories.ClassFormatRepository;
-import com.example.backendtracker.domain.repositories.SpecialtyRepository;
-import com.example.backendtracker.domain.repositories.StudentRepository;
-import com.example.backendtracker.domain.repositories.SubjectRepository;
+import com.example.backendtracker.domain.repositories.*;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
@@ -32,7 +29,8 @@ public class DeanService {
     private final UserAccountService userAccountService;
     private final ClassFormatRepository classFormatRepository;
     private final SubjectRepository subjectRepository;
-    private final PersonAccountManager personAccountManager;
+    private final TeacherRepository teacherRepository;
+    private final ClassGroupRepository classGroupRepository;
 
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
@@ -109,9 +107,11 @@ public class DeanService {
                 .description(createClassFormatRequestDTO.description())
                 .build());
     }
-    public List<ClassFormat> getListClassFormat(Integer deanId){
+
+    public List<ClassFormat> getListClassFormat(Integer deanId) {
         return classFormatRepository.findAllByIdDean(deanId);
     }
+
     public ClassFormat getClassFormat(Integer classFormatId, Integer deanId) {
 
         ClassFormat classFormat = classFormatRepository.findById(classFormatId).orElseThrow(() -> new BadRequestException("there's no classFormat"));
@@ -138,6 +138,7 @@ public class DeanService {
     public List<Subject> getListSubjects(Integer deanId) {
         return subjectRepository.findAllByIdDean(deanId);
     }
+
     public Subject createSubject(CreateSubjectDto createSubjectDto, Integer deanId) {
         subjectRepository.findByName(createSubjectDto.name()).ifPresent((e) -> {
             throw new BadRequestException("there's subject");
@@ -178,6 +179,22 @@ public class DeanService {
         studentAccount.setFlpName(NameConverter.convertNameToDb(userInfo.lastname(), userInfo.name(), userInfo.surname()));
 
         return studentRepository.save(studentAccount);
+    }
+
+
+    public ClassGroup createClassGroup(CreateSubjectToTeacherWithFormat createSubjectToTeacherWithFormat, Integer deanId, Integer universityId) {
+        Subject subject = getSubject(createSubjectToTeacherWithFormat.subjectId(), deanId);
+        ClassFormat classFormat = getClassFormat(createSubjectToTeacherWithFormat.formatClassId(), deanId);
+        Teacher teacher = teacherRepository.findByIdUniversityAndIdTeacher(universityId, createSubjectToTeacherWithFormat.teacherId()).orElseThrow(() -> new BadRequestException("there's no teacher with the following id"));
+     classGroupRepository.findByIdTeacherAndIdClassFormatAndAndIdSubject(teacher.getIdTeacher(), classFormat.getIdClassFormat(),subject.getIdSubject()).ifPresent((e)->new BadRequestException("the subject already assing to the following teacher with the class format"));
+        return classGroupRepository.save(ClassGroup
+                .builder()
+                .idTeacher(teacher.getIdTeacher())
+                .idSubject(subject.getIdSubject())
+                .idClassFormat(classFormat.getIdClassFormat())
+                .idDean(deanId)
+                .description(createSubjectToTeacherWithFormat.description())
+                .build());
     }
 
     private void hasBelongToDean(Integer entityIdDean, Integer requestedDeanId) {

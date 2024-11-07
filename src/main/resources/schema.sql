@@ -136,6 +136,8 @@ CREATE TABLE ClassGroups
     description     TEXT,
     id_class_format INT,
     id_teacher      INT,
+    id_dean         INT,
+    FOREIGN KEY (id_dean) REFERENCES Deans (id_dean),
     FOREIGN KEY (id_subject) REFERENCES Subjects (id_subject),
     FOREIGN KEY (id_class_format) REFERENCES ClassFormats (id_class_format),
     FOREIGN KEY (id_teacher) REFERENCES Teachers (id_teacher)

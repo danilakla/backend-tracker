@@ -16,4 +16,6 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
     Optional<Teacher> findByIdAccount(@Param("id_account") Integer id_account);
 
     List<Teacher> findAllByIdUniversity(Integer id_university);
+
+    Optional<Teacher> findByIdUniversityAndIdTeacher(Integer id_university, Integer id_teacher);
 }
