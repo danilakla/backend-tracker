@@ -2,12 +2,14 @@ package com.example.backendtracker.entities.dean.controller;
 
 import com.example.backendtracker.domain.mapper.UniversalMapper;
 import com.example.backendtracker.domain.models.*;
+import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
 import com.example.backendtracker.entities.dean.service.DeanService;
 import com.example.backendtracker.util.AccountInformationRetriever;
 import com.example.backendtracker.util.UserInfo;
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +22,28 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("dean")
+//TODO GET LIST GROUP SUBJ/ GET ONE SUBJECT/ UPDATE (REASSIGN)/ DELETE SUBJECT 
 public class DeanController {
 
     private final AccountInformationRetriever accountInformationRetriever;
     private final DeanService deanService;
 
+    //todo review, in postman
     @PostMapping("class-group/create")
     public ResponseEntity<ClassGroup> createClassGroup(@RequestBody CreateSubjectToTeacherWithFormat createSubjectToTeacherWithFormat, @AuthenticationPrincipal UserDetails userDetails) {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         Integer universityId = accountInformationRetriever.getUniversityId(userDetails);
-
         return ResponseEntity.status(HttpStatus.OK).body(deanService.createClassGroup(createSubjectToTeacherWithFormat, accountId, universityId));
     }
+
+    //todo review, in postman
+    @PostMapping("assign/subgroups")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void createClassGroup(@RequestBody AssignGroupsToClass assignGroupsToClass, @AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        deanService.assignGroupsToClass(assignGroupsToClass, accountId);
+    }
+
 
     @PostMapping("specialty/create")
     public ResponseEntity<Specialty> createSpecialty(@RequestBody CreateSpecialtyDto specialtyDto, @AuthenticationPrincipal UserDetails userDetails) {
@@ -181,6 +193,12 @@ public class DeanController {
     @GetMapping("members/get")
     public ResponseEntity<List<SubGroupMember>> getMemberOfSystem(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.status(HttpStatus.OK).body(deanService.getSubGroupMembers(accountInformationRetriever.getAccountId(userDetails)));
+    }
+
+
+    @GetMapping("subgroup/get")
+    public ResponseEntity<List<Subgroup>> getSubgroup(@AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.status(HttpStatus.OK).body(deanService.getListSubgroups(accountInformationRetriever.getAccountId(userDetails)));
     }
 
 

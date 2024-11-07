@@ -2,23 +2,30 @@ package com.example.backendtracker.entities.dean.service;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
+import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.service.UserAccountService;
+import com.example.backendtracker.security.service.helper.student.dto.StudentResultDto;
 import com.example.backendtracker.security.util.LoginGenerator;
 import com.example.backendtracker.security.util.PasswordGenerator;
 import com.example.backendtracker.util.NameConverter;
 import com.example.backendtracker.util.PersonAccountManager;
 import com.example.backendtracker.util.UserInfo;
 import lombok.AllArgsConstructor;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.Name;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -31,11 +38,17 @@ public class DeanService {
     private final SubjectRepository subjectRepository;
     private final TeacherRepository teacherRepository;
     private final ClassGroupRepository classGroupRepository;
+    private final ClassGroupsToSubgroupsRepository classGroupsToSubgroupsRepository;
+    private final JdbcTemplate jdbcTemplate;
 
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
 
         return commonService.getMemberSystemForDean(deanId);
+    }
+
+    public List<Subgroup> getListSubgroups(Integer deanId) {
+        return commonService.getSubgroupList(deanId);
     }
 
     @Transactional
@@ -186,7 +199,7 @@ public class DeanService {
         Subject subject = getSubject(createSubjectToTeacherWithFormat.subjectId(), deanId);
         ClassFormat classFormat = getClassFormat(createSubjectToTeacherWithFormat.formatClassId(), deanId);
         Teacher teacher = teacherRepository.findByIdUniversityAndIdTeacher(universityId, createSubjectToTeacherWithFormat.teacherId()).orElseThrow(() -> new BadRequestException("there's no teacher with the following id"));
-     classGroupRepository.findByIdTeacherAndIdClassFormatAndAndIdSubject(teacher.getIdTeacher(), classFormat.getIdClassFormat(),subject.getIdSubject()).ifPresent((e)->new BadRequestException("the subject already assing to the following teacher with the class format"));
+        classGroupRepository.findByIdTeacherAndIdClassFormatAndAndIdSubject(teacher.getIdTeacher(), classFormat.getIdClassFormat(), subject.getIdSubject()).ifPresent((e) -> new BadRequestException("the subject already assing to the following teacher with the class format"));
         return classGroupRepository.save(ClassGroup
                 .builder()
                 .idTeacher(teacher.getIdTeacher())
@@ -198,7 +211,33 @@ public class DeanService {
     }
 
     private void hasBelongToDean(Integer entityIdDean, Integer requestedDeanId) {
-        if (entityIdDean != requestedDeanId)
+        if (!Objects.equals(entityIdDean, requestedDeanId))
             throw new BadRequestException("The dean does not belong to the requested dean");
+    }
+
+    public void assignGroupsToClass(AssignGroupsToClass assignGroupsToClass, Integer deanId) {
+        classGroupRepository.findByIdDean(deanId).orElseThrow(() -> new BadRequestException("there's no class-group"));
+        assignStudentGroupsToClassGroup(assignGroupsToClass);
+    }
+
+    public void assignStudentGroupsToClassGroup(AssignGroupsToClass assignGroupsToClass) {
+
+        jdbcTemplate.batchUpdate("INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group) VALUES (?, ?)",
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        Integer idStudentGroup = assignGroupsToClass.studentGroupIds().get(i);
+
+                        ps.setInt(1, idStudentGroup);
+                        ps.setInt(2, assignGroupsToClass.classGroupId());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return assignGroupsToClass.studentGroupIds().size();
+                    }
+                }
+        );
+
     }
 }

@@ -88,4 +88,8 @@ public class CommonService {
         }
         return subgroupMembers;
     }
+
+    public List<Subgroup> getSubgroupList(Integer idDean) {
+        return getListSubgroups(idDean);
+    }
 }
