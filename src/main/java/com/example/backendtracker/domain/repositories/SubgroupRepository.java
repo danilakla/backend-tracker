@@ -13,7 +13,10 @@ import java.util.List;
 public interface SubgroupRepository extends CrudRepository<Subgroup, Integer> {
 
     List<Subgroup> findAllByIdDean(Integer idDean);
+
     @Modifying
     @Query("UPDATE Subgroups SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")
     void updateDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
+
+    List<Subgroup> findAllByIdSubgroupIn(List<Integer> idSubgroupIn);
 }

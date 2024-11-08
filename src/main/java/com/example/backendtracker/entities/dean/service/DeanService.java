@@ -3,6 +3,9 @@ package com.example.backendtracker.entities.dean.service;
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
 import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
+import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
+import com.example.backendtracker.entities.admin.dto.RemoveGroupsToClass;
+import com.example.backendtracker.entities.admin.dto.UpdateClassGroupDto;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.naming.Name;
+import java.lang.Class;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -194,6 +198,41 @@ public class DeanService {
         return studentRepository.save(studentAccount);
     }
 
+    public List<ClassGroup> getListClassGroup(Integer deanId) {
+        return classGroupRepository.findAllByIdDean(deanId);
+    }
+
+    public ClassGroupDto getClassGroup(Integer classGroupId, Integer deanId) {
+        ClassGroup classGroup = classGroupRepository.findById(classGroupId).orElseThrow(() -> new BadRequestException("there's no class-group"));
+        hasBelongToDean(classGroup.getIdDean(), deanId);
+        List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroup.getIdClassGroup());
+        List<Integer> subgroupsId = classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdSubgroup).toList();
+        return ClassGroupDto.builder().classGroup(classGroup).subgroupsId(subgroupsId).build();
+    }
+
+    public ClassGroup deleteClassGroup(Integer classGroupId, Integer deanId) {
+        ClassGroupDto classGroup = getClassGroup(classGroupId, deanId);
+        classGroupRepository.delete(classGroup.classGroup());
+        return classGroup.classGroup();
+    }
+
+    public ClassGroup updateClassGroup(UpdateClassGroupDto updateClassGroupDto, Integer deanId) {
+        ClassGroup classGroup = classGroupRepository.findById(updateClassGroupDto.classGroupId()).orElseThrow(() -> new BadRequestException("there's no class-group"));
+        hasBelongToDean(classGroup.getIdDean(), deanId);
+        classGroup.setIdTeacher(updateClassGroupDto.teacherId());
+        classGroup.setDescription(updateClassGroupDto.description());
+        classGroup.setIdSubject(updateClassGroupDto.subjectId());
+        classGroup.setIdClassFormat(updateClassGroupDto.classFormatId());
+        return classGroupRepository.save(classGroup);
+    }
+
+    public void addSubGroupsToClassGroup(AssignGroupsToClass assignGroupsToClass) {
+        manageStudentGroupsToClassGroup(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group) VALUES (?, ?)");
+    }
+
+    public void removeSubGroupsToClassGroup(RemoveGroupsToClass removeGroupsToClass) {
+        manageStudentGroupsToClassGroup(removeGroupsToClass.studentGroupIds(), removeGroupsToClass.classGroupId(), "DELETE FROM ClassGroupsToSubgroups WHERE id_subgroup = ? AND id_class_group = ?");
+    }
 
     public ClassGroup createClassGroup(CreateSubjectToTeacherWithFormat createSubjectToTeacherWithFormat, Integer deanId, Integer universityId) {
         Subject subject = getSubject(createSubjectToTeacherWithFormat.subjectId(), deanId);
@@ -215,29 +254,29 @@ public class DeanService {
             throw new BadRequestException("The dean does not belong to the requested dean");
     }
 
-    public void assignGroupsToClass(AssignGroupsToClass assignGroupsToClass, Integer deanId) {
-        classGroupRepository.findByIdDean(deanId).orElseThrow(() -> new BadRequestException("there's no class-group"));
-        assignStudentGroupsToClassGroup(assignGroupsToClass);
+    public void assignGroupsToClass(AssignGroupsToClass assignGroupsToClass) {
+        manageStudentGroupsToClassGroup(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group) VALUES (?, ?)");
     }
 
-    public void assignStudentGroupsToClassGroup(AssignGroupsToClass assignGroupsToClass) {
+    public void manageStudentGroupsToClassGroup(List<Integer> ids, Integer classGroupId, String sql) {
 
-        jdbcTemplate.batchUpdate("INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group) VALUES (?, ?)",
+        jdbcTemplate.batchUpdate(sql,
                 new BatchPreparedStatementSetter() {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
-                        Integer idStudentGroup = assignGroupsToClass.studentGroupIds().get(i);
+                        Integer idStudentGroup = ids.get(i);
 
                         ps.setInt(1, idStudentGroup);
-                        ps.setInt(2, assignGroupsToClass.classGroupId());
+                        ps.setInt(2, classGroupId);
                     }
 
                     @Override
                     public int getBatchSize() {
-                        return assignGroupsToClass.studentGroupIds().size();
+                        return ids.size();
                     }
                 }
         );
 
     }
+
 }

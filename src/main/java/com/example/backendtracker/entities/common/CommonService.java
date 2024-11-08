@@ -38,6 +38,10 @@ public class CommonService {
         return teacherRepository.findAllByIdUniversity(idUniversity);
     }
 
+    public Teacher getTeacher(Integer teacherId) {
+        return teacherRepository.findById(teacherId).get();
+    }
+
 
     public List<Student> getListStudents(Integer idSubgroup) {
 
@@ -46,6 +50,11 @@ public class CommonService {
 
     public List<Subgroup> getListSubgroups(Integer idDean) {
         return subgroupRepository.findAllByIdDean(idDean);
+    }
+
+    public List<Subgroup> getListSubgroupsByIds(List<Integer> ids) {
+        List<Subgroup> subgroups = subgroupRepository.findAllByIdSubgroupIn(ids);
+        return subgroups;
     }
 
     public MemberOfSystem getMemberSystemForAdmin(Integer iduniversity) {

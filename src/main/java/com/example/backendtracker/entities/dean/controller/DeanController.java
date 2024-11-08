@@ -3,6 +3,9 @@ package com.example.backendtracker.entities.dean.controller;
 import com.example.backendtracker.domain.mapper.UniversalMapper;
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
+import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
+import com.example.backendtracker.entities.admin.dto.RemoveGroupsToClass;
+import com.example.backendtracker.entities.admin.dto.UpdateClassGroupDto;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
@@ -22,11 +25,25 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("dean")
-//TODO GET LIST GROUP SUBJ/ GET ONE SUBJECT/ UPDATE (REASSIGN)/ DELETE SUBJECT 
+//todo  delete add to class-group groups
 public class DeanController {
 
     private final AccountInformationRetriever accountInformationRetriever;
     private final DeanService deanService;
+
+    //todo review, in postman
+    @DeleteMapping("class-group/delete/{id}")
+    public ResponseEntity<ClassGroup> deleteClassGroup(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.ok(deanService.deleteClassGroup(id, accountId));
+    }
+
+    //todo review, in postman
+    @PutMapping("class-group/update")
+    public ResponseEntity<ClassGroup> updateClassGroup(@RequestBody UpdateClassGroupDto updateClassGroupDto, @AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.status(HttpStatus.OK).body(deanService.updateClassGroup(updateClassGroupDto, accountId));
+    }
 
     //todo review, in postman
     @PostMapping("class-group/create")
@@ -35,15 +52,40 @@ public class DeanController {
         Integer universityId = accountInformationRetriever.getUniversityId(userDetails);
         return ResponseEntity.status(HttpStatus.OK).body(deanService.createClassGroup(createSubjectToTeacherWithFormat, accountId, universityId));
     }
-
     //todo review, in postman
-    @PostMapping("assign/subgroups")
+    @PostMapping("assign/groups")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void createClassGroup(@RequestBody AssignGroupsToClass assignGroupsToClass, @AuthenticationPrincipal UserDetails userDetails) {
-        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
-        deanService.assignGroupsToClass(assignGroupsToClass, accountId);
+    public void createClassGroup(@RequestBody AssignGroupsToClass assignGroupsToClass) {
+        deanService.assignGroupsToClass(assignGroupsToClass);
     }
+    //todo review, in postman
+    @PostMapping("add/groups-to-class")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addClassGroup(@RequestBody AssignGroupsToClass assignGroupsToClass) {
+        deanService.addSubGroupsToClassGroup(assignGroupsToClass);
+    }
+    //todo review, in postman
+    @PostMapping("remove/groups-from-class")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeClassGroup(@RequestBody RemoveGroupsToClass removeGroupsToClass) {
+        deanService.removeSubGroupsToClassGroup(removeGroupsToClass);
+    }
+    //todo review, in postman
+    @GetMapping("get/class-groups")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ClassGroup>> getListClassGroup(@AuthenticationPrincipal UserDetails userDetails) {
 
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.ok(deanService.getListClassGroup(accountId));
+    }
+    //todo review, in postman
+    @GetMapping("get/class-group/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ClassGroupDto> getClassGroup(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
+
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.ok(deanService.getClassGroup(id, accountId));
+    }
 
     @PostMapping("specialty/create")
     public ResponseEntity<Specialty> createSpecialty(@RequestBody CreateSpecialtyDto specialtyDto, @AuthenticationPrincipal UserDetails userDetails) {
@@ -147,7 +189,6 @@ public class DeanController {
         ClassFormat classFormat = deanService.updateClassFormat(updateClassFormatRequestDTO, accountId);
         return ResponseEntity.status(HttpStatus.OK).body(classFormat);
     }
-// subj
 
     @PostMapping("subject/create")
     public ResponseEntity<Subject> createSubject(@RequestBody CreateSubjectDto createSubjectDto, @AuthenticationPrincipal UserDetails userDetails) {
