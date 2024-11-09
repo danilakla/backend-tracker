@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface SpecialtyRepository extends CrudRepository<Specialty, Integer> {
-    @Query("SELECT * FROM Specialties WHERE id_d    ean = :idDean")
+    @Query("SELECT * FROM Specialties WHERE id_dean = :idDean")
     List<Specialty> findByDeanId(@Param("idDean") Integer idDean);
 
     Optional<List<Specialty>> findAllByNameInAndIdDean(List<String> names, Integer idDean);
