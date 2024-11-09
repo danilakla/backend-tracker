@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//todo reassing teacher and dean delete check
 @RestController
 @RequestMapping("common")
 @AllArgsConstructor
@@ -31,18 +32,22 @@ public class CommonController {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getListTeachers(universityId));
     }
 
-    //TODO REVIEW
-    @GetMapping("subgroups")
+    //TODO
+    @GetMapping("subgroups-by-id")
     public ResponseEntity<List<Subgroup>> getListSubgroups(@RequestBody SubgroupsContainerOfId subgroupsContainerOfId) {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getListSubgroupsByIds(subgroupsContainerOfId.ids()));
     }
+    //TODO
+    @GetMapping("students/groups/{id}")
+    public ResponseEntity<List<Student>> getListStudentsBySubgroupId(@PathVariable("id") Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(commonService.getListStudents(id));
+    }
 
 
-    //todo review
+    //todo
     @GetMapping("get/teacher/{id}")
     public ResponseEntity<Teacher> getTeacher(@PathVariable("id") Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getTeacher(id));
     }
-
 
 }

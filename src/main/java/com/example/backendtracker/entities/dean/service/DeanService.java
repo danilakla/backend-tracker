@@ -210,9 +210,17 @@ public class DeanService {
         return ClassGroupDto.builder().classGroup(classGroup).subgroupsId(subgroupsId).build();
     }
 
+    @Transactional
     public ClassGroup deleteClassGroup(Integer classGroupId, Integer deanId) {
         ClassGroupDto classGroup = getClassGroup(classGroupId, deanId);
+        try {
+            classGroupsToSubgroupsRepository.deleteAllByIdClassGroup(classGroupId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         classGroupRepository.delete(classGroup.classGroup());
+
         return classGroup.classGroup();
     }
 
