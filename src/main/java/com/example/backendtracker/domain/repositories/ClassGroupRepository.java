@@ -17,6 +17,9 @@ public interface ClassGroupRepository extends CrudRepository<ClassGroup, Integer
     @Query("UPDATE ClassGroups SET id_teacher = :newTeacherId WHERE id_teacher = :oldTeacherId")
     void updateTeacherId(@Param("newTeacherId") int newTeacherId, @Param("oldTeacherId") int oldTeacherId);
 
+    @Modifying
+    @Query("UPDATE ClassGroups SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")
+    void updateByDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
 
     List<ClassGroup> findAllByIdDean(Integer deanId);
 

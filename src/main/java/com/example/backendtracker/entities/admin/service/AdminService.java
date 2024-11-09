@@ -78,7 +78,9 @@ public class AdminService {
         specialtyRepository.updateDeanId(newDeanId, oldDeanId);
         classFormatRepository.updateDeanId(newDeanId, oldDeanId);
         subgroupRepository.updateDeanId(newDeanId, oldDeanId);
-        subjectRepository.updateDeanId(newDeanId,oldDeanId);
+        subjectRepository.updateDeanId(newDeanId, oldDeanId);
+        //require the testing
+        classGroupRepository.updateByDeanId(newDeanId, oldDeanId);
         deanRepository.deleteById(oldDeanId);
     }
 
