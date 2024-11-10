@@ -206,8 +206,7 @@ public class DeanService {
         ClassGroup classGroup = classGroupRepository.findById(classGroupId).orElseThrow(() -> new BadRequestException("there's no class-group"));
         hasBelongToDean(classGroup.getIdDean(), deanId);
         List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroup.getIdClassGroup());
-        List<Integer> subgroupsId = classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdSubgroup).toList();
-        return ClassGroupDto.builder().classGroup(classGroup).subgroupsId(subgroupsId).build();
+        return ClassGroupDto.builder().classGroup(classGroup).subgroupsId(classGroupsToSubgroups).build();
     }
 
     @Transactional

@@ -12,5 +12,5 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Class {
     @Id
     private Integer idClass;
-    private Integer idClassGroup;
+    private Integer idClassGroupToSubgroup;
 }

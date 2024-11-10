@@ -7,12 +7,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClassGroupsToSubgroupsRepository extends CrudRepository<ClassGroupsToSubgroups, Integer> {
 
     List<ClassGroupsToSubgroups> findAllByIdClassGroup(Integer classGroupId);
+
     @Modifying
     @Query("DELETE FROM ClassGroupsToSubgroups c WHERE c.id_class_group = :classGroupId")
     void deleteAllByIdClassGroup(Integer classGroupId);
+
+
 }

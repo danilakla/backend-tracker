@@ -11,6 +11,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("classgroupstosubgroups")
 public class ClassGroupsToSubgroups {
     @Id
+    private Integer idClassGroupToSubgroup;
+
     private Integer idSubgroup;
 
     private Integer idClassGroup;

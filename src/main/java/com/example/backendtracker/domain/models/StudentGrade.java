@@ -11,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("studentgrades")
 public class StudentGrade {
     @Id
+    private Integer idStudentGrate;
     private Integer idStudent;
     private Integer idClass;
     private Integer grade;

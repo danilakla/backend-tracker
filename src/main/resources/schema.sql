@@ -27,7 +27,7 @@ VALUES ('ADMIN'),
 CREATE TABLE UserAccounts
 (
     id_account SERIAL PRIMARY KEY,
-    login      VARCHAR(50) unique ,
+    login      VARCHAR(50) unique,
     password   VARCHAR(250),
     id_role    INT,
     FOREIGN KEY (id_role) REFERENCES UserRoles (id_role)
@@ -122,10 +122,10 @@ CREATE TABLE Students
 
 CREATE TABLE Subjects
 (
-    id_subject    SERIAL PRIMARY KEY,
-    id_dean       INT,
-    name          VARCHAR(100),
-    description          VARCHAR(500),
+    id_subject  SERIAL PRIMARY KEY,
+    id_dean     INT,
+    name        VARCHAR(100),
+    description VARCHAR(500),
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
@@ -143,30 +143,32 @@ CREATE TABLE ClassGroups
     FOREIGN KEY (id_teacher) REFERENCES Teachers (id_teacher)
 );
 
+CREATE TABLE ClassGroupsToSubgroups
+(
+    id_class_group_to_subgroup SERIAL PRIMARY KEY,
+    id_subgroup                INT,
+    id_class_group             INT,
+    FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup),
+    FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group),
+    UNIQUE (id_subgroup, id_class_group)
+);
+
 CREATE TABLE Classes
 (
     id_class       SERIAL PRIMARY KEY,
-    id_class_group INT,
-    FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group)
+    id_class_group_to_subgroup INT,
+    FOREIGN KEY (id_class_group_to_subgroup) REFERENCES ClassGroupsToSubgroups (id_class_group_to_subgroup)
 );
 
 CREATE TABLE StudentGrades
 (
+    id_student_grate       SERIAL PRIMARY KEY,
+
     id_student  INT,
     id_class    INT,
     grade       INT,
     description TEXT,
     attendance  BOOLEAN,
-    PRIMARY KEY (id_student, id_class),
     FOREIGN KEY (id_student) REFERENCES Students (id_student),
     FOREIGN KEY (id_class) REFERENCES Classes (id_class)
-);
-
-CREATE TABLE ClassGroupsToSubgroups
-(
-    id_subgroup    INT,
-    id_class_group INT,
-    PRIMARY KEY (id_subgroup, id_class_group),
-    FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup),
-    FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group)
 );
