@@ -74,8 +74,8 @@ public class DeanService {
 
     }
 
-    public void checkExistenceOfSpecialty(String name) {
-        specialtyRepository.findByName(name).ifPresent(specialty -> {
+    public void checkExistenceOfSpecialty(String name, Integer deanId) {
+        specialtyRepository.findByNameAndIdDean(name, deanId).ifPresent(specialty -> {
             throw new BadRequestException("The specialty already exists");
         });
 
@@ -95,6 +95,7 @@ public class DeanService {
     }
 
     public Specialty updateSpecialty(UpdateSpecialty specialty, Integer deanId) {
+        checkExistenceOfSpecialty(specialty.name(), deanId);
         Specialty specialtyToUpdate = getSpecialty(specialty.id(), deanId);
         hasBelongToDean(specialtyToUpdate.getIdDean(), deanId);
         specialtyToUpdate.setName(specialty.name());
@@ -102,7 +103,7 @@ public class DeanService {
     }
 
     public Specialty createSpecialty(CreateSpecialtyDto specialtyDto, Integer accountId) {
-        checkExistenceOfSpecialty(specialtyDto.name());
+        checkExistenceOfSpecialty(specialtyDto.name(), accountId);
         return specialtyRepository.save(Specialty.builder()
                 .name(specialtyDto.name())
                 .idDean(accountId).build());
@@ -114,7 +115,7 @@ public class DeanService {
     }
 
     public ClassFormat createClassFormat(CreateClassFormatRequestDTO createClassFormatRequestDTO, Integer deanId) {
-        classFormatRepository.findClassFormatByFormatName(createClassFormatRequestDTO.formatName()).ifPresent((e) -> {
+        classFormatRepository.findClassFormatByFormatNameAndIdDean(createClassFormatRequestDTO.formatName(), deanId).ifPresent((e) -> {
             throw new BadRequestException("there's classFormat");
         });
         return classFormatRepository.save(ClassFormat
@@ -144,7 +145,11 @@ public class DeanService {
     }
 
     public ClassFormat updateClassFormat(UpdateClassFormatRequestDTO updateClassFormatRequestDTO, Integer deanId) {
+        classFormatRepository.findClassFormatByFormatNameAndIdDean(updateClassFormatRequestDTO.formatName(), deanId).ifPresent((e) -> {
+            throw new BadRequestException("there's classFormat");
+        });
         ClassFormat classFormat = getClassFormat(updateClassFormatRequestDTO.id(), deanId);
+
         hasBelongToDean(classFormat.getIdDean(), deanId);
         classFormat.setFormatName(updateClassFormatRequestDTO.formatName());
         classFormat.setDescription(updateClassFormatRequestDTO.description());
@@ -157,7 +162,7 @@ public class DeanService {
     }
 
     public Subject createSubject(CreateSubjectDto createSubjectDto, Integer deanId) {
-        subjectRepository.findByName(createSubjectDto.name()).ifPresent((e) -> {
+        subjectRepository.findByNameAndIdDean(createSubjectDto.name(), deanId).ifPresent((e) -> {
             throw new BadRequestException("there's subject");
         });
         return subjectRepository.save(Subject
@@ -183,6 +188,9 @@ public class DeanService {
     }
 
     public Subject updateSubject(UpdateSubjectDto updateSubjectDto, Integer deanId) {
+        subjectRepository.findByNameAndIdDean(updateSubjectDto.name(), deanId).ifPresent((e) -> {
+            throw new BadRequestException("there's subject");
+        });
         Subject subject = getSubject(updateSubjectDto.id(), deanId);
         hasBelongToDean(subject.getIdDean(), deanId);
         subject.setName(updateSubjectDto.name());

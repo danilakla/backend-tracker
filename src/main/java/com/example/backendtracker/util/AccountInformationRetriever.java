@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class AccountInformationRetriever {
     private final StudentRepository studentRepository;
     private final UserAccountRepository userAccountRepository;
     private final UniversityRepository universityRepository;
+    private final SubgroupRepository subgroupRepository;
 
     public Integer getAccountId(UserDetails userDetails) {
         String role = userDetails.getAuthorities().iterator().next().toString();
@@ -45,14 +47,15 @@ public class AccountInformationRetriever {
         Integer userAccount = userAccountRepository.findByLogin(userDetails.getUsername()).orElseThrow(() -> new BadRequestException("Can't retrieve user account by the account id")).getIdAccount();
         if (Objects.equals(role, "ROLE_DEAN")) {
             univerId = deanRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id")).getIdUniversity();
-
         } else if (Objects.equals(role, "ROLE_ADMIN")) {
-
             Integer adminId = adminRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id")).getIdAdmin();
-            univerId = universityRepository.findByAdminId(adminId).orElseThrow(()->new BadRequestException("Can't retrive the university id")).getIdUniversity();
+            univerId = universityRepository.findByAdminId(adminId).orElseThrow(() -> new BadRequestException("Can't retrive the university id")).getIdUniversity();
         } else if (Objects.equals(role, "ROLE_TEACHER")) {
             univerId = teacherRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id")).getIdUniversity();
-
+        } else if (Objects.equals(role, "ROLE_STUDENT")) {
+            Student student = studentRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id"));
+            Optional<Subgroup> subgroup = subgroupRepository.findById(student.getIdSubgroup());
+            univerId = deanRepository.findById(subgroup.get().getIdDean()).get().getIdUniversity();
         }
         return univerId;
 

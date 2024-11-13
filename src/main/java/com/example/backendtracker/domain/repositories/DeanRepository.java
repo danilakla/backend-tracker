@@ -17,4 +17,5 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
 
     List<Dean> findAllByIdUniversity(Integer id_university);
 
+
 }

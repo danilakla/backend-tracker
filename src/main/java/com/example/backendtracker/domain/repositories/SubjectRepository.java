@@ -16,7 +16,7 @@ public interface SubjectRepository extends CrudRepository<Subject, Integer> {
     @Query("UPDATE Subjects SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")
     void updateDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
 
-    Optional<Subject> findByName(String name);
+    Optional<Subject> findByNameAndIdDean(String name,Integer deanId);
 
     List<Subject> findAllByIdDean(int deanId);
 }

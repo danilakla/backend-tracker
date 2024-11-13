@@ -19,7 +19,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNjQ4ODc3LCJleHAiOjE3MzA3NDg4Nzd9.6sK8aQty7Nv612nOKaNhGZ2AIVlBm3U-Pfbxz0OrMkU",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMxMjQyMjY1LCJleHAiOjE3MzEzNDIyNjV9.Ybd17uiJUIRulTBZool0nYYp6WiuY_cTY7KEk6YxBNA",
 										"type": "text"
 									}
 								],
@@ -96,7 +96,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNjQ4ODc3LCJleHAiOjE3MzA3NDg4Nzd9.6sK8aQty7Nv612nOKaNhGZ2AIVlBm3U-Pfbxz0OrMkU",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMxNTA5Njc0LCJleHAiOjE3MzE2MDk2NzR9.lPCohUSKNPW6Rd1xLnYPdRAyj7c7_8RzB4PpycNmEeg",
 										"type": "text"
 									}
 								],
@@ -399,13 +399,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0MDM0MSwiZXhwIjoxNzMxMjQwMzQxfQ.6LK-gE0jIEr2g9aqn-gAekc6QcnsZVU0qIK21yBPVMQ",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"ПОИ3d1Т\"\r\n}",
+									"raw": "{\r\n    \"name\":\"test\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -491,13 +491,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDY0OTIwOSwiZXhwIjoxNzMwNzQ5MjA5fQ.9sWZKfdkqSPyriKTs2oINsXeP07a2yTHPY8I0DkF_AI\"",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\":2,\r\n    \"name\":\"test\"\r\n}",
+									"raw": "{\r\n    \"id\":1,\r\n    \"name\":\"test\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -560,7 +560,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
 										"type": "text"
 									}
 								],
@@ -721,7 +721,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
 										"type": "text"
 									}
 								],
@@ -882,7 +882,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMDc0MTg1NywiZXhwIjoxNzMwODQxODU3fQ.ra5l3xTEXXc3gj578rrumFGmUBf51k4zT__gabqSuu4",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
 										"type": "text"
 									}
 								],
@@ -1295,7 +1295,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n3,1,2\r\n    ]\r\n}",
+									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n1,2\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1503,6 +1503,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get teacher by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/get/teacher/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"get",
+								"teacher",
+								"4"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1544,7 +1572,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"login\":\"teacher@gmail.ru\",\r\n    \"password\":\"1234\"\r\n    \r\n    }",
+							"raw": "{\r\n   \"login\":\"teacher@gmail.ru\",\r\n    \"password\":\"123\"\r\n    \r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1577,7 +1605,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"login\":\"vlad@mail.ru\",\r\n    \"password\":\"123\"\r\n    \r\n    }",
+							"raw": "{\r\n   \"login\":\"Бекишь_Александр_Андреевичf5e86c54\",\r\n    \"password\":\"hbVdbeGFFZ\"\r\n    \r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1741,6 +1769,33 @@
 							"path": [
 								"user",
 								"update-user-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get university",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40YdmNWU4NmM1NCIsImlhdCI6MTczMTUwOTk1OCwiZXhwIjoxNzMxNjA5OTU4fQ.D6XihRuyAroK6fkBRN2kumxAdKMvO8LNrYiHbFF1i7w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/get/university",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"get",
+								"university"
 							]
 						}
 					},

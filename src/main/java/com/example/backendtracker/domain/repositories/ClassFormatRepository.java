@@ -17,7 +17,7 @@ public interface ClassFormatRepository extends CrudRepository<ClassFormat, Integ
     @Query("UPDATE ClassFormats SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")
     void updateDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
 
-    Optional<ClassFormat> findClassFormatByFormatName(String formatName);
+    Optional<ClassFormat> findClassFormatByFormatNameAndIdDean(String formatName,int idDean);
 
     List<ClassFormat> findAllByIdDean(Integer idDean);
 }

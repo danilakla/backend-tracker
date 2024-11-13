@@ -17,7 +17,7 @@ public interface SpecialtyRepository extends CrudRepository<Specialty, Integer> 
 
     Optional<List<Specialty>> findAllByNameInAndIdDean(List<String> names, Integer idDean);
 
-    Optional<Specialty> findByName(String name);
+    Optional<Specialty> findByNameAndIdDean(String name, Integer deanId);
 
     @Modifying
     @Query("UPDATE Specialties SET id_dean = :newDeanId WHERE id_dean = :oldDeanId")

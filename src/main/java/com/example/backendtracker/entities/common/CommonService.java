@@ -1,16 +1,11 @@
 package com.example.backendtracker.entities.common;
 
-import com.example.backendtracker.domain.models.Dean;
-import com.example.backendtracker.domain.models.Student;
-import com.example.backendtracker.domain.models.Subgroup;
-import com.example.backendtracker.domain.models.Teacher;
-import com.example.backendtracker.domain.repositories.DeanRepository;
-import com.example.backendtracker.domain.repositories.StudentRepository;
-import com.example.backendtracker.domain.repositories.SubgroupRepository;
-import com.example.backendtracker.domain.repositories.TeacherRepository;
+import com.example.backendtracker.domain.models.*;
+import com.example.backendtracker.domain.repositories.*;
 import com.example.backendtracker.entities.common.dto.DeanMemberDto;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
+import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +20,12 @@ public class CommonService {
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
     private final SubgroupRepository subgroupRepository;
+    private final UniversityRepository universityRepository;
 
+    public University getUniversity(Integer idUniversity) {
+
+        return universityRepository.findById(idUniversity).orElseThrow(()->new BadRequestException("there's no"));
+    }
 
     public List<Dean> getListDeans(Integer idUniversity) {
 
