@@ -49,21 +49,25 @@ public class DeanController {
         Integer universityId = accountInformationRetriever.getUniversityId(userDetails);
         return ResponseEntity.status(HttpStatus.OK).body(deanService.createClassGroup(createSubjectToTeacherWithFormat, accountId, universityId));
     }
+
     @PostMapping("assign/groups")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void createClassGroup(@RequestBody AssignGroupsToClass assignGroupsToClass) {
         deanService.assignGroupsToClass(assignGroupsToClass);
     }
+
     @PostMapping("add/groups-to-class")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void addClassGroup(@RequestBody AssignGroupsToClass assignGroupsToClass) {
         deanService.addSubGroupsToClassGroup(assignGroupsToClass);
     }
+
     @PostMapping("remove/groups-from-class")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeClassGroup(@RequestBody RemoveGroupsToClass removeGroupsToClass) {
         deanService.removeSubGroupsToClassGroup(removeGroupsToClass);
     }
+
     @GetMapping("get/class-groups")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ClassGroup>> getListClassGroup(@AuthenticationPrincipal UserDetails userDetails) {
@@ -71,6 +75,7 @@ public class DeanController {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         return ResponseEntity.ok(deanService.getListClassGroup(accountId));
     }
+
     @GetMapping("get/class-group/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ClassGroupDto> getClassGroup(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
@@ -228,6 +233,11 @@ public class DeanController {
         return ResponseEntity.status(HttpStatus.OK).body(deanService.getSubGroupMembers(accountInformationRetriever.getAccountId(userDetails)));
     }
 
+    @DeleteMapping("delete/subgroup/{id}")
+    public ResponseEntity<Subgroup> deleteSubgroupById(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.ok(deanService.deleteByIdSubgroup(id, accountId));
+    }
 
     @GetMapping("subgroup/get")
     public ResponseEntity<List<Subgroup>> getSubgroup(@AuthenticationPrincipal UserDetails userDetails) {

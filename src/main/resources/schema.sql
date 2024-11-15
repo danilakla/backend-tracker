@@ -116,7 +116,7 @@ CREATE TABLE Students
     flp_name            VARCHAR(200),
     key_student_parents TEXT,
     id_account          INT,
-    FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup),
+    FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup) ON DELETE CASCADE,
     FOREIGN KEY (id_account) REFERENCES UserAccounts (id_account) ON DELETE CASCADE
 );
 
@@ -148,7 +148,7 @@ CREATE TABLE ClassGroupsToSubgroups
     id_class_group_to_subgroup SERIAL PRIMARY KEY,
     id_subgroup                INT,
     id_class_group             INT,
-    FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup),
+    FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup) ON DELETE CASCADE,
     FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group),
     UNIQUE (id_subgroup, id_class_group)
 );
@@ -157,7 +157,7 @@ CREATE TABLE Classes
 (
     id_class       SERIAL PRIMARY KEY,
     id_class_group_to_subgroup INT,
-    FOREIGN KEY (id_class_group_to_subgroup) REFERENCES ClassGroupsToSubgroups (id_class_group_to_subgroup)
+    FOREIGN KEY (id_class_group_to_subgroup) REFERENCES ClassGroupsToSubgroups (id_class_group_to_subgroup) ON DELETE CASCADE
 );
 
 CREATE TABLE StudentGrades
@@ -169,6 +169,6 @@ CREATE TABLE StudentGrades
     grade       INT,
     description TEXT,
     attendance  BOOLEAN,
-    FOREIGN KEY (id_student) REFERENCES Students (id_student),
-    FOREIGN KEY (id_class) REFERENCES Classes (id_class)
+    FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
+    FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
 );

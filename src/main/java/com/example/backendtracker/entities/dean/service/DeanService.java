@@ -43,12 +43,20 @@ public class DeanService {
     private final TeacherRepository teacherRepository;
     private final ClassGroupRepository classGroupRepository;
     private final ClassGroupsToSubgroupsRepository classGroupsToSubgroupsRepository;
+    private final SubgroupRepository subgroupRepository;
     private final JdbcTemplate jdbcTemplate;
 
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
 
         return commonService.getMemberSystemForDean(deanId);
+    }
+
+    public Subgroup deleteByIdSubgroup(Integer subgroupId, Integer deanId) {
+        Subgroup subgroup = subgroupRepository.findById(subgroupId).orElseThrow(() -> new BadRequestException("Subgroup not found"));
+        hasBelongToDean(subgroup.getIdDean(), deanId);
+        subgroupRepository.delete(subgroup);
+        return subgroup;
     }
 
     public List<Subgroup> getListSubgroups(Integer deanId) {
