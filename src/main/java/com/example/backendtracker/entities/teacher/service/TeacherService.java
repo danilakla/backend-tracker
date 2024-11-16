@@ -2,6 +2,7 @@ package com.example.backendtracker.entities.teacher.service;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
+import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
 import com.example.backendtracker.entities.admin.dto.ClassGroupInfo;
 import com.example.backendtracker.entities.common.CommonService;
@@ -15,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -32,7 +34,7 @@ public class TeacherService {
     private final StudentGradeRepository studentGradeRepository;
     private final JdbcTemplate jdbcTemplate;
 
-    public List<ClassGroup> getListClassGroups(Integer teacherId) {
+    public List<ClassGroupMapDTO> getListClassGroups(Integer teacherId) {
         return classGroupRepository.findAllByIdTeacher(teacherId);
 
     }
@@ -47,10 +49,18 @@ public class TeacherService {
         return studentGradeRepository.findAllByIdClass(classesId);
     }
 
+    @Transactional
     public ClassInfoDto generateStudentGrateForNewClass(CreateClassInfo createClassInfo) {
-        Classes classes = createClass(createClassInfo.classGroupToSubgroupId());
-        List<StudentGrade> studentGrades = createStudentGrade(createClassInfo.studentship(), classes.getIdClass());
-        return ClassInfoDto.builder().classes(classes).studentGrades(studentGrades).build();
+        try {
+            Classes classes = createClass(createClassInfo.classGroupToSubgroupId());
+            List<StudentGrade> studentGrades = createStudentGrade(createClassInfo.studentship(), classes.getIdClass());
+            return ClassInfoDto.builder().classes(classes).studentGrades(studentGrades).build();
+
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     private void createStudentGrateViaBatch(List<Integer> ids, Integer classId, String sql) {

@@ -33,13 +33,11 @@ public class CommonController {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getListTeachers(universityId));
     }
 
-    //todo
     @GetMapping("subgroups-by-id")
     public ResponseEntity<List<Subgroup>> getListSubgroups(@RequestBody SubgroupsContainerOfId subgroupsContainerOfId) {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getListSubgroupsByIds(subgroupsContainerOfId.ids()));
     }
 
-    //todo
     @GetMapping("show/table/{subgroupId}/{classGroupToSubgroupId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TableViewDto> showTableInfo(@PathVariable("classGroupToSubgroupId") Integer classGroupToSubgroupId, @PathVariable("subgroupId") Integer subgroupId) {

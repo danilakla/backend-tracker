@@ -2,6 +2,7 @@ package com.example.backendtracker.entities.dean.controller;
 
 import com.example.backendtracker.domain.mapper.UniversalMapper;
 import com.example.backendtracker.domain.models.*;
+import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
 import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
 import com.example.backendtracker.entities.admin.dto.RemoveGroupsToClass;
@@ -70,7 +71,7 @@ public class DeanController {
 
     @GetMapping("get/class-groups")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ClassGroup>> getListClassGroup(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<List<ClassGroupMapDTO>> getListClassGroup(@AuthenticationPrincipal UserDetails userDetails) {
 
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         return ResponseEntity.ok(deanService.getListClassGroup(accountId));

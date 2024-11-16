@@ -2,6 +2,7 @@ package com.example.backendtracker.entities.dean.service;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
+import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
 import com.example.backendtracker.entities.admin.dto.*;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
@@ -211,7 +212,7 @@ public class DeanService {
         return studentRepository.save(studentAccount);
     }
 
-    public List<ClassGroup> getListClassGroup(Integer deanId) {
+    public List<ClassGroupMapDTO> getListClassGroup(Integer deanId) {
         return classGroupRepository.findAllByIdDean(deanId);
     }
 

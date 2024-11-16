@@ -1,6 +1,7 @@
 package com.example.backendtracker.entities.teacher.controller;
 
 import com.example.backendtracker.domain.models.ClassGroup;
+import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
 import com.example.backendtracker.entities.dean.service.DeanService;
 import com.example.backendtracker.entities.teacher.dto.ClassInfoDto;
@@ -24,15 +25,13 @@ public class TeacherController {
     private final TeacherService teacherService;
     private final AccountInformationRetriever accountInformationRetriever;
 
-    //todo
     @GetMapping("get/class-groups")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ClassGroup>> getListClassGroup(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<List<ClassGroupMapDTO>> getListClassGroup(@AuthenticationPrincipal UserDetails userDetails) {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         return ResponseEntity.ok(teacherService.getListClassGroups(accountId));
     }
 
-    //todo
     @GetMapping("get/class-groups/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ClassGroupDto> getListClassGroup(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
@@ -44,7 +43,7 @@ public class TeacherController {
 
 
     //todo
-    @GetMapping("create/classes")
+    @PostMapping("create/classes")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ClassInfoDto> createClasses(@RequestBody CreateClassInfo createClassInfo) {
         return ResponseEntity.ok(teacherService.generateStudentGrateForNewClass(createClassInfo));
