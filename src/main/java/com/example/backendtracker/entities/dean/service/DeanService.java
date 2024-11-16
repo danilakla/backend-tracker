@@ -225,6 +225,10 @@ public class DeanService {
         return ClassGroupDto.builder().classGroup(classGroup).subgroupsId(classGroupsToSubgroups).build();
     }
 
+    public List<ClassGroup> getListClassGroupByIdSubject(Integer subjectId, Integer deanId) {
+        return classGroupRepository.findAllByIdSubjectAndIdDean(subjectId, deanId);
+    }
+
     @Transactional
     public ClassGroup deleteClassGroup(Integer classGroupId, Integer deanId) {
         ClassGroupDto classGroup = getClassGroup(classGroupId, deanId);

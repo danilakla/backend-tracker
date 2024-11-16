@@ -84,6 +84,14 @@ public class DeanController {
         return ResponseEntity.ok(deanService.getClassGroup(id, accountId));
     }
 
+    @GetMapping("get/class-groups/subject/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ClassGroup>> getListClassGroupBySubjectId(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
+
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return ResponseEntity.ok(deanService.getListClassGroupByIdSubject(id, accountId));
+    }
+
     @PostMapping("specialty/create")
     public ResponseEntity<Specialty> createSpecialty(@RequestBody CreateSpecialtyDto specialtyDto, @AuthenticationPrincipal UserDetails userDetails) {
 

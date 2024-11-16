@@ -1381,6 +1381,35 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "get class-group by subject id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTY1MDEzOSwiZXhwIjoxNzMxNzUwMTM5fQ.xozEwRoloETaBfl6FkdJL2goG6JS0m8atriTLVpUNeg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/get/class-groups/subject/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"get",
+										"class-groups",
+										"subject",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},

@@ -24,4 +24,6 @@ public interface ClassGroupRepository extends CrudRepository<ClassGroup, Integer
     List<ClassGroup> findAllByIdDean(Integer deanId);
 
     Optional<ClassGroup> findByIdTeacherAndIdClassFormatAndAndIdSubject(int teacherId, int classFormatId, int subjectId);
+
+    List<ClassGroup> findAllByIdSubjectAndIdDean(Integer subjectId, Integer deanId);
 }

@@ -19,4 +19,5 @@ public interface ClassGroupsToSubgroupsRepository extends CrudRepository<ClassGr
     void deleteAllByIdClassGroup(Integer classGroupId);
 
 
+
 }
