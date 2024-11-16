@@ -22,6 +22,7 @@ public interface ClassGroupRepository extends CrudRepository<ClassGroup, Integer
     void updateByDeanId(@Param("newDeanId") int newDeanId, @Param("oldDeanId") int oldDeanId);
 
     List<ClassGroup> findAllByIdDean(Integer deanId);
+    List<ClassGroup> findAllByIdTeacher(Integer teacherId);
 
     Optional<ClassGroup> findByIdTeacherAndIdClassFormatAndAndIdSubject(int teacherId, int classFormatId, int subjectId);
 

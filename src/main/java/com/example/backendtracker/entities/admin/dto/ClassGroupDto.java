@@ -5,6 +5,7 @@ import com.example.backendtracker.domain.models.ClassGroupsToSubgroups;
 import lombok.Builder;
 
 import java.util.List;
+
 @Builder
-public record ClassGroupDto(ClassGroup classGroup, List<ClassGroupsToSubgroups> subgroupsId) {
+public record ClassGroupDto(ClassGroupInfo classGroup, List<ClassGroupsToSubgroups> subgroupsId) {
 }

@@ -2,9 +2,12 @@ package com.example.backendtracker.entities.common;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
+import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
+import com.example.backendtracker.entities.admin.dto.ClassGroupInfo;
 import com.example.backendtracker.entities.common.dto.DeanMemberDto;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
+import com.example.backendtracker.entities.teacher.dto.TableViewDto;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,33 @@ public class CommonService {
     private final StudentRepository studentRepository;
     private final SubgroupRepository subgroupRepository;
     private final UniversityRepository universityRepository;
+    private final ClassGroupRepository classGroupRepository;
+    private final SubjectRepository subjectRepository;
+    private final ClassFormatRepository classFormatRepository;
+    private final ClassRepository classRepository;
+    private final StudentGradeRepository studentGradeRepository;
 
     public University getUniversity(Integer idUniversity) {
 
-        return universityRepository.findById(idUniversity).orElseThrow(()->new BadRequestException("there's no"));
+        return universityRepository.findById(idUniversity).orElseThrow(() -> new BadRequestException("there's no"));
+    }
+
+
+    public TableViewDto showInfoTable(Integer subgroupId, Integer idClassGroupToSubgroup) {
+        List<Student> students = getListStudents(subgroupId);
+        List<Classes> classes = classRepository.findAllByIdClassGroupToSubgroup(idClassGroupToSubgroup);
+        List<StudentGrade> studentGrades = studentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
+                classes.stream().map(Classes::getIdClass).toList(),
+                students.stream().map(Student::getIdStudent).toList());
+        return TableViewDto.builder().classes(classes).students(students).studentGrades(studentGrades).build();
+    }
+
+    public ClassGroupInfo getClassGroup(Integer idClassGroup) {
+        ClassGroup classGroup = classGroupRepository.findById(idClassGroup).orElseThrow(() -> new BadRequestException("there's no class-group"));
+        Subject subject = subjectRepository.findById(classGroup.getIdSubject()).orElseThrow(() -> new BadRequestException("there's no subject"));
+        ClassFormat classFormat = classFormatRepository.findById(classGroup.getIdClassFormat()).orElseThrow(() -> new BadRequestException("there's no class-format"));
+        return ClassGroupInfo.builder().classGroup(classGroup).subjectName(subject.getName()).nameClassFormat(classFormat.getFormatName()).build();
+
     }
 
     public List<Dean> getListDeans(Integer idUniversity) {

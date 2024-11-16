@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("classes")
-public class Class {
+public class Classes {
     @Id
     private Integer idClass;
     private Integer idClassGroupToSubgroup;

@@ -2,10 +2,7 @@ package com.example.backendtracker.entities.dean.service;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
-import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
-import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
-import com.example.backendtracker.entities.admin.dto.RemoveGroupsToClass;
-import com.example.backendtracker.entities.admin.dto.UpdateClassGroupDto;
+import com.example.backendtracker.entities.admin.dto.*;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
@@ -219,10 +216,10 @@ public class DeanService {
     }
 
     public ClassGroupDto getClassGroup(Integer classGroupId, Integer deanId) {
-        ClassGroup classGroup = classGroupRepository.findById(classGroupId).orElseThrow(() -> new BadRequestException("there's no class-group"));
-        hasBelongToDean(classGroup.getIdDean(), deanId);
-        List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroup.getIdClassGroup());
-        return ClassGroupDto.builder().classGroup(classGroup).subgroupsId(classGroupsToSubgroups).build();
+        ClassGroupInfo classGroupInfo = commonService.getClassGroup(classGroupId);
+        hasBelongToDean(classGroupInfo.classGroup().getIdDean(), deanId);
+        List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroupInfo.classGroup().getIdClassGroup());
+        return ClassGroupDto.builder().classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
     }
 
     public List<ClassGroup> getListClassGroupByIdSubject(Integer subjectId, Integer deanId) {
@@ -238,9 +235,9 @@ public class DeanService {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        classGroupRepository.delete(classGroup.classGroup());
+        classGroupRepository.delete(classGroup.classGroup().classGroup());
 
-        return classGroup.classGroup();
+        return classGroup.classGroup().classGroup();
     }
 
     public ClassGroup updateClassGroup(UpdateClassGroupDto updateClassGroupDto, Integer deanId) {
