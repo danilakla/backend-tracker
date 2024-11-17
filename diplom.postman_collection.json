@@ -1443,6 +1443,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "get list subgrpoup",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTgyODkxMCwiZXhwIjoxNzMxOTI4OTEwfQ.1Zus4XAHMtp_OV88a7u-MMNiZe1TWpY89jXUfcg80jA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/dean/subgroup/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"subgroup",
+										"get"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
