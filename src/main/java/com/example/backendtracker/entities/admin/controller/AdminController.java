@@ -71,14 +71,14 @@ public class AdminController {
     }
 
     @DeleteMapping("delete/teacher")
-    public ResponseEntity<TypeResolutionContext.Empty> deleteTeacher(@RequestBody TeacherDeleteDto teacherDeleteDto) {
+    public ResponseEntity<Void> deleteTeacher(@RequestBody TeacherDeleteDto teacherDeleteDto) {
         adminService.deleteTeacher(teacherDeleteDto.teacherId(), teacherDeleteDto.newTeacherId());
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return  ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("delete/dean")
-    public ResponseEntity<TypeResolutionContext.Empty> deleteDean(@RequestBody DeanDeleteDto deanDeleteDto) {
+    public ResponseEntity<Void> deleteDean(@RequestBody DeanDeleteDto deanDeleteDto) {
         adminService.deleteDean(deanDeleteDto.deanId(), deanDeleteDto.newDeanId());
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return  ResponseEntity.noContent().build();
     }
 }

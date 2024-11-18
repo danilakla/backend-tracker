@@ -9,6 +9,7 @@ import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.teacher.dto.ClassInfoDto;
 import com.example.backendtracker.entities.teacher.dto.CreateClassInfo;
 import com.example.backendtracker.entities.teacher.dto.TableViewDto;
+import com.example.backendtracker.entities.teacher.dto.UpdateStudentGrade;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -37,6 +38,10 @@ public class TeacherService {
     public List<ClassGroupMapDTO> getListClassGroups(Integer teacherId) {
         return classGroupRepository.findAllByIdTeacher(teacherId);
 
+    }
+
+    public void deleteClass(Integer idClass) {
+        classRepository.deleteById(idClass);
     }
 
     private Classes createClass(Integer classGroupToSubgroupId) {
@@ -74,7 +79,7 @@ public class TeacherService {
 
                         ps.setInt(1, idStudentGroup);
                         ps.setInt(2, classId);
-                        ps.setBoolean(3, false);
+                        ps.setInt(3, 0);
                     }
 
                     @Override
@@ -86,6 +91,14 @@ public class TeacherService {
         );
 
 
+    }
+
+    public StudentGrade updateStudentGrade(UpdateStudentGrade updateStudentGrade) {
+        StudentGrade studentGrade = studentGradeRepository.findById(updateStudentGrade.idStudentGrate()).orElseThrow(() -> new BadRequestException("Student grade not found"));
+        studentGrade.setAttendance(updateStudentGrade.attendance());
+        studentGrade.setDescription(updateStudentGrade.description());
+        studentGrade.setGrade(updateStudentGrade.grade());
+        return studentGradeRepository.save(studentGrade);
     }
 
 

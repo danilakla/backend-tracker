@@ -157,6 +157,7 @@ CREATE TABLE Classes
 (
     id_class       SERIAL PRIMARY KEY,
     id_class_group_to_subgroup INT,
+    date_creation  DATE DEFAULT CURRENT_DATE,
     FOREIGN KEY (id_class_group_to_subgroup) REFERENCES ClassGroupsToSubgroups (id_class_group_to_subgroup) ON DELETE CASCADE
 );
 
@@ -168,7 +169,7 @@ CREATE TABLE StudentGrades
     id_class    INT,
     grade       INT,
     description TEXT,
-    attendance  BOOLEAN,
+    attendance  INT,
     FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
     FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
 );

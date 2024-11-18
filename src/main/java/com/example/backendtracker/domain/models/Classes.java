@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,4 +15,6 @@ public class Classes {
     @Id
     private Integer idClass;
     private Integer idClassGroupToSubgroup;
+    private LocalDate dateCreation;
+
 }

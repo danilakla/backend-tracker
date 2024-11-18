@@ -68,8 +68,8 @@ public class UserController {
 
     @DeleteMapping("delete/student/{id}")
     @Transactional
-    public ResponseEntity<TypeResolutionContext.Empty> delete(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
         userAccountService.deleteAccount(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return  ResponseEntity.noContent().build();
     }
 }

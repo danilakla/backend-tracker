@@ -16,5 +16,5 @@ public class StudentGrade {
     private Integer idClass;
     private Integer grade;
     private String description;
-    private Boolean attendance;
+    private Integer attendance;
 }
