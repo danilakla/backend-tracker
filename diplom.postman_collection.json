@@ -1627,6 +1627,144 @@
 			"name": "TEACHER ENDPOINTS",
 			"item": [
 				{
+					"name": "manage class",
+					"item": [
+						{
+							"name": "show table by id class-group-to-subgroup and id subgroup",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTk1MDk5NSwiZXhwIjoxNzMyMDUwOTk1fQ.k1TysAKL9bf6u530BgALr0qN9RI1Q8ndCvm6LksK20w",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/common/show/table/2/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"common",
+										"show",
+										"table",
+										"2",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create class",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"classGroupToSubgroupId\":2,\r\n    \"studentship\":[3,4]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/teacher/create/classes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teacher",
+										"create",
+										"classes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete class by id ",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTk1MDk5NSwiZXhwIjoxNzMyMDUwOTk1fQ.k1TysAKL9bf6u530BgALr0qN9RI1Q8ndCvm6LksK20w",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost:8080/teacher/delete/class/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teacher",
+										"delete",
+										"class",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update student grade",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTk1MDk5NSwiZXhwIjoxNzMyMDUwOTk1fQ.k1TysAKL9bf6u530BgALr0qN9RI1Q8ndCvm6LksK20w",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n     \"idStudentGrate\":3,\r\n\"grade\":9,\r\n\"description\":\"3dsadsa \",\r\n \"attendance\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/teacher/update/classes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"teacher",
+										"update",
+										"classes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "REGISTRATION TEACHER",
 					"request": {
 						"method": "POST",
@@ -1808,71 +1946,6 @@
 							"path": [
 								"common",
 								"subgroups-by-id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "INFO TO FILL TABLE ",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/common/show/table/2/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"common",
-								"show",
-								"table",
-								"2",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create class",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"classGroupToSubgroupId\":2,\r\n    \"studentship\":[3,4]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/teacher/create/classes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"teacher",
-								"create",
-								"classes"
 							]
 						}
 					},
