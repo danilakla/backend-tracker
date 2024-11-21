@@ -59,11 +59,14 @@ public class WebSecurityConfig {
                         .requestMatchers("/teacher").hasRole("TEACHER")
                         .requestMatchers("/dean/**").hasRole("DEAN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/student").hasRole("STUDENT")
+                        .requestMatchers("/student/get/class-groups").hasRole("PARENTS")
+
                         .requestMatchers("/user/**").authenticated()
 
                         .requestMatchers("/authenticate/**").permitAll()
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/student").hasRole("STUDENT")
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/api-docs/**",
                                 "/swagger-ui/**",

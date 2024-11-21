@@ -882,7 +882,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMjA4MTM0NCwiZXhwIjoxNzMyMTgxMzQ0fQ.UFmwEUVXzTMopN4z61gpAzyat_pLJjL87POFqUv2Wdw",
 										"type": "text"
 									}
 								],
@@ -920,7 +920,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMjA4MDE2MywiZXhwIjoxNzMyMTgwMTYzfQ.UNF7FFc0GEm8q6DnOKZLr6NNlbgpI9jMIv8QZHEDEYM",
 										"type": "text"
 									}
 								],
@@ -1253,13 +1253,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTY1MDEzOSwiZXhwIjoxNzMxNzUwMTM5fQ.xozEwRoloETaBfl6FkdJL2goG6JS0m8atriTLVpUNeg",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMjA4MTM0NCwiZXhwIjoxNzMyMTgxMzQ0fQ.UFmwEUVXzTMopN4z61gpAzyat_pLJjL87POFqUv2Wdw",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n1,2\r\n    ]\r\n}",
+									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n8,9\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1423,12 +1423,21 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTY1MDEzOSwiZXhwIjoxNzMxNzUwMTM5fQ.xozEwRoloETaBfl6FkdJL2goG6JS0m8atriTLVpUNeg",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMjA4MTM0NCwiZXhwIjoxNzMyMTgxMzQ0fQ.UFmwEUVXzTMopN4z61gpAzyat_pLJjL87POFqUv2Wdw",
 										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost:8080/dean/delete/subgroup/1",
+									"raw": "http://localhost:8080/dean/delete/subgroup/3",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1438,7 +1447,7 @@
 										"dean",
 										"delete",
 										"subgroup",
-										"1"
+										"3"
 									]
 								}
 							},
@@ -1630,18 +1639,18 @@
 					"name": "manage class",
 					"item": [
 						{
-							"name": "show table by id class-group-to-subgroup and id subgroup",
+							"name": "show table by id subgrpouo and id class-group-to-subgroup",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTk1MDk5NSwiZXhwIjoxNzMyMDUwOTk1fQ.k1TysAKL9bf6u530BgALr0qN9RI1Q8ndCvm6LksK20w",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MDY5MSwiZXhwIjoxNzMyMTgwNjkxfQ.lsESqYaKytDZiZ81ZhMmuCYnOplqudOqhEGojubzM7o",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "http://localhost:8080/common/show/table/2/2",
+									"raw": "http://localhost:8080/common/show/table/8/4",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1651,8 +1660,8 @@
 										"common",
 										"show",
 										"table",
-										"2",
-										"2"
+										"8",
+										"4"
 									]
 								}
 							},
@@ -1665,13 +1674,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MTYyNSwiZXhwIjoxNzMyMTgxNjI1fQ.Bh1mqBspoG3uMkm4LkqCA2BiR_UE2ZqZmxBQItalsdg",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"classGroupToSubgroupId\":2,\r\n    \"studentship\":[3,4]\r\n}",
+									"raw": "{\r\n    \"classGroupToSubgroupId\":4,\r\n    \"studentship\":[15,16]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1701,7 +1710,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTk1MDk5NSwiZXhwIjoxNzMyMDUwOTk1fQ.k1TysAKL9bf6u530BgALr0qN9RI1Q8ndCvm6LksK20w",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MTYyNSwiZXhwIjoxNzMyMTgxNjI1fQ.Bh1mqBspoG3uMkm4LkqCA2BiR_UE2ZqZmxBQItalsdg",
 										"type": "text"
 									}
 								],
@@ -1710,7 +1719,7 @@
 									"formdata": []
 								},
 								"url": {
-									"raw": "http://localhost:8080/teacher/delete/class/3",
+									"raw": "http://localhost:8080/teacher/delete/class/7",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1720,7 +1729,7 @@
 										"teacher",
 										"delete",
 										"class",
-										"3"
+										"7"
 									]
 								}
 							},
@@ -1830,13 +1839,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MTYyNSwiZXhwIjoxNzMyMTgxNjI1fQ.Bh1mqBspoG3uMkm4LkqCA2BiR_UE2ZqZmxBQItalsdg",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ids\":[1,2,3]\r\n}",
+							"raw": "{\r\n    \"ids\":[8,9]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1865,7 +1874,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MTYyNSwiZXhwIjoxNzMyMTgxNjI1fQ.Bh1mqBspoG3uMkm4LkqCA2BiR_UE2ZqZmxBQItalsdg",
 								"type": "text"
 							}
 						],
@@ -1892,7 +1901,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MTYyNSwiZXhwIjoxNzMyMTgxNjI1fQ.Bh1mqBspoG3uMkm4LkqCA2BiR_UE2ZqZmxBQItalsdg",
 								"type": "text"
 							}
 						],
@@ -1912,44 +1921,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "get subgroups by id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMTc3OTM0MywiZXhwIjoxNzMxODc5MzQzfQ.8YAf1KN7mYV5kBHxgPx49x_VdOJGw_uJ8w7xgukEdoM",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"ids\":[2]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/common/subgroups-by-id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"common",
-								"subgroups-by-id"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -1963,7 +1934,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"login\":\"Бекишь_Александр_Андреевичf5e86c54\",\r\n    \"password\":\"hbVdbeGFFZ\"\r\n    \r\n    }",
+							"raw": "{\r\n   \"login\":\"Картузов_Данила_Александрович27949853\",\r\n    \"password\":\"IzBqITkWCs\"\r\n    \r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1979,6 +1950,62 @@
 							"port": "8080",
 							"path": [
 								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list class-group and general info ",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JrQsNGA0YLRg9C30L7Qsl_QlNCw0L3QuNC70LBf0JDQu9C10LrRgdCw0L3QtNGA0L7QstC40YcyNzk0OTg1MyIsImlhdCI6MTczMjA4MjY0MiwiZXhwIjoxNzMyMTgyNjQyfQ.GnonPysYd4rKAzgYpfHo76XRt4rLogZj5eZizT3zpUo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/student/get/class-groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"get",
+								"class-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show table by id subgrpouo and id class-group-to-subgroup Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MDY5MSwiZXhwIjoxNzMyMTgwNjkxfQ.lsESqYaKytDZiZ81ZhMmuCYnOplqudOqhEGojubzM7o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/show/table/8/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"show",
+								"table",
+								"8",
+								"4"
 							]
 						}
 					},
@@ -2188,6 +2215,62 @@
 							"path": [
 								"authenticate",
 								"parent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list class-group and general info  Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JrQsNGA0YLRg9C30L7Qsl_QlNCw0L3QuNC70LBf0JDQu9C10LrRgdCw0L3QtNGA0L7QstC40YcyNzk0OTg1MyIsImlhdCI6MTczMjA4MjY0MiwiZXhwIjoxNzMyMTgyNjQyfQ.GnonPysYd4rKAzgYpfHo76XRt4rLogZj5eZizT3zpUo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/student/get/class-groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"get",
+								"class-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show table by id subgrpouo and id class-group-to-subgroup Copy 2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MDY5MSwiZXhwIjoxNzMyMTgwNjkxfQ.lsESqYaKytDZiZ81ZhMmuCYnOplqudOqhEGojubzM7o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/show/table/8/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"show",
+								"table",
+								"8",
+								"4"
 							]
 						}
 					},

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -45,7 +46,7 @@ public class TeacherService {
     }
 
     private Classes createClass(Integer classGroupToSubgroupId) {
-        return classRepository.save(Classes.builder().idClassGroupToSubgroup(classGroupToSubgroupId).build());
+        return classRepository.save(Classes.builder().idClassGroupToSubgroup(classGroupToSubgroupId).dateCreation(LocalDate.now()).build());
     }
 
 

@@ -41,6 +41,24 @@ public class AccountInformationRetriever {
         return AccountId;
     }
 
+    public Object getPerson(UserDetails userDetails) {
+        String role = userDetails.getAuthorities().iterator().next().toString();
+        Integer userAccount = userAccountRepository.findByLogin(userDetails.getUsername()).orElseThrow(() -> new BadRequestException("Can't retrieve user account by the account id")).getIdAccount();
+        if (Objects.equals(role, "ROLE_ADMIN")) {
+            return adminRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id"));
+        } else if (Objects.equals(role, "ROLE_DEAN")) {
+            return deanRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id"));
+
+        } else if (Objects.equals(role, "ROLE_TEACHER")) {
+            return teacherRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id"));
+
+        } else if (Objects.equals(role, "ROLE_STUDENT")) {
+            return studentRepository.findByIdAccount(userAccount).orElseThrow(() -> new BadRequestException("Can't retrieve the account id"));
+
+        }
+        return null;
+    }
+
     public Integer getUniversityId(UserDetails userDetails) {
         String role = userDetails.getAuthorities().iterator().next().toString();
         Integer univerId = null;
