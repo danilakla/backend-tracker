@@ -138,7 +138,7 @@ CREATE TABLE ClassGroups
     id_teacher      INT,
     id_dean         INT,
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean),
-    FOREIGN KEY (id_subject) REFERENCES Subjects (id_subject),
+    FOREIGN KEY (id_subject) REFERENCES Subjects (id_subject) ON DELETE CASCADE,
     FOREIGN KEY (id_class_format) REFERENCES ClassFormats (id_class_format),
     FOREIGN KEY (id_teacher) REFERENCES Teachers (id_teacher)
 );
@@ -149,7 +149,7 @@ CREATE TABLE ClassGroupsToSubgroups
     id_subgroup                INT,
     id_class_group             INT,
     FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup) ON DELETE CASCADE,
-    FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group),
+    FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group) ON DELETE CASCADE,
     UNIQUE (id_subgroup, id_class_group)
 );
 
