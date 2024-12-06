@@ -33,7 +33,7 @@ public class CommonController {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getListTeachers(universityId));
     }
 
-    @GetMapping("subgroups-by-id")
+    @PostMapping("subgroups-by-id")
     public ResponseEntity<List<Subgroup>> getListSubgroups(@RequestBody SubgroupsContainerOfId subgroupsContainerOfId) {
         return ResponseEntity.status(HttpStatus.OK).body(commonService.getListSubgroupsByIds(subgroupsContainerOfId.ids()));
     }
