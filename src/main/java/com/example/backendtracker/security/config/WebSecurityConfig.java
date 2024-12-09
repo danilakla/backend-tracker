@@ -61,7 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
-                        .requestMatchers("/student/get/class-groups").hasRole("PARENTS")
+                        .requestMatchers("/parent/**").hasRole("PARENTS")
 
                         .requestMatchers("/user/**").authenticated()
 
