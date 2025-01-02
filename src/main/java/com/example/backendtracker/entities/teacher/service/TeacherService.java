@@ -8,23 +8,20 @@ import com.example.backendtracker.entities.admin.dto.ClassGroupInfo;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.teacher.dto.ClassInfoDto;
 import com.example.backendtracker.entities.teacher.dto.CreateClassInfo;
-import com.example.backendtracker.entities.teacher.dto.TableViewDto;
 import com.example.backendtracker.entities.teacher.dto.UpdateStudentGrade;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.crypto.BadPaddingException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -53,6 +50,12 @@ public class TeacherService {
     private List<StudentGrade> createStudentGrade(List<Integer> studentsId, Integer classesId) {
         createStudentGrateViaBatch(studentsId, classesId, "INSERT INTO StudentGrades (id_student,id_class,attendance) VALUES (?,?,?)");
         return studentGradeRepository.findAllByIdClass(classesId);
+    }
+
+    public void acceptAttendance(Integer studentGrate, Integer attendanceCode) throws BadPaddingException {
+        StudentGrade studentGrade = studentGradeRepository.findById(studentGrate).orElseThrow(BadRequestException::new);
+        studentGrade.setAttendance(attendanceCode);
+        studentGradeRepository.save(studentGrade);
     }
 
     @Transactional

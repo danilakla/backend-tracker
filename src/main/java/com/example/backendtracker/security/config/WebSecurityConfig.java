@@ -56,15 +56,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("qr/teacher/**").hasRole("TEACHER")
+                        .requestMatchers("qr/student/**").hasRole("STUDENT")
                         .requestMatchers("/teacher").hasRole("TEACHER")
                         .requestMatchers("/dean/**").hasRole("DEAN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
                         .requestMatchers("/parent/**").hasRole("PARENTS")
-
                         .requestMatchers("/user/**").authenticated()
-
                         .requestMatchers("/authenticate/**").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/home").permitAll()
@@ -76,7 +76,6 @@ public class WebSecurityConfig {
                                 "/swagger-ui/index.html",
                                 "/favicon-32x32.png",
                                 "/favicon-16x16.png").permitAll()
-
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

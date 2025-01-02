@@ -1,4 +1,9 @@
 spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   datasource:
     url: jdbc:postgresql://localhost:5432/mydatabase
     username: myuser
@@ -31,7 +36,8 @@ logging:
   level:
 #    org.springframework.data.jdbc: debug
 #    org.springframework.jdbc: debug
-    org.springframework.security: trace
+#    org.springframework.security: trace
+    org.springframework.data.redis: trace
 springdoc:
   swagger-ui:
     path: /swagger-ui
