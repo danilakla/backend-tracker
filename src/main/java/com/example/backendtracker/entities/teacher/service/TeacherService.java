@@ -52,8 +52,8 @@ public class TeacherService {
         return studentGradeRepository.findAllByIdClass(classesId);
     }
 
-    public void acceptAttendance(Integer studentGrate, Integer attendanceCode) throws BadPaddingException {
-        StudentGrade studentGrade = studentGradeRepository.findById(studentGrate).orElseThrow(BadRequestException::new);
+    public void acceptAttendance(Integer studentGrate, Integer attendanceCode) {
+        StudentGrade studentGrade = studentGradeRepository.findById(studentGrate).orElseThrow();
         studentGrade.setAttendance(attendanceCode);
         studentGradeRepository.save(studentGrade);
     }
