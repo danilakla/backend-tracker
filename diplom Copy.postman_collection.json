@@ -882,7 +882,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMjA4MTM0NCwiZXhwIjoxNzMyMTgxMzQ0fQ.UFmwEUVXzTMopN4z61gpAzyat_pLJjL87POFqUv2Wdw",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczNTk3ODMwMiwiZXhwIjoxNzM2MDc4MzAyfQ.77xDarW6OPaIgMQR2OXDYZxef8vnBmqF0lPS646Ev6c",
 										"type": "text"
 									}
 								],
@@ -1895,6 +1895,44 @@
 					"response": []
 				},
 				{
+					"name": "get list subgroups by ids Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MTYyNSwiZXhwIjoxNzMyMTgxNjI1fQ.Bh1mqBspoG3uMkm4LkqCA2BiR_UE2ZqZmxBQItalsdg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\":[8,9]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/common/subgroups-by-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"subgroups-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "get class-group by id",
 					"request": {
 						"method": "GET",
@@ -2460,16 +2498,23 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/teacher/accept/attendance",
+									"raw": "http://localhost:8080/qr/teacher/stop/review?classId=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
+										"qr",
 										"teacher",
-										"accept",
-										"attendance"
+										"stop",
+										"review"
+									],
+									"query": [
+										{
+											"key": "classId",
+											"value": "1"
+										}
 									]
 								}
 							},
@@ -2563,6 +2608,304 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "CHANGES",
+			"item": [
+				{
+					"name": "(DEAN) get groups for class-group that are assigned",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczNTk3ODMwMiwiZXhwIjoxNzM2MDc4MzAyfQ.77xDarW6OPaIgMQR2OXDYZxef8vnBmqF0lPS646Ev6c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"classGroupId\":\"3\",\r\n    \"studentGroupIds\":[\r\n7,8\r\n    ],\r\n    \"isMany\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/get/class-group/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"get",
+								"class-group",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(DEAN) assign subgroup to class-group Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczNTk3ODMwMiwiZXhwIjoxNzM2MDc4MzAyfQ.77xDarW6OPaIgMQR2OXDYZxef8vnBmqF0lPS646Ev6c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"classGroupId\":\"3\",\r\n    \"studentGroupIds\":[\r\n7,8\r\n    ],\r\n    \"isMany\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/assign/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"assign",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(DEAN) add subgroup to classgroup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczNTk3ODMwMiwiZXhwIjoxNzM2MDc4MzAyfQ.77xDarW6OPaIgMQR2OXDYZxef8vnBmqF0lPS646Ev6c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"classGroupId\":\"3\",\r\n    \"studentGroupIds\":[\r\n8,9\r\n    ],\r\n    \"isMany\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/assign/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"assign",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(TEACHER) get list subgroups by ids Copy 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBtYWlsLnJ1IiwiaWF0IjoxNzM1OTc4MjI4LCJleHAiOjE3MzYwNzgyMjh9.J2W3zO_fET5yo9lJb3K18PdRScAz_fVHTYL4ZUPyfMY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\":[7,8],\r\n    \"ClassGroup\":3\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/common/subgroups-by-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"subgroups-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(TEACHER)  show table by id subgrpouo and id class-group-to-subgroup Copy 2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBtYWlsLnJ1IiwiaWF0IjoxNzM1OTc4MjI4LCJleHAiOjE3MzYwNzgyMjh9.J2W3zO_fET5yo9lJb3K18PdRScAz_fVHTYL4ZUPyfMY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/show/table/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"show",
+								"table",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(STUDENT)  show table by id subgrpouo and id class-group-to-subgroup Copy 3",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40YdlNTMyZjhlZSIsImlhdCI6MTczNTk4NDgxOCwiZXhwIjoxNzM2MDg0ODE4fQ.sEKaDFL3SRczEbWn8ndImn-Xgx7tDHx2rd7y2YZKaoI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/show/table/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"show",
+								"table",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(STUDENT)  return class-group also return idHold",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40YdlNTMyZjhlZSIsImlhdCI6MTczNTk4NDgxOCwiZXhwIjoxNzM2MDg0ODE4fQ.sEKaDFL3SRczEbWn8ndImn-Xgx7tDHx2rd7y2YZKaoI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/student/get/class-groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"get",
+								"class-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(Parent)  return class-group also return idHold Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40YdlNTMyZjhlZSIsImlhdCI6MTczNTk4NDgxOCwiZXhwIjoxNzM2MDg0ODE4fQ.sEKaDFL3SRczEbWn8ndImn-Xgx7tDHx2rd7y2YZKaoI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/student/get/class-groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"get",
+								"class-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(TEACHER) create classes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBtYWlsLnJ1IiwiaWF0IjoxNzM1OTc4MjI4LCJleHAiOjE3MzYwNzgyMjh9.J2W3zO_fET5yo9lJb3K18PdRScAz_fVHTYL4ZUPyfMY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentship\":[13,14,15,16],\r\n    \"holdId\":11\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/create/classes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"create",
+								"classes"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
