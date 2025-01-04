@@ -14,10 +14,13 @@ public interface ClassGroupsToSubgroupsRepository extends CrudRepository<ClassGr
 
     List<ClassGroupsToSubgroups> findAllByIdClassGroup(Integer classGroupId);
 
+    List<ClassGroupsToSubgroups> findAllByIdClassHold(Integer idHold);
+
     @Modifying
     @Query("DELETE FROM ClassGroupsToSubgroups c WHERE c.id_class_group = :classGroupId")
     void deleteAllByIdClassGroup(Integer classGroupId);
 
+    List<ClassGroupsToSubgroups> findAllByIdClassGroupAndAndIdSubgroupIn(Integer idClassGroup, List<Integer> IdSubgroups);
 
 
 }

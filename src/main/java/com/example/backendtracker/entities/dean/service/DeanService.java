@@ -43,6 +43,7 @@ public class DeanService {
     private final ClassGroupsToSubgroupsRepository classGroupsToSubgroupsRepository;
     private final SubgroupRepository subgroupRepository;
     private final JdbcTemplate jdbcTemplate;
+    private final ClassGroupsHoldRepository classGroupsHoldRepository;
 
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
@@ -220,7 +221,12 @@ public class DeanService {
         ClassGroupInfo classGroupInfo = commonService.getClassGroup(classGroupId);
         hasBelongToDean(classGroupInfo.classGroup().getIdDean(), deanId);
         List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroupInfo.classGroup().getIdClassGroup());
-        return ClassGroupDto.builder().classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
+        Long count = classGroupsToSubgroups.stream().map(e -> e.getIdClassHold()).distinct().count();
+        Boolean isMany = false;
+        if (count == 1 && classGroupsToSubgroups.size() > 1) {
+            isMany = true;
+        }
+        return ClassGroupDto.builder().isMany(isMany).classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
     }
 
     public List<ClassGroup> getListClassGroupByIdSubject(Integer subjectId, Integer deanId) {
@@ -251,8 +257,9 @@ public class DeanService {
         return classGroupRepository.save(classGroup);
     }
 
-    public void addSubGroupsToClassGroup(AssignGroupsToClass assignGroupsToClass) {
-        manageStudentGroupsToClassGroup(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group) VALUES (?, ?)");
+    public void addSubGroupsToClassGroup(AssignGroupsToClass groupsToClass) {
+
+        assignGroupsToClass(groupsToClass);
     }
 
     public void removeSubGroupsToClassGroup(RemoveGroupsToClass removeGroupsToClass) {
@@ -279,8 +286,73 @@ public class DeanService {
             throw new BadRequestException("The dean does not belong to the requested dean");
     }
 
+    @Transactional
     public void assignGroupsToClass(AssignGroupsToClass assignGroupsToClass) {
-        manageStudentGroupsToClassGroup(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group) VALUES (?, ?)");
+        try {
+            if (assignGroupsToClass.isMany()) {
+
+
+                List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
+                Integer classGroupsHoldId;
+                if (classGroups.isEmpty()) {
+                    classGroupsHoldId = classGroupsHoldRepository.save(ClassGroupsHold.builder().build()).getIdClassHold();
+
+                } else {
+                    classGroupsHoldId = classGroups.get(0).getIdClassHold();
+                }
+                manageStudentGroupsToAssign(classGroupsHoldId, assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
+            } else {
+                manageStudentGroupsToAssignOne(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void manageStudentGroupsToAssign(Integer idHolder, List<Integer> ids, Integer classGroupId, String sql) {
+
+        jdbcTemplate.batchUpdate(sql,
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        Integer idStudentGroup = ids.get(i);
+                        ps.setInt(1, idStudentGroup);
+                        ps.setInt(2, classGroupId);
+                        ps.setInt(3, idHolder);
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return ids.size();
+                    }
+                }
+        );
+
+    }
+
+    public void manageStudentGroupsToAssignOne(List<Integer> ids, Integer classGroupId, String sql) {
+
+        jdbcTemplate.batchUpdate(sql,
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        Integer idStudentGroup = ids.get(i);
+                        ps.setInt(1, idStudentGroup);
+                        ps.setInt(2, classGroupId);
+                        ClassGroupsHold classGroupsHold = classGroupsHoldRepository.save(ClassGroupsHold.builder().build());
+
+                        ps.setInt(3, classGroupsHold.getIdClassHold());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return ids.size();
+                    }
+                }
+        );
+
     }
 
     public void manageStudentGroupsToClassGroup(List<Integer> ids, Integer classGroupId, String sql) {
@@ -290,7 +362,6 @@ public class DeanService {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         Integer idStudentGroup = ids.get(i);
-
                         ps.setInt(1, idStudentGroup);
                         ps.setInt(2, classGroupId);
                     }

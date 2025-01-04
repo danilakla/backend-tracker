@@ -142,34 +142,42 @@ CREATE TABLE ClassGroups
     FOREIGN KEY (id_class_format) REFERENCES ClassFormats (id_class_format),
     FOREIGN KEY (id_teacher) REFERENCES Teachers (id_teacher)
 );
+create table ClassGroupsHold
+(
+    id_class_hold SERIAL PRIMARY KEY
+
+);
 
 CREATE TABLE ClassGroupsToSubgroups
 (
     id_class_group_to_subgroup SERIAL PRIMARY KEY,
     id_subgroup                INT,
     id_class_group             INT,
+    id_class_hold              INT,
     FOREIGN KEY (id_subgroup) REFERENCES Subgroups (id_subgroup) ON DELETE CASCADE,
     FOREIGN KEY (id_class_group) REFERENCES ClassGroups (id_class_group) ON DELETE CASCADE,
+    FOREIGN KEY (id_class_hold) REFERENCES ClassGroupsHold (id_class_hold) ON DELETE CASCADE,
     UNIQUE (id_subgroup, id_class_group)
 );
 
+
 CREATE TABLE Classes
 (
-    id_class       SERIAL PRIMARY KEY,
-    id_class_group_to_subgroup INT,
-    date_creation  DATE DEFAULT CURRENT_DATE,
-    FOREIGN KEY (id_class_group_to_subgroup) REFERENCES ClassGroupsToSubgroups (id_class_group_to_subgroup) ON DELETE CASCADE
+    id_class                   SERIAL PRIMARY KEY,
+    id_class_hold INT,
+    date_creation              DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (id_class_hold) REFERENCES ClassGroupsHold (id_class_hold) ON DELETE CASCADE
 );
 
 CREATE TABLE StudentGrades
 (
-    id_student_grate       SERIAL PRIMARY KEY,
+    id_student_grate SERIAL PRIMARY KEY,
 
-    id_student  INT,
-    id_class    INT,
-    grade       INT,
-    description TEXT,
-    attendance  INT,
+    id_student       INT,
+    id_class         INT,
+    grade            INT,
+    description      TEXT,
+    attendance       INT,
     FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
     FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
 );

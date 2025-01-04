@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record SubgroupsContainerOfId(List<Integer> ids) {
+public record SubgroupsContainerOfId(List<Integer> ids, Integer ClassGroup) {
 }

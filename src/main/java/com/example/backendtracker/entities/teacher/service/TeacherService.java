@@ -42,8 +42,8 @@ public class TeacherService {
         classRepository.deleteById(idClass);
     }
 
-    private Classes createClass(Integer classGroupToSubgroupId) {
-        return classRepository.save(Classes.builder().idClassGroupToSubgroup(classGroupToSubgroupId).dateCreation(LocalDate.now()).build());
+    private Classes createClass(Integer idHole) {
+        return classRepository.save(Classes.builder().idClassHold(idHole).dateCreation(LocalDate.now()).build());
     }
 
 
@@ -61,7 +61,7 @@ public class TeacherService {
     @Transactional
     public ClassInfoDto generateStudentGrateForNewClass(CreateClassInfo createClassInfo) {
         try {
-            Classes classes = createClass(createClassInfo.classGroupToSubgroupId());
+            Classes classes = createClass(createClassInfo.holdId());
             List<StudentGrade> studentGrades = createStudentGrade(createClassInfo.studentship(), classes.getIdClass());
             return ClassInfoDto.builder().classes(classes).studentGrades(studentGrades).build();
 

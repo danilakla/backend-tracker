@@ -18,11 +18,11 @@ public class RoleService {
     public RoleService(UserRoleRepository userRoleRepository) {
         this.userRoleRepository = userRoleRepository;
     }
-    @Cacheable("roleIds")
+//    @Cacheable(key = "#role")
 
-    public Integer getRoleIdByRoleName(String roleName) {
-        return finedRoleByRoleName(roleName)
-                .orElseThrow(() -> new NoSuchElementException("The role: " + roleName + " has not been  found")
+    public Integer getRoleIdByRoleName(String role) {
+        return finedRoleByRoleName(role)
+                .orElseThrow(() -> new NoSuchElementException("The role: " + role + " has not been  found")
                 ).getIdRole();
 
     }

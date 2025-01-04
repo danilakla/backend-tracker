@@ -14,7 +14,8 @@ import java.time.LocalDate;
 public class Classes {
     @Id
     private Integer idClass;
-    private Integer idClassGroupToSubgroup;
+    private Integer idClassHold;
+
     private LocalDate dateCreation;
 
 }

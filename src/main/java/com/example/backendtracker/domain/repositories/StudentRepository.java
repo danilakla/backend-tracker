@@ -24,5 +24,7 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 
     List<Student> findAllByIdSubgroup(Integer idSubgroup);
 
+    List<Student> findAllByIdSubgroupIn(List<Integer> idSubgroup);
+
     void deleteByIdAccount(Integer idAccount);
 }

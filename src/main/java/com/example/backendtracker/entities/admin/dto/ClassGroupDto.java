@@ -7,5 +7,5 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record ClassGroupDto(ClassGroupInfo classGroup, List<ClassGroupsToSubgroups> subgroupsId) {
+public record ClassGroupDto(Boolean isMany, ClassGroupInfo classGroup, List<ClassGroupsToSubgroups> subgroupsId) {
 }

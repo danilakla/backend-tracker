@@ -4,9 +4,12 @@ import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
 import com.example.backendtracker.entities.admin.dto.ClassGroupInfo;
+import com.example.backendtracker.entities.common.dto.ClassesTableDto;
 import com.example.backendtracker.entities.common.dto.DeanMemberDto;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
+import com.example.backendtracker.entities.teacher.dto.ClassGroupClassHoldDTO;
+import com.example.backendtracker.entities.teacher.dto.ClassHoldSubgroupDTO;
 import com.example.backendtracker.entities.teacher.dto.TableViewDto;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
@@ -14,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -29,6 +34,7 @@ public class CommonService {
     private final ClassFormatRepository classFormatRepository;
     private final ClassRepository classRepository;
     private final StudentGradeRepository studentGradeRepository;
+    private final ClassGroupsToSubgroupsRepository classGroupsToSubgroupsRepository;
 
     public University getUniversity(Integer idUniversity) {
 
@@ -36,9 +42,25 @@ public class CommonService {
     }
 
 
-    public TableViewDto showInfoTable(Integer subgroupId, Integer idClassGroupToSubgroup) {
-        List<Student> students = getListStudents(subgroupId);
-        List<Classes> classes = classRepository.findAllByIdClassGroupToSubgroup(idClassGroupToSubgroup);
+    public TableViewDto showInfoTable(ClassesTableDto classesTableDto) {
+        List<Student> students = getListStudentsByListIdGroups(classesTableDto.groupsId());
+        List<Classes> classes = classRepository.findAllByIdClassHold(classesTableDto.holdId());
+        List<StudentGrade> studentGrades = studentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
+                classes.stream().map(Classes::getIdClass).toList(),
+                students.stream().map(Student::getIdStudent).toList());
+        return TableViewDto.builder().classes(classes).students(students).studentGrades(studentGrades).build();
+    }
+
+    public List<Student> getListStudentsByListIdGroups(List<Integer> idSubgroups) {
+
+        return studentRepository.findAllByIdSubgroupIn(idSubgroups);
+    }
+
+    public TableViewDto showInfoTableOne(Integer idHold) {
+
+        List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassHold(idHold);
+        List<Student> students = getListStudentsByListIdGroups(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdSubgroup).toList());
+        List<Classes> classes = classRepository.findAllByIdClassHold(idHold);
         List<StudentGrade> studentGrades = studentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
                 classes.stream().map(Classes::getIdClass).toList(),
                 students.stream().map(Student::getIdStudent).toList());
@@ -78,9 +100,27 @@ public class CommonService {
         return subgroupRepository.findAllByIdDean(idDean);
     }
 
-    public List<Subgroup> getListSubgroupsByIds(List<Integer> ids) {
+    public ClassGroupClassHoldDTO getListSubgroupsByIds(Integer id, List<Integer> ids) {
         List<Subgroup> subgroups = subgroupRepository.findAllByIdSubgroupIn(ids);
-        return subgroups;
+        List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroupAndAndIdSubgroupIn(id, ids);
+
+        Map<Integer, Subgroup> subgroupMap = subgroups.stream()
+                .collect(Collectors.toMap(Subgroup::getIdSubgroup, subgroup -> subgroup));
+
+        List<ClassHoldSubgroupDTO> result = classGroups.stream()
+                .map(classGroup -> {
+                    Subgroup subgroup = subgroupMap.get(classGroup.getIdSubgroup());
+                    return ClassHoldSubgroupDTO.builder().idHold(classGroup.getIdClassHold()).subgroup(subgroup).build();
+                })
+                .toList();
+
+        boolean allIdHoldsSame = result.stream()
+                .map(ClassHoldSubgroupDTO::getIdHold) // Извлекаем idHold
+                .distinct()                          // Оставляем только уникальные значения
+                .count() == 1;                       // Если одно уникальное значение, то true
+
+        return ClassGroupClassHoldDTO.builder().isOneClass(allIdHoldsSame).classHoldSubgroupDTO(result).build();
+
     }
 
     public MemberOfSystem getMemberSystemForAdmin(Integer iduniversity) {

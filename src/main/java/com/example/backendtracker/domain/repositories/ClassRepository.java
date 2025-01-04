@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ClassRepository extends CrudRepository<Classes, Integer> {
-    List<Classes> findAllByIdClassGroupToSubgroup(Integer idClassGroupToSubgroup);
+    List<Classes> findAllByIdClassHold(Integer idClassHold);
 
 }

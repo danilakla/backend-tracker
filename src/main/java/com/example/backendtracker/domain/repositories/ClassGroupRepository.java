@@ -32,7 +32,7 @@ public interface ClassGroupRepository extends CrudRepository<ClassGroup, Integer
     List<ClassGroupMapDTO> findAllByIdTeacher(@Param("id_teacher") int id);
 
 
-    @Query(value = "SELECT cg.id_class_group AS idClassGroup, cgs.id_class_group_to_subgroup as idClassGroupToSubgroup, cgs.id_subgroup as idSubgroup,  cg.description AS description, s.name AS subjectName, cf.format_name AS formatName, t.flp_name AS teacherName " +
+    @Query(value = "SELECT cg.id_class_group AS idClassGroup, cgs.id_class_group_to_subgroup as idClassGroupToSubgroup, cgs.id_subgroup as idSubgroup,  cgs.id_class_hold as idHold, cg.description AS description, s.name AS subjectName, cf.format_name AS formatName, t.flp_name AS teacherName " +
             "FROM ClassGroups cg " +
             "JOIN Subjects s ON cg.id_subject = s.id_subject " +
             "JOIN ClassFormats cf ON cg.id_class_format = cf.id_class_format " +

@@ -4,7 +4,9 @@ import com.example.backendtracker.domain.models.Student;
 import com.example.backendtracker.domain.models.Subgroup;
 import com.example.backendtracker.domain.models.Teacher;
 import com.example.backendtracker.domain.models.University;
+import com.example.backendtracker.entities.common.dto.ClassesTableDto;
 import com.example.backendtracker.entities.common.dto.SubgroupsContainerOfId;
+import com.example.backendtracker.entities.teacher.dto.ClassGroupClassHoldDTO;
 import com.example.backendtracker.entities.teacher.dto.TableViewDto;
 import com.example.backendtracker.util.AccountInformationRetriever;
 import lombok.AllArgsConstructor;
@@ -34,14 +36,20 @@ public class CommonController {
     }
 
     @PostMapping("subgroups-by-id")
-    public ResponseEntity<List<Subgroup>> getListSubgroups(@RequestBody SubgroupsContainerOfId subgroupsContainerOfId) {
-        return ResponseEntity.status(HttpStatus.OK).body(commonService.getListSubgroupsByIds(subgroupsContainerOfId.ids()));
+    public ResponseEntity<ClassGroupClassHoldDTO> getListSubgroups(@RequestBody SubgroupsContainerOfId subgroupsContainerOfId) {
+        return ResponseEntity.status(HttpStatus.OK).body(commonService.getListSubgroupsByIds(subgroupsContainerOfId.ClassGroup(), subgroupsContainerOfId.ids()));
     }
 
-    @GetMapping("show/table/{subgroupId}/{classGroupToSubgroupId}")
+    @GetMapping("show/table")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<TableViewDto> showTableInfo(@PathVariable("classGroupToSubgroupId") Integer classGroupToSubgroupId, @PathVariable("subgroupId") Integer subgroupId) {
-        return ResponseEntity.ok(commonService.showInfoTable(subgroupId, classGroupToSubgroupId));
+    public ResponseEntity<TableViewDto> showTableInfoMore(@RequestBody ClassesTableDto classesTableDto) {
+        return ResponseEntity.ok(commonService.showInfoTable(classesTableDto));
+    }
+
+    @GetMapping("show/table/{idHold}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<TableViewDto> showTableInfoOneClass(@PathVariable("idHold") Integer idHold) {
+        return ResponseEntity.ok(commonService.showInfoTableOne( idHold));
     }
 
 
