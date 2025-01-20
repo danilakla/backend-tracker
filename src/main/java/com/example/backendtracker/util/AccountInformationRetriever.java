@@ -103,7 +103,7 @@ public class AccountInformationRetriever {
             setUpUserInfo(studentAccount.getFlpName(), userInfoDto);
 
         }
-
+        userInfoDto.setIdAccount(userAccountId);
         return userInfoDto;
     }
 
