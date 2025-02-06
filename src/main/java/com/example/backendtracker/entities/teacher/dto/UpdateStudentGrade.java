@@ -7,6 +7,7 @@ public record UpdateStudentGrade(
         Integer idStudentGrate,
         Integer grade,
         String description,
+        Boolean isPassLab,
         Integer attendance
 ) {
 }

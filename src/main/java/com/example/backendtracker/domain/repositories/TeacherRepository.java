@@ -17,5 +17,7 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
 
     List<Teacher> findAllByIdUniversity(Integer id_university);
 
+    List<Teacher> findAllByIdTeacherIn(List<Integer> teacherIds);
+
     Optional<Teacher> findByIdUniversityAndIdTeacher(Integer id_university, Integer id_teacher);
 }

@@ -35,6 +35,7 @@ public class CommonService {
     private final ClassRepository classRepository;
     private final StudentGradeRepository studentGradeRepository;
     private final ClassGroupsToSubgroupsRepository classGroupsToSubgroupsRepository;
+    private final AttestationStudentGradeRepository attestationStudentGradeRepository;
 
     public University getUniversity(Integer idUniversity) {
 
@@ -48,7 +49,24 @@ public class CommonService {
         List<StudentGrade> studentGrades = studentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
                 classes.stream().map(Classes::getIdClass).toList(),
                 students.stream().map(Student::getIdStudent).toList());
-        return TableViewDto.builder().classes(classes).students(students).studentGrades(studentGrades).build();
+
+        List<Classes> classForAttestation = classes.stream().filter(Classes::getIsAttestation).collect(Collectors.toList());
+        List<AttestationStudentGrade> attestationStudentGrades = new ArrayList<>();
+
+
+        if (!classes.isEmpty() && !classForAttestation.isEmpty()) {
+            try {
+                attestationStudentGrades = attestationStudentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
+                        classForAttestation.stream().map(Classes::getIdClass).toList(),
+                        students.stream().map(Student::getIdStudent).toList()
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("d");
+            }
+
+        }
+        return TableViewDto.builder().classes(classes).students(students).attestationStudentGrades(attestationStudentGrades).studentGrades(studentGrades).build();
     }
 
     public List<Student> getListStudentsByListIdGroups(List<Integer> idSubgroups) {
@@ -64,7 +82,23 @@ public class CommonService {
         List<StudentGrade> studentGrades = studentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
                 classes.stream().map(Classes::getIdClass).toList(),
                 students.stream().map(Student::getIdStudent).toList());
-        return TableViewDto.builder().classes(classes).students(students).studentGrades(studentGrades).build();
+        List<Classes> classForAttestation = classes.stream().filter(Classes::getIsAttestation).collect(Collectors.toList());
+        List<AttestationStudentGrade> attestationStudentGrades = new ArrayList<>();
+
+
+        if (!classes.isEmpty() && !classForAttestation.isEmpty()) {
+            try {
+                attestationStudentGrades = attestationStudentGradeRepository.findAllByIdClassInAndAndIdStudentIn(
+                        classForAttestation.stream().map(Classes::getIdClass).toList(),
+                        students.stream().map(Student::getIdStudent).toList()
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("d");
+            }
+
+        }
+        return TableViewDto.builder().classes(classes).students(students).attestationStudentGrades(attestationStudentGrades).studentGrades(studentGrades).build();
     }
 
     public ClassGroupInfo getClassGroup(Integer idClassGroup) {

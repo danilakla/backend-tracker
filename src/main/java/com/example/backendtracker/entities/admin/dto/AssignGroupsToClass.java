@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record AssignGroupsToClass(Boolean isMany, Integer classGroupId, List<Integer> studentGroupIds) {
+public record AssignGroupsToClass(Boolean isMany, Integer classGroupId, Boolean hasApplyAttestation, List<Integer> studentGroupIds) {
 }

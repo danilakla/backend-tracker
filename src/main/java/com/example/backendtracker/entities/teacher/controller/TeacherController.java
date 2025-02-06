@@ -1,5 +1,6 @@
 package com.example.backendtracker.entities.teacher.controller;
 
+import com.example.backendtracker.domain.models.AttestationStudentGrade;
 import com.example.backendtracker.domain.models.ClassGroup;
 import com.example.backendtracker.domain.models.Classes;
 import com.example.backendtracker.domain.models.StudentGrade;
@@ -55,6 +56,19 @@ public class TeacherController {
     public ResponseEntity<StudentGrade> updateClasses(@RequestBody UpdateStudentGrade updateStudentGrade) {
         return ResponseEntity.ok(teacherService.updateStudentGrade(updateStudentGrade));
     }
+
+    @PutMapping("update/attestation/classes")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<AttestationStudentGrade> updateAttestationClasses(@RequestBody UpdateAttestationStudentGrade updateAttestationStudentGrade) {
+        return ResponseEntity.ok(teacherService.updateAttestationStudentGrade(updateAttestationStudentGrade));
+    }
+
+    @PostMapping("calculate/avg/attestation")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AttestationStudentGrade> calculateAvgAttestation(@RequestBody AttestationCalculationDto attestationCalculationDto) {
+        return teacherService.calculateAvgForAttestationProp(attestationCalculationDto);
+    }
+
 
     @PostMapping("accept/attendance")
     @ResponseStatus(HttpStatus.OK)

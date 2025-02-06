@@ -295,14 +295,14 @@ public class DeanService {
                 List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
                 Integer classGroupsHoldId;
                 if (classGroups.isEmpty()) {
-                    classGroupsHoldId = classGroupsHoldRepository.save(ClassGroupsHold.builder().build()).getIdClassHold();
+                    classGroupsHoldId = classGroupsHoldRepository.save(ClassGroupsHold.builder().hasApplyAttestation(assignGroupsToClass.hasApplyAttestation()).build()).getIdClassHold();
 
                 } else {
                     classGroupsHoldId = classGroups.get(0).getIdClassHold();
                 }
                 manageStudentGroupsToAssign(classGroupsHoldId, assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
             } else {
-                manageStudentGroupsToAssignOne(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
+                manageStudentGroupsToAssignOne(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.hasApplyAttestation(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
 
             }
         } catch (Exception e) {
@@ -332,7 +332,7 @@ public class DeanService {
 
     }
 
-    public void manageStudentGroupsToAssignOne(List<Integer> ids, Integer classGroupId, String sql) {
+    public void manageStudentGroupsToAssignOne(List<Integer> ids, Boolean hasApplyAttestation, Integer classGroupId, String sql) {
 
         jdbcTemplate.batchUpdate(sql,
                 new BatchPreparedStatementSetter() {
@@ -341,7 +341,7 @@ public class DeanService {
                         Integer idStudentGroup = ids.get(i);
                         ps.setInt(1, idStudentGroup);
                         ps.setInt(2, classGroupId);
-                        ClassGroupsHold classGroupsHold = classGroupsHoldRepository.save(ClassGroupsHold.builder().build());
+                        ClassGroupsHold classGroupsHold = classGroupsHoldRepository.save(ClassGroupsHold.builder().hasApplyAttestation(hasApplyAttestation).build());
 
                         ps.setInt(3, classGroupsHold.getIdClassHold());
                     }

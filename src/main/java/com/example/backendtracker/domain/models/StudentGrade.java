@@ -17,4 +17,5 @@ public class StudentGrade {
     private Integer grade;
     private String description;
     private Integer attendance;
+    private Boolean isPassLab;
 }

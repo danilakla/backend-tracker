@@ -11,9 +11,14 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("classgroupshold")
-public class ClassGroupsHold {
+@Table("attestationstudentgrades")
+public class AttestationStudentGrade {
     @Id
-    private Integer idClassHold;
-    private Boolean hasApplyAttestation;
+    private Integer idAttestationStudentGrades;
+    private Integer idStudent;
+    private Integer idClass;
+    private Double avgGrade;
+    private Double hour;
+    private Integer currentCountLab;
+    private Integer maxCountLab;
 }

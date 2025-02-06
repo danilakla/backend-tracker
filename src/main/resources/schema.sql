@@ -1,17 +1,3 @@
--- create table t_user_teacher
--- (
---     id         int primary key,
---     c_username varchar not null unique,
---     c_password varchar not null
--- );
---
--- create table t_user_student
--- (
---     id         int primary key,
---     c_username varchar not null unique,
---     c_password varchar not null
--- );
-
 CREATE TABLE UserRoles
 (
     id_role   SERIAL PRIMARY KEY,
@@ -144,8 +130,9 @@ CREATE TABLE ClassGroups
 );
 create table ClassGroupsHold
 (
-    id_class_hold SERIAL PRIMARY KEY
 
+    id_class_hold SERIAL PRIMARY KEY,
+    has_apply_attestation BOOLEAN default true
 );
 
 CREATE TABLE ClassGroupsToSubgroups
@@ -163,9 +150,10 @@ CREATE TABLE ClassGroupsToSubgroups
 
 CREATE TABLE Classes
 (
-    id_class                   SERIAL PRIMARY KEY,
+    id_class      SERIAL PRIMARY KEY,
     id_class_hold INT,
-    date_creation              DATE DEFAULT CURRENT_DATE,
+    date_creation DATE DEFAULT CURRENT_DATE,
+    is_attestation boolean default false,
     FOREIGN KEY (id_class_hold) REFERENCES ClassGroupsHold (id_class_hold) ON DELETE CASCADE
 );
 
@@ -175,9 +163,28 @@ CREATE TABLE StudentGrades
 
     id_student       INT,
     id_class         INT,
-    grade            INT,
+    grade            INT DEFAULT 0,
     description      TEXT,
     attendance       INT,
+    is_pass_lab boolean default false,
+
     FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
     FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
 );
+CREATE TABLE AttestationStudentGrades
+(
+    id_attestation_student_grades SERIAL PRIMARY KEY,
+
+    id_student                    INT,
+    id_class                      INT,
+    avg_grade                     double precision,
+    hour                          double precision,
+    current_count_lab             INT,
+    max_count_lab                 INT,
+    FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
+    FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
+);
+
+
+CREATE INDEX idx_cgts_class_hold ON ClassGroupsToSubgroups(id_class_hold);
+CREATE INDEX idx_students_subgroup ON Students(id_subgroup);

@@ -17,5 +17,7 @@ public class Classes {
     private Integer idClassHold;
 
     private LocalDate dateCreation;
+    private Boolean isAttestation;
+
 
 }

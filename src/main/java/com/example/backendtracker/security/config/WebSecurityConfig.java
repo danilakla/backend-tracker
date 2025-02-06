@@ -56,6 +56,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("attestation/**").hasAnyRole("TEACHER", "DEAN")
+
                         .requestMatchers("qr/teacher/**").hasRole("TEACHER")
                         .requestMatchers("qr/student/**").hasRole("STUDENT")
                         .requestMatchers("/teacher").hasRole("TEACHER")

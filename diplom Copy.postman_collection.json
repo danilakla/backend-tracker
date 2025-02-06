@@ -19,7 +19,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMxMjQyMjY1LCJleHAiOjE3MzEzNDIyNjV9.Ybd17uiJUIRulTBZool0nYYp6WiuY_cTY7KEk6YxBNA",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzM4ODUzOTUyLCJleHAiOjE3Mzg5NTM5NTJ9.vPubCCgLzXjklrO8q3VHiyaCD5bVdk8Cejjw8Ftit74",
 										"type": "text"
 									}
 								],
@@ -55,7 +55,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwNDg3NDA0LCJleHAiOjE3MzA1ODc0MDR9.Cu7UIQvM5WOQZ2Igo8rasqXcwy0TGV_6nNY972gkco0",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzM4ODU0MzEyLCJleHAiOjE3Mzg5NTQzMTJ9.R12vZgMY55R3wGCn_68wXdHjvFUNbk9EAAaDzSbHZuM",
 										"type": "text"
 									}
 								],
@@ -96,7 +96,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMxNTA5Njc0LCJleHAiOjE3MzE2MDk2NzR9.lPCohUSKNPW6Rd1xLnYPdRAyj7c7_8RzB4PpycNmEeg",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzM4ODUzOTUyLCJleHAiOjE3Mzg5NTM5NTJ9.vPubCCgLzXjklrO8q3VHiyaCD5bVdk8Cejjw8Ftit74",
 										"type": "text"
 									}
 								],
@@ -399,7 +399,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTUwOTg2NSwiZXhwIjoxNzMxNjA5ODY1fQ.5xGZMPj4tqXr5sXSr1zGOamX2oom5Xgv2iFvlpEkwUs",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
 										"type": "text"
 									}
 								],
@@ -560,13 +560,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTY1MDEzOSwiZXhwIjoxNzMxNzUwMTM5fQ.xozEwRoloETaBfl6FkdJL2goG6JS0m8atriTLVpUNeg",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\":\"Матем \",\r\n    \"description\":\"удалить чем то\"\r\n}",
+									"raw": "{\r\n    \"name\":\"Матем\",\r\n    \"description\":\"удалить чем то\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -721,13 +721,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTY1MDEzOSwiZXhwIjoxNzMxNzUwMTM5fQ.xozEwRoloETaBfl6FkdJL2goG6JS0m8atriTLVpUNeg",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"formatName\": \"Пз\",\r\n    \"description\":\" вот всякая ерунда\"\r\n}",
+									"raw": "{\r\n    \"formatName\": \"Лаба\",\r\n    \"description\":\" вот всякая ерунда\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -882,7 +882,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczNTk3ODMwMiwiZXhwIjoxNzM2MDc4MzAyfQ.77xDarW6OPaIgMQR2OXDYZxef8vnBmqF0lPS646Ev6c",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
 										"type": "text"
 									}
 								],
@@ -1126,13 +1126,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTY1MDEzOSwiZXhwIjoxNzMxNzUwMTM5fQ.xozEwRoloETaBfl6FkdJL2goG6JS0m8atriTLVpUNeg",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"teacherId\":1,\r\n    \"subjectId\":1,\r\n    \"formatClassId\":1,\r\n    \"description\":\"ПОИТ 3 КУРС МАТЕМАТИКА И ЧТО=ТО ЕЩЕ \"\r\n}",
+									"raw": "{\r\n    \"teacherId\":1,\r\n    \"subjectId\":1,\r\n    \"formatClassId\":2,\r\n    \"description\":\"матем 1 курс лекция 6.2 2.1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1247,42 +1247,6 @@
 							"response": []
 						},
 						{
-							"name": "assign subgroup to class-group",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMjA4MTM0NCwiZXhwIjoxNzMyMTgxMzQ0fQ.UFmwEUVXzTMopN4z61gpAzyat_pLJjL87POFqUv2Wdw",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n8,9\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/dean/assign/groups",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"dean",
-										"assign",
-										"groups"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "remove subgroup from class-group",
 							"request": {
 								"method": "POST",
@@ -1319,49 +1283,13 @@
 							"response": []
 						},
 						{
-							"name": "add subgroup to class-group ",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n2,3,1\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/dean/add/groups-to-class",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"dean",
-										"add",
-										"groups-to-class"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "delete by id class-group",
 							"request": {
 								"method": "DELETE",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczMTE0NTYzNiwiZXhwIjoxNzMxMjQ1NjM2fQ.bjKOJYOIFdF39MVoVZ8oZLb9jIWY-SbfY0_YvnbPylQ",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
 										"type": "text"
 									}
 								],
@@ -1406,6 +1334,42 @@
 										"class-groups",
 										"subject",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "(DEAN) assign subgroup to class-group Copy 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"classGroupId\":\"1\",\r\n    \"studentGroupIds\":[\r\n1\r\n    ],\r\n    \"isMany\":false,\r\n    \"hasApplyAttestation\" :true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/assign/groups",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"assign",
+										"groups"
 									]
 								}
 							},
@@ -2606,6 +2570,42 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "ACCEPT ATTENDANCE Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBtYWlsLnJ1IiwiaWF0IjoxNzM1ODA5MDQwLCJleHAiOjE3MzU5MDkwNDB9.rigBKA_7ZuITQtqEgvkBMpENYJ4MzSyPyt3lUxEO5nY",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"studentGrateId\" :1,\r\n  \"attendanceCode\": 3  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/student/accept/attendance",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"student",
+										"accept",
+										"attendance"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -2739,7 +2739,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ids\":[7,8],\r\n    \"ClassGroup\":3\r\n\r\n}",
+							"raw": "{\r\n    \"ids\":[8,9],\r\n    \"ClassGroup\":3\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2768,12 +2768,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBtYWlsLnJ1IiwiaWF0IjoxNzM1OTc4MjI4LCJleHAiOjE3MzYwNzgyMjh9.J2W3zO_fET5yo9lJb3K18PdRScAz_fVHTYL4ZUPyfMY",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/common/show/table/13",
+							"raw": "http://localhost:8080/common/show/table/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2783,7 +2783,7 @@
 								"common",
 								"show",
 								"table",
-								"13"
+								"6"
 							]
 						}
 					},
@@ -2796,12 +2796,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40YdlNTMyZjhlZSIsImlhdCI6MTczNTk4NDgxOCwiZXhwIjoxNzM2MDg0ODE4fQ.sEKaDFL3SRczEbWn8ndImn-Xgx7tDHx2rd7y2YZKaoI",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/common/show/table/11",
+							"raw": "http://localhost:8080/common/show/table/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2811,7 +2811,7 @@
 								"common",
 								"show",
 								"table",
-								"11"
+								"5"
 							]
 						}
 					},
@@ -2902,6 +2902,263 @@
 								"teacher",
 								"create",
 								"classes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NEW AND UPDATED",
+			"item": [
+				{
+					"name": "START ATTESTATION",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"time\":\"100000\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/attestation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"attestation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW DEAN WHICH TEACHER DOESNT ATTESTATE HIS GROUPS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/attestation/notify-dean",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"attestation",
+								"notify-dean"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SHOW TEACHER IF HE MUST ATTESTATE, MAKE IT IN TABLE PAGE",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/attestation/notify-teacher/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"attestation",
+								"notify-teacher",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CALCUALTE AVG ATTESTATION",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"maxLabCount\": 7,\r\n    \"holdId\":6,\r\n    \"classId\":4,\r\n    \"countClassThatNotAttestation\":3,\r\n    \"timeOfOneClass\":80,\r\n    \"studentId\":[1,2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/calculate/avg/attestation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"calculate",
+								"avg",
+								"attestation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(TEACHER)  show table by id subgrpouo and id class-group-to-subgroup Copy 3",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/common/show/table/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"common",
+								"show",
+								"table",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE STUDENT GRADE NEW PROPS",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"idStudentGrate\":3,\r\n\"grade\":9,\r\n\"description\":\"3dsadsa \",\r\n \"attendance\":1,\r\n \"isPassLab\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/update/classes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"update",
+								"classes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE STUDENT ATTESTATION GRADE",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"idAttestationStudentGrades\":1,\r\n         \"avgGrade\":5.2,\r\n         \"hour\" :3,\r\n         \"currentCountLab\":2,\r\n         \"maxCountLab\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/update/attestation/classes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"update",
+								"attestation",
+								"classes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm attestation of class",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczODg1NDM5NiwiZXhwIjoxNzM4OTU0Mzk2fQ.OVXSh5Ug46zwdzMUVYRjXNLf-3xIbfx415XK8WlW8e4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/attestation/remove/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"attestation",
+								"remove",
+								"6"
 							]
 						}
 					},
