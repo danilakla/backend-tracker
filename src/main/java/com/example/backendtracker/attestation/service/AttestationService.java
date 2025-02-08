@@ -6,6 +6,7 @@ import com.example.backendtracker.domain.repositories.TeacherRepository;
 import com.example.backendtracker.domain.repositories.mapper.HoldStudentProjection;
 import com.example.backendtracker.entities.admin.dto.TeacherHolds;
 import com.example.backendtracker.entities.teacher.service.TeacherService;
+import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.flywaydb.core.internal.jdbc.JdbcTemplate;
 import org.springframework.data.redis.core.RedisCallback;
@@ -29,6 +30,7 @@ public class AttestationService {
     @Transactional
     public void createStudentAttestationGrade(Integer deanId, int expirationTimeInSeconds) {
         List<TeacherHolds> holdIds = batchAddHoldsGroupsToTeachers(deanId, expirationTimeInSeconds);
+        if (holdIds.isEmpty()) throw  new BadRequestException("There're no class that must be attesteted");
         Map<Integer, List<Integer>> holdStudentsMap = getStudentsGroupedByHold(holdIds);
 
         holdStudentsMap.forEach((holdId, studentIds) ->
