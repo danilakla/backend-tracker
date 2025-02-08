@@ -34,6 +34,7 @@ public class TeacherService {
     private final ClassRepository classRepository;
     private final StudentGradeRepository studentGradeRepository;
     private final AttestationStudentGradeRepository attestationStudentGradeRepository;
+    private final ClassGroupsHoldRepository classGroupsHoldRepository;
     private final JdbcTemplate jdbcTemplate;
 
     public List<ClassGroupMapDTO> getListClassGroups(Integer teacherId) {
@@ -141,7 +142,7 @@ public class TeacherService {
                         attestationGrade.setMaxCountLab(attestationCalculationDto.maxLabCount());
                         attestationGrade.setCurrentCountLab(summary.getPassLabCount());
                         attestationGrade.setAvgGrade(summary.getAvgGrade());
-                        attestationGrade.setHour(((attestationCalculationDto.countClassThatNotAttestation()-summary.getAttendanceCount())* attestationCalculationDto.timeOfOneClass())/60);
+                        attestationGrade.setHour(((attestationCalculationDto.countClassThatNotAttestation() - summary.getAttendanceCount()) * attestationCalculationDto.timeOfOneClass()) / 60);
                     }
                 })
                 .collect(Collectors.toList());
@@ -198,7 +199,9 @@ public class TeacherService {
         hasBelongToTeacher(classGroupInfo.classGroup().getIdTeacher(), teacherId);
 
         List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroupInfo.classGroup().getIdClassGroup());
-        return ClassGroupDto.builder().classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
+        List<Boolean> listAttested= classGroupsHoldRepository.findByIdClassHoldIn(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdClassHold).toList()).stream().map(ClassGroupsHold::getHasApplyAttestation).toList();
+
+        return ClassGroupDto.builder().hasApplyAttestation(listAttested).classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
     }
 
     private void hasBelongToTeacher(Integer entityIdTeacher, Integer requestedTeacherId) {

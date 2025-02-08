@@ -221,12 +221,13 @@ public class DeanService {
         ClassGroupInfo classGroupInfo = commonService.getClassGroup(classGroupId);
         hasBelongToDean(classGroupInfo.classGroup().getIdDean(), deanId);
         List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroupInfo.classGroup().getIdClassGroup());
+        List<Boolean> listAttested= classGroupsHoldRepository.findByIdClassHoldIn(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdClassHold).toList()).stream().map(ClassGroupsHold::getHasApplyAttestation).toList();
         Long count = classGroupsToSubgroups.stream().map(e -> e.getIdClassHold()).distinct().count();
         Boolean isMany = false;
         if (count == 1 && classGroupsToSubgroups.size() > 1) {
             isMany = true;
         }
-        return ClassGroupDto.builder().isMany(isMany).classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
+        return ClassGroupDto.builder().hasApplyAttestation(listAttested).isMany(isMany).classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
     }
 
     public List<ClassGroup> getListClassGroupByIdSubject(Integer subjectId, Integer deanId) {

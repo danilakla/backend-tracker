@@ -16,4 +16,6 @@ public class ClassGroupsHold {
     @Id
     private Integer idClassHold;
     private Boolean hasApplyAttestation;
+
+
 }
