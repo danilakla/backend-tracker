@@ -73,7 +73,7 @@ public class DeanService {
         Student student = Student
                 .builder()
                 .idAccount(studentAccountId)
-                .keyStudentParents(LoginGenerator.generateLogin(studentAddDto) + PasswordGenerator.generatePassword())
+                .keyStudentParents(PasswordGenerator.generateParentPassword())
                 .flpName(NameConverter.convertNameToDb(studentAddDto.lastname(), studentAddDto.name(), studentAddDto.surname()))
                 .idSubgroup(studentAddDto.numberOfGroupId()).build();
 
@@ -221,7 +221,7 @@ public class DeanService {
         ClassGroupInfo classGroupInfo = commonService.getClassGroup(classGroupId);
         hasBelongToDean(classGroupInfo.classGroup().getIdDean(), deanId);
         List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroupInfo.classGroup().getIdClassGroup());
-        List<Boolean> listAttested= classGroupsHoldRepository.findByIdClassHoldIn(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdClassHold).toList()).stream().map(ClassGroupsHold::getHasApplyAttestation).toList();
+        List<Boolean> listAttested = classGroupsHoldRepository.findByIdClassHoldIn(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdClassHold).toList()).stream().map(ClassGroupsHold::getHasApplyAttestation).toList();
         Long count = classGroupsToSubgroups.stream().map(e -> e.getIdClassHold()).distinct().count();
         Boolean isMany = false;
         if (count == 1 && classGroupsToSubgroups.size() > 1) {

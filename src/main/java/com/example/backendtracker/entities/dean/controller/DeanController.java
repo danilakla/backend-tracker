@@ -237,6 +237,8 @@ public class DeanController {
         return ResponseEntity.status(HttpStatus.OK).body(subject);
     }
 
+    //todo return student login
+    //todo edit key for parent
     @GetMapping("members/get")
     public ResponseEntity<List<SubGroupMember>> getMemberOfSystem(@AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.status(HttpStatus.OK).body(deanService.getSubGroupMembers(accountInformationRetriever.getAccountId(userDetails)));

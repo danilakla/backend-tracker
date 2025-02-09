@@ -2,6 +2,7 @@ package com.example.backendtracker.entities.common;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
+import com.example.backendtracker.domain.repositories.mapper.StudentWithLogin;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
 import com.example.backendtracker.entities.admin.dto.ClassGroupInfo;
 import com.example.backendtracker.entities.common.dto.ClassesTableDto;
@@ -159,8 +160,8 @@ public class CommonService {
 
     public MemberOfSystem getMemberSystemForAdmin(Integer iduniversity) {
         MemberOfSystem memberOfSystem = new MemberOfSystem();
-        memberOfSystem.setTeacherList(getListTeachers(iduniversity));
-        memberOfSystem.setDeanList(getListDeans(iduniversity));
+        memberOfSystem.setTeacherList(teacherRepository.findAllByIdUniversityLogin(iduniversity));
+        memberOfSystem.setDeanList(deanRepository.findAllByIdUniversityWithLogin(iduniversity));
         return memberOfSystem;
     }
 
@@ -191,7 +192,7 @@ public class CommonService {
         for (Subgroup subgroup : subgroups) {
             SubGroupMember subgroupMember = new SubGroupMember();
             subgroupMember.setSubgroup(subgroup);
-            List<Student> students = getListStudents(subgroup.getIdSubgroup());
+            List<StudentWithLogin> students = studentRepository.findAllByIdSubgroupWithLogin(subgroup.getIdSubgroup());
             subgroupMember.setStudents(students);
             subgroupMembers.add(subgroupMember);
         }

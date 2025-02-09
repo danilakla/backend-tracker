@@ -7,4 +7,7 @@ public class PasswordGenerator {
     public static String generatePassword() {
         return RandomStringUtils.randomAlphabetic(10);
     }
+    public static String generateParentPassword() {
+        return RandomStringUtils.randomAlphabetic(8);
+    }
 }

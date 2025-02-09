@@ -42,6 +42,20 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
             WHERE cgts.id_class_hold IN (:holdIds)
             """, rowMapperClass = HoldRowMapper.class)
     List<HoldStudentProjection> findStudentsByHoldIds(@Param("holdIds") List<Integer> holdIds);
+    @Query(value = "SELECT \n" +
+            "    d.id_dean,\n" +
+            "    d.flp_name,\n" +
+            "    d.faculty,\n" +
+            "    d.id_university,\n" +
+            "    d.id_account,\n" +
+            "    ua.login\n" +
+            "FROM \n" +
+            "    Deans d\n" +
+            "JOIN \n" +
+            "    UserAccounts ua ON d.id_account = ua.id_account\n" +
+            "WHERE \n" +
+            "    d.id_university = :idUniversity;", rowMapperClass = DeanWithLoginMapper.class)
+    List<DeanWithLogin> findAllByIdUniversityWithLogin(Integer idUniversity);
 
 
 }

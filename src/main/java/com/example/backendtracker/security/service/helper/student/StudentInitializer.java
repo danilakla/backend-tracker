@@ -62,7 +62,7 @@ public class StudentInitializer {
                         StudentWithCredentials.builder()
                                 .login(LoginGenerator.generateLogin(student))
                                 .password(PasswordGenerator.generatePassword())
-                                .parentKey(LoginGenerator.generateLogin(student) + PasswordGenerator.generatePassword())
+                                .parentKey(PasswordGenerator.generateParentPassword())
                                 .studentExcelDto(student).build()
                 )
                 .collect(Collectors.groupingBy(

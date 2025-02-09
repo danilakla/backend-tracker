@@ -2,6 +2,7 @@ package com.example.backendtracker.entities.common.dto;
 
 import com.example.backendtracker.domain.models.Student;
 import com.example.backendtracker.domain.models.Subgroup;
+import com.example.backendtracker.domain.repositories.mapper.StudentWithLogin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,6 @@ public class SubGroupMember {
 
     private Subgroup subgroup;
 
-    private List<Student> students;
+    private List<StudentWithLogin> students;
 
 }

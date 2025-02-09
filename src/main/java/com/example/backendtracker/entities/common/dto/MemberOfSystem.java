@@ -2,6 +2,9 @@ package com.example.backendtracker.entities.common.dto;
 
 import com.example.backendtracker.domain.models.Dean;
 import com.example.backendtracker.domain.models.Teacher;
+import com.example.backendtracker.domain.repositories.mapper.DeanWithLogin;
+import com.example.backendtracker.domain.repositories.mapper.DeanWithLoginMapper;
+import com.example.backendtracker.domain.repositories.mapper.TeacherWithLogin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MemberOfSystem {
 
-    private List<Dean> deanList;
-    private List<Teacher> teacherList;
+    private List<DeanWithLogin> deanList;
+    private List<TeacherWithLogin> teacherList;
 }
