@@ -3180,7 +3180,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"maxLabCount\": 7,\r\n    \"holdId\":6,\r\n    \"classId\":4,\r\n    \"countClassThatNotAttestation\":3,\r\n    \"timeOfOneClass\":80,\r\n    \"studentId\":[1,2]\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"

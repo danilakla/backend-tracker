@@ -60,12 +60,13 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
             "    d.id_university = :idUniversity", rowMapperClass = DeanWithLoginMapper.class)
     List<DeanWithLogin> findAllByIdUniversityWithLogin(Integer idUniversity);
 
+
     @Query(value = "WITH FilteredStudents AS (\n" +
             "    SELECT s.id_student\n" +
             "    FROM Students s\n" +
             "    JOIN Subgroups sg ON s.id_subgroup = sg.id_subgroup\n" +
             "    JOIN AttestationStudentGrades asg ON s.id_student = asg.id_student\n" +
-            "    WHERE sg.id_dean = :deanId AND asg.is_attested = true\n" +
+            "    WHERE sg.id_dean = :deanId AND asg.is_attested = false\n" +
             "    GROUP BY s.id_student\n" +
             "    HAVING COUNT(asg.id_attestation_student_grades) > 2\n" +
             ")\n" +
@@ -87,9 +88,8 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
             "JOIN ClassGroups cg ON cgts.id_class_group = cg.id_class_group\n" +
             "JOIN AttestationStudentGrades asg ON s.id_student = asg.id_student\n" +
             "JOIN Classes c ON asg.id_class = c.id_class\n" +
-            "WHERE asg.is_attested = true\n" +
+            "WHERE asg.is_attested = false\n" +
             "AND c.id_class_hold = cgts.id_class_hold\n" +
             "AND sg.id_dean = :deanId;", rowMapperClass = StudentRowMapper.class)
     List<StudentDTO> findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(Integer deanId);
-
 }
