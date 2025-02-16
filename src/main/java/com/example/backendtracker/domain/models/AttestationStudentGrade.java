@@ -21,4 +21,5 @@ public class AttestationStudentGrade {
     private Double hour;
     private Integer currentCountLab;
     private Integer maxCountLab;
+    private Boolean isAttested;
 }

@@ -190,6 +190,7 @@ public class TeacherService {
         attestationStudentGrade.setHour(updateStudentGrade.hour());
         attestationStudentGrade.setCurrentCountLab(updateStudentGrade.currentCountLab());
         attestationStudentGrade.setMaxCountLab(updateStudentGrade.maxCountLab());
+        attestationStudentGrade.setIsAttested(updateStudentGrade.isAttested());
         return attestationStudentGradeRepository.save(attestationStudentGrade);
     }
 

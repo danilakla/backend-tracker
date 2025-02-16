@@ -8,6 +8,7 @@ public record UpdateAttestationStudentGrade(
         Double avgGrade,
         Double hour,
         Integer currentCountLab,
-        Integer maxCountLab
+        Integer maxCountLab,
+        Boolean isAttested
 ) {
 }

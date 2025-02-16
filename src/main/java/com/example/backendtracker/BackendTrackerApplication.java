@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 //todo. teacher how hasn't attested yet 4. allow teacher attest a class  5.update attesta_student_grate manualy
 //todo. 6. calculate avg attestation
 //todo review commit in order to verify all changes
-
+// update attesation student grade add columnt in order set u
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class BackendTrackerApplication {
     public static void main(String[] args) {

@@ -26,8 +26,11 @@ import javax.naming.Name;
 import java.lang.Class;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -45,6 +48,7 @@ public class DeanService {
     private final JdbcTemplate jdbcTemplate;
     private final ClassGroupsHoldRepository classGroupsHoldRepository;
 
+    private final DeanRepository deanRepository;
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
 
@@ -116,6 +120,83 @@ public class DeanService {
                 .idDean(accountId).build());
 
     }
+
+//    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Long deanId) {
+//        List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
+//
+//        // Group students by subgroup
+//        Map<Long, GroupedResultDTO> groupedResults = new HashMap<>();
+//        for (StudentDTO student : students) {
+//            Long subgroupId = student.getSubgroup().getId();
+//            GroupedResultDTO group = groupedResults.computeIfAbsent(subgroupId, k -> {
+//                GroupedResultDTO g = new GroupedResultDTO();
+//                g.setSubgroup(student.getSubgroup());
+//                g.setStudents(new ArrayList<>());
+//                return g;
+//            });
+//
+//            // Add student to subgroup if not already present
+//            if (group.getStudents().stream().noneMatch(s -> s.getId().equals(student.getId()))) {
+//                group.getStudents().add(student);
+//            }
+//        }
+//
+//        return new ArrayList<>(groupedResults.values());
+//    }
+
+    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId) {
+        List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
+
+        Map<Integer, GroupedResultDTO> groupedResults = new HashMap<>();
+        for (StudentDTO student : students) {
+            Integer subgroupId = student.getSubgroup().getId();
+            GroupedResultDTO group = groupedResults.computeIfAbsent(subgroupId, k -> {
+                GroupedResultDTO g = new GroupedResultDTO();
+                g.setSubgroup(student.getSubgroup());
+                g.setStudents(new ArrayList<>());
+                return g;
+            });
+
+            // Add student to subgroup if not already present
+            if (group.getStudents().stream().noneMatch(s -> s.getId().equals(student.getId()))) {
+                group.getStudents().add(student);
+            }
+        }
+
+        return new ArrayList<>(groupedResults.values());
+    }
+//
+//    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Long deanId) {
+//        // Fetch all students who meet the criteria
+//        List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
+//
+//        // Group students by subgroup using Stream API
+//        return students.stream()
+//                .collect(Collectors.groupingBy(
+//                        student -> student.getSubgroup().getId(), // Group by subgroup ID
+//                        Collectors.collectingAndThen(
+//                                Collectors.toList(),
+//                                groupedStudents -> {
+//                                    // Create a GroupedResultDTO for each subgroup
+//                                    GroupedResultDTO group = new GroupedResultDTO();
+//                                    group.setSubgroup(groupedStudents.get(0).getSubgroup()); // Set subgroup
+//                                    group.setStudents(groupedStudents.stream()
+//                                            .filter(distinctByKey(StudentDTO::getId)) // Ensure unique students
+//                                            .collect(Collectors.toList()));
+//                                    return group;
+//                                }
+//                        )
+//                ))
+//                .values() // Get the grouped results as a collection
+//                .stream()
+//                .collect(Collectors.toList()); // Convert to a list
+//    }
+//
+//    // Helper method to ensure uniqueness based on a key
+//    private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+//        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+//        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+//    }
 
     public List<Specialty> getSetSpecialty(Integer accountId) {
         return specialtyRepository.findByDeanId(accountId);

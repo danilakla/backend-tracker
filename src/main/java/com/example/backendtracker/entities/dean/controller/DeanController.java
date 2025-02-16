@@ -123,6 +123,14 @@ public class DeanController {
         return ResponseEntity.status(HttpStatus.OK).body(deanService.getSetSpecialty(accountId));
     }
 
+
+    @GetMapping("not-attested/students")
+    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(@AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        return deanService.findStudentsByDeanWithAttestations(accountId);
+    }
+
+
     @GetMapping("specialty/get/{id}")
     public ResponseEntity<Specialty> getSpecialty(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
 
