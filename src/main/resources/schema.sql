@@ -181,7 +181,7 @@ CREATE TABLE AttestationStudentGrades
     hour                          double precision,
     current_count_lab             INT,
     max_count_lab                 INT,
-    is_attested BOOLEAN default false
+    is_attested BOOLEAN default false,
     FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
     FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
 );
