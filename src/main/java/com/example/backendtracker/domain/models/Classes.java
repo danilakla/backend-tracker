@@ -18,6 +18,7 @@ public class Classes {
 
     private LocalDate dateCreation;
     private Boolean isAttestation;
+    private String className;
 
 
 }

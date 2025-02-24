@@ -1,47 +1,48 @@
 package com.example.backendtracker.domain.repositories.mapper;
 
 import com.example.backendtracker.entities.dean.dto.*;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 public class StudentRowMapper implements RowMapper<StudentDTO> {
     @Override
     public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-        // Map subgroup information
+        // Map subgroup
         SubgroupDTO subgroup = new SubgroupDTO();
         subgroup.setId(rs.getInt("id_subgroup"));
         subgroup.setSubgroupNumber(rs.getString("subgroup_number"));
         subgroup.setAdmissionDate(rs.getDate("admission_date").toLocalDate());
 
-        // Map student information
+        // Map student
         StudentDTO student = new StudentDTO();
         student.setId(rs.getInt("id_student"));
         student.setName(rs.getString("student_name"));
+        student.setUnattestedCount(rs.getInt("unattested_count"));
         student.setSubgroup(subgroup);
 
-        // Map class group information
-        ClassGroupDTO classGroup = new ClassGroupDTO();
-        classGroup.setId(rs.getInt("id_class_group"));
-        classGroup.setDescription(rs.getString("class_group_description"));
-        classGroup.setIdSubject(rs.getLong("id_subject"));
-        classGroup.setIdClassFormat(rs.getLong("id_class_format"));
-        classGroup.setIdTeacher(rs.getLong("id_teacher"));
+        // Initialize classGroups list
+        List<ClassGroupDTO> classGroups = new ArrayList<>();
 
-        // Initialize classGroups list if null
-        if (student.getClassGroups() == null) {
-            student.setClassGroups(new ArrayList<>());
+        // Get class group data
+        Integer classGroupId = rs.getObject("id_class_group", Integer.class);
+        if (classGroupId != null) {
+            ClassGroupDTO classGroup = new ClassGroupDTO();
+            classGroup.setId(classGroupId);
+            classGroup.setDescription(rs.getString("class_group_description"));
+            classGroup.setIdSubject(rs.getInt("id_subject"));
+            classGroup.setIdClassFormat(rs.getInt("id_class_format"));
+            classGroup.setIdTeacher(rs.getInt("id_teacher"));
+            classGroup.setIdClassHold(rs.getInt("id_class_hold"));
+
+            // Add only if unattested_count > 0
+            if (rs.getInt("unattested_count") > 0) {
+                classGroups.add(classGroup);
+            }
         }
 
-        // Add class group to student
-        student.getClassGroups().add(classGroup);
-
+        student.setClassGroups(classGroups);
         return student;
     }
 }

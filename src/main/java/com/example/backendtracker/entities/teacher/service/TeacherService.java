@@ -9,6 +9,7 @@ import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.teacher.dto.*;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
+import org.springframework.expression.ExpressionException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,13 @@ public class TeacherService {
     public List<ClassGroupMapDTO> getListClassGroups(Integer teacherId) {
         return classGroupRepository.findAllByIdTeacher(teacherId);
 
+    }
+
+    @Transactional
+    public void updateClass(Integer idClass, String className) {
+        Classes classes = classRepository.findById(idClass).orElseThrow(() -> new ExpressionException("Not found"));
+        classes.setClassName(className);
+        classRepository.save(classes);
     }
 
     public void deleteClass(Integer idClass) {
@@ -200,7 +208,7 @@ public class TeacherService {
         hasBelongToTeacher(classGroupInfo.classGroup().getIdTeacher(), teacherId);
 
         List<ClassGroupsToSubgroups> classGroupsToSubgroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(classGroupInfo.classGroup().getIdClassGroup());
-        List<Boolean> listAttested= classGroupsHoldRepository.findByIdClassHoldIn(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdClassHold).toList()).stream().map(ClassGroupsHold::getHasApplyAttestation).toList();
+        List<Boolean> listAttested = classGroupsHoldRepository.findByIdClassHoldIn(classGroupsToSubgroups.stream().map(ClassGroupsToSubgroups::getIdClassHold).toList()).stream().map(ClassGroupsHold::getHasApplyAttestation).toList();
 
         return ClassGroupDto.builder().hasApplyAttestation(listAttested).classGroup(classGroupInfo).subgroupsId(classGroupsToSubgroups).build();
     }

@@ -143,28 +143,52 @@ public class DeanService {
 //
 //        return new ArrayList<>(groupedResults.values());
 //    }
+public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId) {
+    List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
 
-    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId) {
-        List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
+    Map<Integer, GroupedResultDTO> groupedResults = new HashMap<>();
+    for (StudentDTO incomingStudent : students) {
+        Integer subgroupId = incomingStudent.getSubgroup().getId();
+        GroupedResultDTO group = groupedResults.computeIfAbsent(subgroupId, k ->
+                new GroupedResultDTO(incomingStudent.getSubgroup(), new ArrayList<>())
+        );
 
-        Map<Integer, GroupedResultDTO> groupedResults = new HashMap<>();
-        for (StudentDTO student : students) {
-            Integer subgroupId = student.getSubgroup().getId();
-            GroupedResultDTO group = groupedResults.computeIfAbsent(subgroupId, k -> {
-                GroupedResultDTO g = new GroupedResultDTO();
-                g.setSubgroup(student.getSubgroup());
-                g.setStudents(new ArrayList<>());
-                return g;
-            });
+        List<ClassGroupDTO> incomingClassGroups = incomingStudent.getClassGroups() != null
+                ? incomingStudent.getClassGroups()
+                : new ArrayList<>();
 
-            // Add student to subgroup if not already present
-            if (group.getStudents().stream().noneMatch(s -> s.getId().equals(student.getId()))) {
-                group.getStudents().add(student);
-            }
-        }
+        group.getStudents().stream()
+                .filter(s -> s.getId().equals(incomingStudent.getId()))
+                .findFirst()
+                .ifPresentOrElse(
+                        existingStudent -> {
+                            // Merge class groups
+                            incomingClassGroups.forEach(newCg -> {
+                                if (!existingStudent.getClassGroups().contains(newCg)) {
+                                    existingStudent.getClassGroups().add(newCg);
+                                }
+                            });
 
-        return new ArrayList<>(groupedResults.values());
+                            // Sum unattested counts
+                            existingStudent.setUnattestedCount(
+                                    existingStudent.getUnattestedCount() +
+                                            incomingStudent.getUnattestedCount()
+                            );
+                        },
+                        () -> {
+                            // Add new student with initialized data
+                            StudentDTO newStudent = new StudentDTO();
+                            newStudent.setId(incomingStudent.getId());
+                            newStudent.setName(incomingStudent.getName());
+                            newStudent.setSubgroup(incomingStudent.getSubgroup());
+                            newStudent.getClassGroups().addAll(incomingClassGroups);
+                            newStudent.setUnattestedCount(incomingStudent.getUnattestedCount());
+                            group.getStudents().add(newStudent);
+                        }
+                );
     }
+    return new ArrayList<>(groupedResults.values());
+}
 //
 //    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Long deanId) {
 //        // Fetch all students who meet the criteria

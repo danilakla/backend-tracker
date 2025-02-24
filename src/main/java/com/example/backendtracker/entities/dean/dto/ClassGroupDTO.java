@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -12,9 +14,21 @@ import lombok.NoArgsConstructor;
 public class ClassGroupDTO {
     private Integer id;
     private String description;
-    private Long idSubject;
-    private Long idClassFormat;
-    private Long idTeacher;
+    private Integer idSubject;
+    private Integer idClassFormat;
+    private Integer idTeacher;
+    private  Integer idClassHold;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClassGroupDTO that = (ClassGroupDTO) o;
+        return Objects.equals(id, that.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
     // Getters and Setters
 }

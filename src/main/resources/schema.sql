@@ -154,6 +154,7 @@ CREATE TABLE Classes
     id_class_hold INT,
     date_creation DATE DEFAULT CURRENT_DATE,
     is_attestation boolean default false,
+    class_name      VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_class_hold) REFERENCES ClassGroupsHold (id_class_hold) ON DELETE CASCADE
 );
 

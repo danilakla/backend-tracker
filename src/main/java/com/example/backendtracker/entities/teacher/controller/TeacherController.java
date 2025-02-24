@@ -6,6 +6,8 @@ import com.example.backendtracker.domain.models.Classes;
 import com.example.backendtracker.domain.models.StudentGrade;
 import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
+import com.example.backendtracker.entities.common.CommonService;
+import com.example.backendtracker.entities.common.dto.ClassesTableDto;
 import com.example.backendtracker.entities.dean.service.DeanService;
 import com.example.backendtracker.entities.teacher.dto.*;
 import com.example.backendtracker.entities.teacher.service.TeacherService;
@@ -26,6 +28,7 @@ import java.util.List;
 public class TeacherController {
     private final TeacherService teacherService;
     private final AccountInformationRetriever accountInformationRetriever;
+    private final CommonService commonService;
 
     @GetMapping("get/class-groups")
     @ResponseStatus(HttpStatus.OK)
@@ -41,6 +44,26 @@ public class TeacherController {
         teacherService.deleteClass(id);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @PutMapping("update/class/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> updateClass(@PathVariable("id") Integer id, @RequestBody UpdateClassName updateClassName) {
+        teacherService.updateClass(id, updateClassName.className());
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @GetMapping("show/table")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<TableViewDto> showTableInfoMore(@RequestBody ClassesTableDto classesTableDto) {
+        return ResponseEntity.ok(commonService.showInfoTable(classesTableDto));
+    }
+
+    @GetMapping("show/table/{idHold}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<TableViewDto> showTableInfoOneClass(@PathVariable("idHold") Integer idHold) {
+        return ResponseEntity.ok(commonService.showInfoTableOne(idHold));
     }
 
 

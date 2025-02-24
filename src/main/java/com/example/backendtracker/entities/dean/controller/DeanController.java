@@ -7,10 +7,13 @@ import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
 import com.example.backendtracker.entities.admin.dto.ClassGroupDto;
 import com.example.backendtracker.entities.admin.dto.RemoveGroupsToClass;
 import com.example.backendtracker.entities.admin.dto.UpdateClassGroupDto;
+import com.example.backendtracker.entities.common.CommonService;
+import com.example.backendtracker.entities.common.dto.ClassesTableDto;
 import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
 import com.example.backendtracker.entities.dean.service.DeanService;
+import com.example.backendtracker.entities.teacher.dto.TableViewDto;
 import com.example.backendtracker.util.AccountInformationRetriever;
 import com.example.backendtracker.util.UserInfo;
 import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
@@ -30,6 +33,7 @@ public class DeanController {
 
     private final AccountInformationRetriever accountInformationRetriever;
     private final DeanService deanService;
+    private final CommonService commonService;
 
     @DeleteMapping("class-group/delete/{id}")
     public ResponseEntity<ClassGroup> deleteClassGroup(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
@@ -107,6 +111,18 @@ public class DeanController {
     public ResponseEntity<List<Subject>> getAllSubject(@AuthenticationPrincipal UserDetails userDetails) {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
         return ResponseEntity.status(HttpStatus.OK).body(deanService.getListSubjects(accountId));
+    }
+
+    @GetMapping("show/table")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<TableViewDto> showTableInfoMore(@RequestBody ClassesTableDto classesTableDto) {
+        return ResponseEntity.ok(commonService.showInfoTable(classesTableDto));
+    }
+
+    @GetMapping("show/table/{idHold}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<TableViewDto> showTableInfoOneClass(@PathVariable("idHold") Integer idHold) {
+        return ResponseEntity.ok(commonService.showInfoTableOne(idHold));
     }
 
 

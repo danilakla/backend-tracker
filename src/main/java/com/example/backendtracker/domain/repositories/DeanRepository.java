@@ -61,35 +61,45 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
     List<DeanWithLogin> findAllByIdUniversityWithLogin(Integer idUniversity);
 
 
-    @Query(value = "WITH FilteredStudents AS (\n" +
-            "    SELECT s.id_student\n" +
-            "    FROM Students s\n" +
-            "    JOIN Subgroups sg ON s.id_subgroup = sg.id_subgroup\n" +
-            "    JOIN AttestationStudentGrades asg ON s.id_student = asg.id_student\n" +
-            "    WHERE sg.id_dean = :deanId AND asg.is_attested = false\n" +
-            "    GROUP BY s.id_student\n" +
-            "    HAVING COUNT(asg.id_attestation_student_grades) > 2\n" +
-            ")\n" +
-            "SELECT\n" +
-            "    s.id_student,\n" +
-            "    s.flp_name AS student_name,\n" +
-            "    sg.id_subgroup,\n" +
-            "    sg.subgroup_number,\n" +
-            "    sg.admission_date,\n" +
-            "    cg.id_class_group,\n" +
-            "    cg.description AS class_group_description,\n" +
-            "    cg.id_subject,\n" +
-            "    cg.id_class_format,\n" +
-            "    cg.id_teacher\n" +
-            "FROM FilteredStudents fs\n" +
-            "JOIN Students s ON fs.id_student = s.id_student\n" +
-            "JOIN Subgroups sg ON s.id_subgroup = sg.id_subgroup\n" +
-            "JOIN ClassGroupsToSubgroups cgts ON sg.id_subgroup = cgts.id_subgroup\n" +
-            "JOIN ClassGroups cg ON cgts.id_class_group = cg.id_class_group\n" +
-            "JOIN AttestationStudentGrades asg ON s.id_student = asg.id_student\n" +
-            "JOIN Classes c ON asg.id_class = c.id_class\n" +
-            "WHERE asg.is_attested = false\n" +
-            "AND c.id_class_hold = cgts.id_class_hold\n" +
-            "AND sg.id_dean = :deanId;", rowMapperClass = StudentRowMapper.class)
+    @Query(value = """
+    WITH StudentUnattested AS (
+        SELECT 
+            s.id_student,
+            cgts.id_class_group,
+            COUNT(asg.id_attestation_student_grades) AS unattested_count
+        FROM Students s
+        JOIN Subgroups sg ON s.id_subgroup = sg.id_subgroup
+        JOIN ClassGroupsToSubgroups cgts ON sg.id_subgroup = cgts.id_subgroup
+        LEFT JOIN Classes c ON cgts.id_class_hold = c.id_class_hold
+        LEFT JOIN AttestationStudentGrades asg 
+            ON asg.id_class = c.id_class 
+            AND asg.id_student = s.id_student 
+            AND asg.is_attested = false
+        WHERE sg.id_dean = :deanId
+        GROUP BY s.id_student, cgts.id_class_group
+    )
+    SELECT
+        s.id_student,
+        s.flp_name AS student_name,
+        sg.id_subgroup,
+        sg.subgroup_number,
+        sg.admission_date,
+        cg.id_class_group,
+        cg.description AS class_group_description,
+        cg.id_subject,
+        cg.id_class_format,
+        cg.id_teacher,
+        cgts.id_class_hold,
+        COALESCE(su.unattested_count, 0) AS unattested_count
+    FROM Students s
+    JOIN Subgroups sg ON s.id_subgroup = sg.id_subgroup
+    JOIN ClassGroupsToSubgroups cgts ON sg.id_subgroup = cgts.id_subgroup
+    JOIN ClassGroups cg ON cgts.id_class_group = cg.id_class_group
+    LEFT JOIN StudentUnattested su 
+        ON s.id_student = su.id_student 
+        AND cg.id_class_group = su.id_class_group
+    WHERE sg.id_dean = :deanId
+    """,
+            rowMapperClass = StudentRowMapper.class)
     List<StudentDTO> findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(Integer deanId);
 }
