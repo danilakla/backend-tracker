@@ -57,15 +57,17 @@ public class ExcelExporter {
         // Create header row
         Row headerRow = sheet.createRow(0);
         for (int i = 0; i < headers.size(); i++) {
-            headerRow.createCell(i).setCellValue(headers.get(i));
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers.get(i));
+            // Set wider column width (20 characters, approximately 2560 units in POI)
+            sheet.setColumnWidth(i, 20 * 256); // 20 characters wide
         }
 
         // Create data rows with formatted cells
         for (int i = 0; i < data.size(); i++) {
             Row row = sheet.createRow(i + 1);
             List<String> rowData = data.get(i);
-            int j;
-            for (j = 0; j < rowData.size(); j++) {
+            for (int j = 0; j < rowData.size(); j++) { // Define 'j' here
                 Cell cell = row.createCell(j);
                 String cellContent = rowData.get(j);
                 if (cellContent != null && !cellContent.isEmpty()) {
@@ -76,7 +78,12 @@ public class ExcelExporter {
                     cell.setCellValue(cellContent);
                 }
             }
-            // Auto-size columns for better visibility
+            // Ensure column width is at least 20 characters for all columns
+            for (int j = 0; j < rowData.size(); j++) { // Reiterate over columns to set width
+                if (sheet.getColumnWidth(j) < 20 * 256) {
+                    sheet.setColumnWidth(j, 20 * 256);
+                }
+            }
         }
     }
 
