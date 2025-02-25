@@ -1936,7 +1936,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"login\":\"Картузов_Данила_Александрович27949853\",\r\n    \"password\":\"IzBqITkWCs\"\r\n    \r\n    }",
+							"raw": "{\r\n   \"login\":\"Бекишь_Александр_Андреевич9e29c65b\",\r\n    \"password\":\"xfjjYVqWnc\"\r\n    \r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1991,23 +1991,22 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MDY5MSwiZXhwIjoxNzMyMTgwNjkxfQ.lsESqYaKytDZiZ81ZhMmuCYnOplqudOqhEGojubzM7o",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40Yc5ZTI5YzY1YiIsImlhdCI6MTc0MDQxMTA3NiwiZXhwIjoxNzQwNTExMDc2fQ.eFo_wH_AyHoAkNMtPDfaSxvZtF3LuXnQsCcXsSplSQk",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/common/show/table/8/4",
+							"raw": "http://localhost:8080/student/show/table/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"common",
+								"student",
 								"show",
 								"table",
-								"8",
-								"4"
+								"5"
 							]
 						}
 					},
@@ -2200,7 +2199,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"token\":\"Картузов_Данила_Александрович1eb71a04LZBVfWHKGs\",\r\n    \"role\":\"ROLE_PARENTS\"\r\n\r\n    }",
+							"raw": "{\r\n   \"token\":\"Бекишь_Александр_Андреевичe9bec19dhjsbOhyEFs\",\r\n    \"role\":\"ROLE_PARENTS\"\r\n\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2256,23 +2255,22 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTczMjA4MDY5MSwiZXhwIjoxNzMyMTgwNjkxfQ.lsESqYaKytDZiZ81ZhMmuCYnOplqudOqhEGojubzM7o",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40Yc5ZTI5YzY1YiIsImlhdCI6MTc0MDQxMTA3NiwiZXhwIjoxNzQwNTExMDc2fQ.eFo_wH_AyHoAkNMtPDfaSxvZtF3LuXnQsCcXsSplSQk",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/common/show/table/8/4",
+							"raw": "http://localhost:8080/parent/show/table/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"common",
+								"parent",
 								"show",
 								"table",
-								"8",
-								"4"
+								"5"
 							]
 						}
 					},
@@ -3198,6 +3196,303 @@
 								"dean",
 								"not-attested",
 								"students"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pls last update",
+			"item": [
+				{
+					"name": "change the name of class",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTc0MDQxMTIxNCwiZXhwIjoxNzQwNTExMjE0fQ.8q7GZD-WbWkal8MO9QHwtZ9Uc3nAAqivV8R4d7cqWD8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"className\":\"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/update/class/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"update",
+								"class",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "parent table",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9QQVJFTlRTIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40Yc5ZTI5YzY1YiIsImlhdCI6MTc0MDQxMDg1MywiZXhwIjoxNzQwNTEwODUzfQ.wd-BmfjFDDW3skaUjtO6nB0JfbL962iZJ98PuT0kdno",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/parent/show/table/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parent",
+								"show",
+								"table",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "student table",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9TVFVERU5UIiwic3ViIjoi0JHQtdC60LjRiNGMX9CQ0LvQtdC60YHQsNC90LTRgF_QkNC90LTRgNC10LXQstC40Yc5ZTI5YzY1YiIsImlhdCI6MTc0MDQxMTA3NiwiZXhwIjoxNzQwNTExMDc2fQ.eFo_wH_AyHoAkNMtPDfaSxvZtF3LuXnQsCcXsSplSQk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/student/show/table/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"show",
+								"table",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teacher table",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9URUFDSEVSIiwic3ViIjoidGVhY2hlckBnbWFpbC5ydSIsImlhdCI6MTc0MDQxMTIxNCwiZXhwIjoxNzQwNTExMjE0fQ.8q7GZD-WbWkal8MO9QHwtZ9Uc3nAAqivV8R4d7cqWD8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/teacher/show/table/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teacher",
+								"show",
+								"table",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dean table",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTc0MDQxMjgzMiwiZXhwIjoxNzQwNTEyODMyfQ.s2CJAei34bChZjhR3jZtWZnE3OUgybHsziqLVaRDVF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/show/table/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"show",
+								"table",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "redirect to table for dean",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTc0MDQxMjgzMiwiZXhwIjoxNzQwNTEyODMyfQ.s2CJAei34bChZjhR3jZtWZnE3OUgybHsziqLVaRDVF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/show/table/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"show",
+								"table",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get not attested students Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTc0MDQxMjgzMiwiZXhwIjoxNzQwNTEyODMyfQ.s2CJAei34bChZjhR3jZtWZnE3OUgybHsziqLVaRDVF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/not-attested/students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"not-attested",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pre show table for dean",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTc0MDQxMjgzMiwiZXhwIjoxNzQwNTEyODMyfQ.s2CJAei34bChZjhR3jZtWZnE3OUgybHsziqLVaRDVF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/pre/show/table",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"pre",
+								"show",
+								"table"
 							]
 						}
 					},
