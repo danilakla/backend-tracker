@@ -1,6 +1,5 @@
 package com.example.backendtracker.entities.dean.controller;
 
-import com.example.backendtracker.domain.mapper.UniversalMapper;
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
 import com.example.backendtracker.entities.admin.dto.AssignGroupsToClass;
@@ -9,14 +8,12 @@ import com.example.backendtracker.entities.admin.dto.RemoveGroupsToClass;
 import com.example.backendtracker.entities.admin.dto.UpdateClassGroupDto;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.ClassesTableDto;
-import com.example.backendtracker.entities.common.dto.MemberOfSystem;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
 import com.example.backendtracker.entities.dean.service.DeanService;
 import com.example.backendtracker.entities.teacher.dto.TableViewDto;
 import com.example.backendtracker.util.AccountInformationRetriever;
 import com.example.backendtracker.util.UserInfo;
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -125,6 +122,14 @@ public class DeanController {
         return ResponseEntity.ok(commonService.showInfoTableOne(idHold));
     }
 
+
+    @GetMapping("pre/show/table")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SubgroupWithClassGroups> findSubgroupsWithClassGroupsByDeanId(@AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+
+        return deanService.findSubgroupsWithClassGroupsByDeanId(accountId);
+    }
 
     @GetMapping("class-format/get/all")
     public ResponseEntity<List<ClassFormat>> getAllClassFormat(@AuthenticationPrincipal UserDetails userDetails) {

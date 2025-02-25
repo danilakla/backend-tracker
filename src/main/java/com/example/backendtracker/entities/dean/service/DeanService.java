@@ -3,6 +3,7 @@ package com.example.backendtracker.entities.dean.service;
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.domain.repositories.*;
 import com.example.backendtracker.domain.repositories.mapper.ClassGroupMapDTO;
+import com.example.backendtracker.domain.repositories.mapper.SubgroupWithClassGroupsExtractor;
 import com.example.backendtracker.entities.admin.dto.*;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
@@ -398,7 +399,7 @@ public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId)
             if (assignGroupsToClass.isMany()) {
 
 
-                List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
+                    List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
                 Integer classGroupsHoldId;
                 if (classGroups.isEmpty()) {
                     classGroupsHoldId = classGroupsHoldRepository.save(ClassGroupsHold.builder().hasApplyAttestation(assignGroupsToClass.hasApplyAttestation()).build()).getIdClassHold();
@@ -479,6 +480,38 @@ public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId)
                 }
         );
 
+    }
+
+    public List<SubgroupWithClassGroups> findSubgroupsWithClassGroupsByDeanId(Integer deanId) {
+        String sql = """
+            SELECT 
+                s.id_subgroup,
+                s.subgroup_number,
+                cgts.id_class_group,
+                cgts.id_class_hold,
+                cg.description,
+                sub.name AS subject_name,
+                cf.format_name,
+                t.flp_name AS teacher_name
+            FROM 
+                Subgroups s
+            LEFT JOIN 
+                ClassGroupsToSubgroups cgts ON s.id_subgroup = cgts.id_subgroup
+            LEFT JOIN 
+                ClassGroups cg ON cgts.id_class_group = cg.id_class_group
+            LEFT JOIN 
+                Subjects sub ON cg.id_subject = sub.id_subject
+            LEFT JOIN 
+                ClassFormats cf ON cg.id_class_format = cf.id_class_format
+            LEFT JOIN 
+                Teachers t ON cg.id_teacher = t.id_teacher
+            WHERE 
+                s.id_dean = ?
+            ORDER BY 
+                s.id_subgroup, cgts.id_class_group
+            """;
+
+        return jdbcTemplate.query(sql, new SubgroupWithClassGroupsExtractor(), deanId);
     }
 
 }
