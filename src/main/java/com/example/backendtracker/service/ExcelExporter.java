@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -44,6 +45,45 @@ public class ExcelExporter {
         }
 
         workbook.write(outputStream);
+        workbook.close();
+    }
+    public Workbook createWorkbook() {
+        return new XSSFWorkbook();
+    }
+
+    public void createSheet(Workbook workbook, String sheetName, List<String> headers, List<List<String>> data) {
+        Sheet sheet = workbook.createSheet(sheetName);
+
+        // Create header row
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < headers.size(); i++) {
+            headerRow.createCell(i).setCellValue(headers.get(i));
+        }
+
+        // Create data rows with formatted cells
+        for (int i = 0; i < data.size(); i++) {
+            Row row = sheet.createRow(i + 1);
+            List<String> rowData = data.get(i);
+            int j;
+            for (j = 0; j < rowData.size(); j++) {
+                Cell cell = row.createCell(j);
+                String cellContent = rowData.get(j);
+                if (cellContent != null && !cellContent.isEmpty()) {
+                    // Enable text wrapping and set the content
+                    CellStyle style = workbook.createCellStyle();
+                    style.setWrapText(true);
+                    cell.setCellStyle(style);
+                    cell.setCellValue(cellContent);
+                }
+            }
+            // Auto-size columns for better visibility
+        }
+    }
+
+    public void saveWorkbook(Workbook workbook, String fileName) throws IOException {
+        try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
+            workbook.write(fileOut);
+        }
         workbook.close();
     }
 }

@@ -1,11 +1,15 @@
 package com.example.backendtracker;
 
+import com.example.backendtracker.service.ExcelGenerationService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+
 //
 //todo 1.) studentgrade table changed - add new prop, lab_is_passed or not, extend modal where update student grade
 //todo 2.) classes table changed - add bew prop is_attestation or not
@@ -21,5 +25,13 @@ public class BackendTrackerApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(BackendTrackerApplication.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner run(ExcelGenerationService excelGenerationService) {
+        return args -> {
+            excelGenerationService.generateExcelFiles(1l);
+            System.out.println("exel");
+        };
     }
 }
