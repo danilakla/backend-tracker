@@ -70,7 +70,6 @@ public class StudentInitializer {
                 ));
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public List<StudentResultDto> initStudent(List<StudentExcelDto> studentExcelDtos, Integer idDean) {
         try {
 
