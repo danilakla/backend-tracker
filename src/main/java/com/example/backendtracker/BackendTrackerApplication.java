@@ -27,11 +27,11 @@ public class BackendTrackerApplication {
         SpringApplication.run(BackendTrackerApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner run(ExcelGenerationService excelGenerationService) {
-        return args -> {
-            excelGenerationService.generateExcelFiles(1l);
-            System.out.println("exel");
-        };
-    }
+//    @Bean
+//    public CommandLineRunner run(ExcelGenerationService excelGenerationService) {
+//        return args -> {
+//            excelGenerationService.generateExcelFiles(1l);
+//            System.out.println("exel");
+//        };
+//    }
 }

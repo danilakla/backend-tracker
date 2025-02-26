@@ -3497,6 +3497,43 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "generate excel with course info",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTc0MDU4NzA0MSwiZXhwIjoxNzQwNjg3MDQxfQ.CDXFTUyfvgC0_yqURcp8mAJDuWn7hGcYis21ci1jcNM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dean/generate/info/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dean",
+								"generate",
+								"info",
+								"course"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

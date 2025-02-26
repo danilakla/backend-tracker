@@ -47,50 +47,12 @@ public class ExcelExporter {
         workbook.write(outputStream);
         workbook.close();
     }
-    public Workbook createWorkbook() {
-        return new XSSFWorkbook();
-    }
 
-    public void createSheet(Workbook workbook, String sheetName, List<String> headers, List<List<String>> data) {
-        Sheet sheet = workbook.createSheet(sheetName);
 
-        // Create header row
-        Row headerRow = sheet.createRow(0);
-        for (int i = 0; i < headers.size(); i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(headers.get(i));
-            // Set wider column width (20 characters, approximately 2560 units in POI)
-            sheet.setColumnWidth(i, 20 * 256); // 20 characters wide
-        }
 
-        // Create data rows with formatted cells
-        for (int i = 0; i < data.size(); i++) {
-            Row row = sheet.createRow(i + 1);
-            List<String> rowData = data.get(i);
-            for (int j = 0; j < rowData.size(); j++) { // Define 'j' here
-                Cell cell = row.createCell(j);
-                String cellContent = rowData.get(j);
-                if (cellContent != null && !cellContent.isEmpty()) {
-                    // Enable text wrapping and set the content
-                    CellStyle style = workbook.createCellStyle();
-                    style.setWrapText(true);
-                    cell.setCellStyle(style);
-                    cell.setCellValue(cellContent);
-                }
-            }
-            // Ensure column width is at least 20 characters for all columns
-            for (int j = 0; j < rowData.size(); j++) { // Reiterate over columns to set width
-                if (sheet.getColumnWidth(j) < 20 * 256) {
-                    sheet.setColumnWidth(j, 20 * 256);
-                }
-            }
-        }
-    }
 
-    public void saveWorkbook(Workbook workbook, String fileName) throws IOException {
-        try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
-            workbook.write(fileOut);
-        }
+    public void loadToEmail(Workbook workbook, OutputStream outputStream) throws IOException {
+        workbook.write(outputStream);
         workbook.close();
     }
 }

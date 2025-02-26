@@ -2,15 +2,23 @@ package com.example.backendtracker.service;
 
 import com.example.backendtracker.domain.models.*;
 import com.example.backendtracker.service.ExcelExporter;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.time.LocalTime.now;
 
 @Service
 public class ExcelGenerationService {
@@ -18,18 +26,17 @@ public class ExcelGenerationService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private ExcelExporter excelExporter;
 
-    public void generateExcelFiles(Long deanId) throws Exception {
+    public List<Workbook> generateExcelFiles(Integer deanId) throws Exception {
         // Get distinct years for subgroups associated with the dean
+        List<Workbook> resultList = new ArrayList<>();
         String sqlYears = "SELECT DISTINCT EXTRACT(YEAR FROM admission_date) " +
                 "FROM Subgroups " +
                 "WHERE id_dean = ?";
         List<Integer> years = jdbcTemplate.queryForList(sqlYears, Integer.class, deanId);
 
         for (Integer year : years) {
-            Workbook workbook = excelExporter.createWorkbook();
+            Workbook workbook = new XSSFWorkbook();
 
             // Find all id_class_hold for subgroups from this year, filtered by dean
             String sqlClassHolds = "SELECT DISTINCT cgts.id_class_hold " +
@@ -58,7 +65,7 @@ public class ExcelGenerationService {
 
                 // Construct sheet name with subject, format, teacher, and subgroup number
                 String sheetName = sanitizeSheetName(
-                        subjectName + "_" + formatName  + "_" + subgroupNumber
+                        subjectName + "_" + formatName + "_" + subgroupNumber
                 );
 
                 // Find subgroups and students, filtered by dean (ensure unique subgroups)
@@ -101,9 +108,9 @@ public class ExcelGenerationService {
                 headers.add("Имя студента"); // "Student Name" in Russian
                 Set<String> uniqueClassNames = new HashSet<>(); // Prevent duplicates
                 for (Classes cls : classes) {
-                    String className = "Classes " + cls.getIdClass();
+                    String className = "(Classes)" + " id: " + cls.getIdClass() + "name: " + cls.getClassName() == null ? "Default" : cls.getClassName();
                     if (cls.getIsAttestation()) {
-                        className = "Attestation" + cls.getIdClass();
+                        className = "(Attestation) Id:" + cls.getIdClass();
                     }
                     if (uniqueClassNames.add(className)) { // Only add if not already present
                         headers.add(className);
@@ -187,7 +194,7 @@ public class ExcelGenerationService {
                     String studentKey = student.getIdStudent() + "_" + student.getFlpName();
                     if (processedStudents.add(studentKey)) { // Only process unique students
                         List<String> row = new ArrayList<>();
-                        row.add(student.getFlpName()); // Student name
+                        row.add(Arrays.stream(student.getFlpName().split("_")).collect(Collectors.joining(" ")));
 
                         for (Classes cls : classes) {
                             Integer idClass = cls.getIdClass();
@@ -199,8 +206,8 @@ public class ExcelGenerationService {
                                 StudentGrade sg = studentGradesMap.get(key);
                                 if (sg != null) {
                                     cellContent = "Оценка: " + (sg.getGrade() != null ? sg.getGrade() : "—") + "\n" +
-                                            "Посещаемость: " + (sg.getAttendance() != null ? sg.getAttendance() + " ч." : "—") + "\n" +
-                                            "Пройдено: " + (sg.getIsPassLab() != null ? (sg.getIsPassLab() ? "Пройдено" : "Не пройдено") : "—") + "\n" +
+                                            "Посещаемость: " + getAttendance(sg.getAttendance()) + "\n" +
+                                            "Пройдено: " + (sg.getIsPassLab() != null ? (sg.getIsPassLab() ? "Задание защищено" : "Задание не защищено") : "—") + "\n" +
                                             "Примечание: " + (sg.getDescription() != null ? sg.getDescription() : "—");
                                 }
                             } else {
@@ -209,7 +216,7 @@ public class ExcelGenerationService {
                                 StudentGrade sg = studentGradesMap.get(key);
                                 if (asg != null || sg != null) {
                                     cellContent = "Средняя оценка: " + (asg != null && asg.getAvgGrade() != null ? asg.getAvgGrade() : "—") + "\n" +
-                                            "Посещаемость: " + (asg != null && asg.getHour() != null ? asg.getHour() + " ч." : (sg != null && sg.getAttendance() != null ? sg.getAttendance() + " ч." : "—")) + "\n" +
+                                            "Часы пропусков: " + (asg != null && asg.getHour() != null ? asg.getHour() + " ч." : (sg != null && sg.getAttendance() != null ? sg.getAttendance() + " ч." : "—")) + "\n" +
                                             "Лабы: " + (asg != null ? asg.getCurrentCountLab() + "/" + asg.getMaxCountLab() + " макс." : "—") + "\n" +
                                             "Аттестован: " + (asg != null && asg.getIsAttested() != null ? (asg.getIsAttested() ? "Да" : "Нет") : "—") + "\n";
                                 }
@@ -221,11 +228,60 @@ public class ExcelGenerationService {
                 }
 
                 // Create sheet in workbook
-                excelExporter.createSheet(workbook, sheetName, headers, data);
+                createSheet(workbook, sheetName, headers, data);
             }
 
             // Save the workbook
-            excelExporter.saveWorkbook(workbook, "Course23_" + year + ".xlsx");
+            Instant currInstant = Instant.now();
+            ZonedDateTime zonedDate = currInstant.atZone(ZoneId.systemDefault());
+            int currYear = zonedDate.getYear();
+
+            saveWorkbook(workbook, "Course_" + ((currYear - year) + 1) + ".xlsx");
+            resultList.add(workbook);
+        }
+        return resultList;
+    }
+
+    public void saveWorkbook(Workbook workbook, String fileName) throws IOException {
+        try (FileOutputStream fileOut = new FileOutputStream(fileName)) {
+            workbook.write(fileOut);
+        }
+//        workbook.close();
+    }
+
+    public void createSheet(Workbook workbook, String sheetName, List<String> headers, List<List<String>> data) {
+        Sheet sheet = workbook.createSheet(sheetName);
+
+        // Create header row
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < headers.size(); i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers.get(i));
+            // Set wider column width (20 characters, approximately 2560 units in POI)
+            sheet.setColumnWidth(i, 20 * 256); // 20 characters wide
+        }
+
+        // Create data rows with formatted cells
+        for (int i = 0; i < data.size(); i++) {
+            Row row = sheet.createRow(i + 1);
+            List<String> rowData = data.get(i);
+            for (int j = 0; j < rowData.size(); j++) { // Define 'j' here
+                Cell cell = row.createCell(j);
+                String cellContent = rowData.get(j);
+                if (cellContent != null && !cellContent.isEmpty()) {
+                    // Enable text wrapping and set the content
+                    CellStyle style = workbook.createCellStyle();
+                    style.setWrapText(true);
+                    cell.setCellStyle(style);
+                    cell.setCellValue(cellContent);
+                }
+            }
+            // Ensure column width is at least 20 characters for all columns
+            for (int j = 0; j < rowData.size(); j++) { // Reiterate over columns to set width
+                if (sheet.getColumnWidth(j) < 20 * 256) {
+                    sheet.setColumnWidth(j, 20 * 256);
+                }
+            }
         }
     }
 
@@ -242,5 +298,24 @@ public class ExcelGenerationService {
             sanitized = "Sheet1";
         }
         return sanitized;
+    }
+
+    private String getAttendance(Integer code) {
+        if (code == 0) {
+            return "Не указано";
+        } else if (code == 1) {
+            return "Пропуск";
+        } else if (code == 2) {
+            return "Уважительно";
+        } else if (code == 3) {
+            return "Посещено";
+        } else if (code == 7) {
+            return "Отработано по не уваж.";
+        } else if (code == 8) {
+            return "Отработано по уваж";
+        } else {
+            System.out.println(code);
+            throw new RuntimeException("Bad request for code attendance");
+        }
     }
 }

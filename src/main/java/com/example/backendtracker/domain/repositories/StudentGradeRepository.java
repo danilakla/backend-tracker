@@ -20,7 +20,7 @@ public interface StudentGradeRepository extends CrudRepository<StudentGrade, Int
     @Query(value = "SELECT " +
             "sg.id_student AS studentId, " +
             "AVG(CASE WHEN sg.grade > 0 THEN sg.grade ELSE NULL END) AS avgGrade, " +
-            "COUNT(CASE WHEN sg.attendance IN (4) THEN 1 END) AS attendanceCount, " +
+            "COUNT(CASE WHEN sg.attendance IN (3) THEN 1 END) AS attendanceCount, " +
             "SUM(CASE WHEN sg.is_pass_lab = TRUE THEN 1 ELSE 0 END) AS passLabCount " +
             "FROM ClassGroupsToSubgroups cgt " +
             "JOIN Subgroups s ON cgt.id_subgroup = s.id_subgroup " +

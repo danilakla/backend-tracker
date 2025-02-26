@@ -12,6 +12,7 @@ import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
 import com.example.backendtracker.entities.dean.service.DeanService;
 import com.example.backendtracker.entities.teacher.dto.TableViewDto;
+import com.example.backendtracker.service.EmailService;
 import com.example.backendtracker.util.AccountInformationRetriever;
 import com.example.backendtracker.util.UserInfo;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class DeanController {
     private final AccountInformationRetriever accountInformationRetriever;
     private final DeanService deanService;
     private final CommonService commonService;
+    private final EmailService emailService;
 
     @DeleteMapping("class-group/delete/{id}")
     public ResponseEntity<ClassGroup> deleteClassGroup(@PathVariable("id") Integer id, @AuthenticationPrincipal UserDetails userDetails) {
@@ -290,6 +292,14 @@ public class DeanController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(deanService.addStudent(studentAddDto));
     }
+
+    @PostMapping("generate/info/course")
+    @ResponseStatus(HttpStatus.OK)
+    public void createStudentAccounts(@AuthenticationPrincipal UserDetails userDetails) {
+        Integer accountId = accountInformationRetriever.getAccountId(userDetails);
+        emailService.sendCourseInfo(userDetails.getUsername(), accountId);
+    }
+
 
     @PostMapping("students/update/{id}")
     public ResponseEntity<Student> updateStudentAccounts(@PathVariable("id") Integer id, @RequestBody UserInfo userInfo, @AuthenticationPrincipal UserDetails userDetails) {
