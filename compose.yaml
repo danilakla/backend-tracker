@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     image: danila68/spring-app-tracker-v1:latest
