@@ -1,19 +1,20 @@
 spring:
   data:
     redis:
-      host: localhost
+      host: redis
       port: 6379
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydatabase
-    username: myuser
-    password: secret
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
+
   mail:
     host: smtp.gmail.com
     port: 587
-    username: danilakartuzov5@gmail.com
-    password: ccosxltorqxvrbpr
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -27,10 +28,15 @@ spring:
 #        command:
   sql:
     init:
-      mode: never
+      mode: always
+      schema-locations: classpath:schema.sql  # Explicit path
+      platform: postgresql
+
+  flyway:
+    enabled: false
 
 jwt:
-  secret: e.eh7Nxr]zH1QwGP4;s'57@a}p|eW~^"iZNniT8opo,49/bJMs39sb[JDP6jD>#
+  secret: ${JWT_SECRET}
   expirationMs: 100000000
 logging:
   level:
@@ -44,5 +50,5 @@ springdoc:
   api-docs:
     path: /api-docs
 encryption:
-  key: KtZG4c2YJo0rz0p21iTXV8YYUGvJMb30JQOkvpXpRk8=
+  key: ${ENCRYPTION_KEY}
   algorithm: AES

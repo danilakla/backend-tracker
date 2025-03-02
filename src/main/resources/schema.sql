@@ -1,16 +1,15 @@
-CREATE TABLE UserRoles
+CREATE TABLE IF NOT EXISTS UserRoles
 (
     id_role   SERIAL PRIMARY KEY,
     role_name varchar(50)
 );
 
 INSERT INTO UserRoles (role_name)
-VALUES ('ADMIN'),
-       ('STUDENT'),
-       ('TEACHER'),
-       ('DEAN');
+SELECT *
+FROM (VALUES ('ADMIN'), ('STUDENT'), ('TEACHER'), ('DEAN')) AS new_roles
+WHERE NOT EXISTS (SELECT 1 FROM UserRoles);
 
-CREATE TABLE UserAccounts
+CREATE TABLE IF NOT EXISTS UserAccounts
 (
     id_account SERIAL PRIMARY KEY,
     login      VARCHAR(50) unique,
@@ -19,7 +18,7 @@ CREATE TABLE UserAccounts
     FOREIGN KEY (id_role) REFERENCES UserRoles (id_role)
 );
 
-CREATE TABLE Admins
+CREATE TABLE IF NOT EXISTS Admins
 (
     id_admin   SERIAL PRIMARY KEY,
     flp_name   VARCHAR(200),
@@ -27,7 +26,7 @@ CREATE TABLE Admins
     FOREIGN KEY (id_account) REFERENCES UserAccounts (id_account)
 );
 
-CREATE TABLE Universities
+CREATE TABLE IF NOT EXISTS  Universities
 (
     id_university SERIAL PRIMARY KEY,
     name          VARCHAR(100),
@@ -37,7 +36,7 @@ CREATE TABLE Universities
 
 );
 
-CREATE TABLE Deans
+CREATE TABLE IF NOT EXISTS  Deans
 (
     id_dean       SERIAL PRIMARY KEY,
     flp_name      VARCHAR(200),
@@ -49,7 +48,7 @@ CREATE TABLE Deans
 
 );
 
-CREATE TABLE Specialties
+CREATE TABLE IF NOT EXISTS  Specialties
 (
     id_specialty SERIAL PRIMARY KEY,
     name         VARCHAR(80),
@@ -57,7 +56,7 @@ CREATE TABLE Specialties
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
-CREATE TABLE Disciplines
+CREATE TABLE  IF NOT EXISTS  Disciplines
 (
     id_discipline SERIAL PRIMARY KEY,
     id_dean       INT,
@@ -65,7 +64,7 @@ CREATE TABLE Disciplines
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
-CREATE TABLE ClassFormats
+CREATE TABLE IF NOT EXISTS  ClassFormats
 (
     id_class_format SERIAL PRIMARY KEY,
     format_name     VARCHAR(100),
@@ -74,7 +73,7 @@ CREATE TABLE ClassFormats
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
-CREATE TABLE Teachers
+CREATE TABLE IF NOT EXISTS Teachers
 (
     id_teacher    SERIAL PRIMARY KEY,
     id_university INT,
@@ -84,7 +83,7 @@ CREATE TABLE Teachers
     FOREIGN KEY (id_account) REFERENCES UserAccounts (id_account)
 );
 
-CREATE TABLE Subgroups
+CREATE TABLE  IF NOT EXISTS Subgroups
 (
     id_subgroup     SERIAL PRIMARY KEY,
     subgroup_number VARCHAR(50),
@@ -95,7 +94,7 @@ CREATE TABLE Subgroups
     FOREIGN KEY (id_specialty) REFERENCES Specialties (id_specialty)
 );
 
-CREATE TABLE Students
+CREATE TABLE IF NOT EXISTS Students
 (
     id_student          SERIAL PRIMARY KEY,
     id_subgroup         INT,
@@ -106,7 +105,7 @@ CREATE TABLE Students
     FOREIGN KEY (id_account) REFERENCES UserAccounts (id_account) ON DELETE CASCADE
 );
 
-CREATE TABLE Subjects
+CREATE TABLE  IF NOT EXISTS Subjects
 (
     id_subject  SERIAL PRIMARY KEY,
     id_dean     INT,
@@ -115,7 +114,7 @@ CREATE TABLE Subjects
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
-CREATE TABLE ClassGroups
+CREATE TABLE  IF NOT EXISTS ClassGroups
 (
     id_class_group  SERIAL PRIMARY KEY,
     id_subject      INT,
@@ -128,14 +127,14 @@ CREATE TABLE ClassGroups
     FOREIGN KEY (id_class_format) REFERENCES ClassFormats (id_class_format),
     FOREIGN KEY (id_teacher) REFERENCES Teachers (id_teacher)
 );
-create table ClassGroupsHold
+create table  IF NOT EXISTS ClassGroupsHold
 (
 
     id_class_hold SERIAL PRIMARY KEY,
     has_apply_attestation BOOLEAN default true
 );
 
-CREATE TABLE ClassGroupsToSubgroups
+CREATE TABLE IF NOT EXISTS  ClassGroupsToSubgroups
 (
     id_class_group_to_subgroup SERIAL PRIMARY KEY,
     id_subgroup                INT,
@@ -148,7 +147,7 @@ CREATE TABLE ClassGroupsToSubgroups
 );
 
 
-CREATE TABLE Classes
+CREATE TABLE  IF NOT EXISTS Classes
 (
     id_class      SERIAL PRIMARY KEY,
     id_class_hold INT,
@@ -158,7 +157,7 @@ CREATE TABLE Classes
     FOREIGN KEY (id_class_hold) REFERENCES ClassGroupsHold (id_class_hold) ON DELETE CASCADE
 );
 
-CREATE TABLE StudentGrades
+CREATE TABLE IF NOT EXISTS StudentGrades
 (
     id_student_grate SERIAL PRIMARY KEY,
 
@@ -172,7 +171,7 @@ CREATE TABLE StudentGrades
     FOREIGN KEY (id_student) REFERENCES Students (id_student) ON DELETE CASCADE,
     FOREIGN KEY (id_class) REFERENCES Classes (id_class) ON DELETE CASCADE
 );
-CREATE TABLE AttestationStudentGrades
+CREATE TABLE  IF NOT EXISTS AttestationStudentGrades
 (
     id_attestation_student_grades SERIAL PRIMARY KEY,
 
@@ -188,5 +187,5 @@ CREATE TABLE AttestationStudentGrades
 );
 
 
-CREATE INDEX idx_cgts_class_hold ON ClassGroupsToSubgroups(id_class_hold);
-CREATE INDEX idx_students_subgroup ON Students(id_subgroup);
+CREATE INDEX IF NOT EXISTS idx_cgts_class_hold ON ClassGroupsToSubgroups(id_class_hold);
+CREATE INDEX IF NOT EXISTS idx_students_subgroup ON Students(id_subgroup);
