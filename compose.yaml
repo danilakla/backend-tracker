@@ -12,6 +12,15 @@ services:
     networks:
       - app-network
 
+  frontend:
+    image: ilyaletich12/react-tracker-client-v1:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
   postgres:
     image: postgres:15
     env_file: .env    # Load all variables from .env
