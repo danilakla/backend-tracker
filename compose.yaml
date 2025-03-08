@@ -11,7 +11,7 @@ services:
       - app-network
 
   frontend:
-    image: ilyaletich12/react-tracker-client-v1:latest
+    image: ilyaletich12/react-tracker-client-v1-prod:latest
     ports:
       - "80:80"
     depends_on:
