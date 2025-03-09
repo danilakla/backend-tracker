@@ -2,10 +2,12 @@ package com.example.backendtracker.domain.repositories.mapper;
 
 import com.example.backendtracker.entities.dean.dto.*;
 import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class StudentRowMapper implements RowMapper<StudentDTO> {
     @Override
     public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -31,9 +33,9 @@ public class StudentRowMapper implements RowMapper<StudentDTO> {
             ClassGroupDTO classGroup = new ClassGroupDTO();
             classGroup.setId(classGroupId);
             classGroup.setDescription(rs.getString("class_group_description"));
-            classGroup.setIdSubject(rs.getInt("id_subject"));
-            classGroup.setIdClassFormat(rs.getInt("id_class_format"));
-            classGroup.setIdTeacher(rs.getInt("id_teacher"));
+            classGroup.setSubjectName(rs.getString("sub_name"));
+            classGroup.setFormatName(rs.getString("frm_name"));
+            classGroup.setTeacherName(rs.getString("teach_nname"));
             classGroup.setIdClassHold(rs.getInt("id_class_hold"));
 
             // Add only if unattested_count > 0

@@ -14,9 +14,9 @@ import java.util.Objects;
 public class ClassGroupDTO {
     private Integer id;
     private String description;
-    private Integer idSubject;
-    private Integer idClassFormat;
-    private Integer idTeacher;
+    private String subjectName ;
+    private String formatName;
+    private String teacherName;
     private  Integer idClassHold;
     @Override
     public boolean equals(Object o) {

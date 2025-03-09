@@ -60,7 +60,6 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
             "    d.id_university = :idUniversity", rowMapperClass = DeanWithLoginMapper.class)
     List<DeanWithLogin> findAllByIdUniversityWithLogin(Integer idUniversity);
 
-
     @Query(value = """
     WITH StudentUnattested AS (
         SELECT 
@@ -86,15 +85,18 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
         sg.admission_date,
         cg.id_class_group,
         cg.description AS class_group_description,
-        cg.id_subject,
-        cg.id_class_format,
-        cg.id_teacher,
+        subjects.name as sub_name,
+        classformats.format_name as frm_name,
+        teachers.flp_name as teach_nname,
         cgts.id_class_hold,
         COALESCE(su.unattested_count, 0) AS unattested_count
     FROM Students s
     JOIN Subgroups sg ON s.id_subgroup = sg.id_subgroup
     JOIN ClassGroupsToSubgroups cgts ON sg.id_subgroup = cgts.id_subgroup
     JOIN ClassGroups cg ON cgts.id_class_group = cg.id_class_group
+    JOIN subjects on cg.id_subject = subjects.id_subject
+    JOIN classformats on cg.id_class_format = classformats.id_class_format
+    JOIN teachers  on cg.id_teacher = teachers.id_teacher
     LEFT JOIN StudentUnattested su 
         ON s.id_student = su.id_student 
         AND cg.id_class_group = su.id_class_group
@@ -102,4 +104,5 @@ public interface DeanRepository extends CrudRepository<Dean, Integer> {
     """,
             rowMapperClass = StudentRowMapper.class)
     List<StudentDTO> findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(Integer deanId);
+
 }
