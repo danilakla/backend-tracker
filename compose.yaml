@@ -1,6 +1,6 @@
 services:
   app:
-    image: danila68/spring-app-tracker-v1:latest
+    image: danila68/spring-app-tracker-v2:latest
     env_file: .env    # Load all variables from .env
     ports:
       - "8080:8080"
