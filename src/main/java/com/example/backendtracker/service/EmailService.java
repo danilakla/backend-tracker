@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -15,64 +16,70 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
 
     @Autowired
     private ExcelExporter excelExporter;
     @Autowired
     ExcelGenerationService excelGenerationService;
 
-    public void sendEmailWithAttachment(String toEmail, List<StudentResultDto> students) throws IOException, MessagingException {
-        // Создаем письмо
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-        helper.setTo(toEmail);
-        helper.setSubject("Student Results");
-        helper.setText("Please find the attached Excel file with student results.");
-
-        // Генерация Excel-файла в память
+    public ResponseEntity<byte[]> getStudentResultsExcel(List<StudentResultDto> students) throws IOException {
+        // Generate Excel file in memory
         ByteArrayOutputStream excelStream = new ByteArrayOutputStream();
         excelExporter.exportToExcel(students, excelStream);
 
-        // Создаем вложение
-        InputStreamSource attachment = new ByteArrayResource(excelStream.toByteArray());
-        helper.addAttachment("student_results.xlsx", attachment);
+        // Prepare HTTP headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDisposition(ContentDisposition.builder("attachment")
+                .filename("student_results.xlsx")
+                .build());
 
-        // Отправляем письмо
-        mailSender.send(message);
+        // Return ResponseEntity with Excel file
+        return new ResponseEntity<>(excelStream.toByteArray(), headers, HttpStatus.OK);
     }
 
-    public void sendCourseInfo(String toEmail, Integer deanId) {
+    public ResponseEntity<byte[]> getCourseInfoZip(Integer deanId) {
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-            helper.setTo(toEmail);
-            helper.setSubject("Course info Results");
-            helper.setText("Please find the attached Excel file with course info results.");
-
-            // Генерация Excel-файла в память
+            // Generate Excel files in memory
             List<Workbook> result = excelGenerationService.generateExcelFiles(deanId);
-            List<ByteArrayOutputStream> excelStreams = result.stream().map(i -> new ByteArrayOutputStream()).toList();
+            List<ByteArrayOutputStream> excelStreams = result.stream()
+                    .map(i -> new ByteArrayOutputStream())
+                    .toList();
+
             for (int i = 0; i < result.size(); i++) {
                 excelExporter.loadToEmail(result.get(i), excelStreams.get(i));
             }
 
-            // Создаем вложение
-            for (int i = 0; i < result.size(); i++) {
+            // Create ZIP file in memory
+            ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
+            try (ZipOutputStream zipOutputStream = new ZipOutputStream(zipStream)) {
+                for (int i = 0; i < result.size(); i++) {
+                    String fileName = "Course_" + (i + 1) + "_" + ".xlsx";
+                    ZipEntry zipEntry = new ZipEntry(fileName);
+                    zipOutputStream.putNextEntry(zipEntry);
 
-                InputStreamSource attachment = new ByteArrayResource(excelStreams.get(i).toByteArray());
-                helper.addAttachment("Course_" + i+1 + "_" + ".xlsx", attachment);
-
+                    byte[] excelBytes = excelStreams.get(i).toByteArray();
+                    zipOutputStream.write(excelBytes, 0, excelBytes.length);
+                    zipOutputStream.closeEntry();
+                }
             }
-            // Отправляем письмо
-            mailSender.send(message);
+
+            // Prepare HTTP headers
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDisposition(ContentDisposition.builder("attachment")
+                    .filename("course_info_results.zip")
+                    .build());
+
+            // Return ResponseEntity with ZIP file
+            return new ResponseEntity<>(zipStream.toByteArray(), headers, HttpStatus.OK);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

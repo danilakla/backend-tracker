@@ -295,9 +295,9 @@ public class DeanController {
 
     @PostMapping("generate/info/course")
     @ResponseStatus(HttpStatus.OK)
-    public void createStudentAccounts(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<byte[]> createStudentAccounts(@AuthenticationPrincipal UserDetails userDetails) {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
-        emailService.sendCourseInfo(userDetails.getUsername(), accountId);
+        return emailService.getCourseInfoZip(accountId);
     }
 
 

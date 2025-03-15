@@ -6,6 +6,7 @@ import com.example.backendtracker.security.service.helper.student.dto.StudentRes
 import com.example.backendtracker.service.EmailService;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,9 @@ public class StudentGeneratorService {
     private final StudentInitializer studentInitializer;
     private final EmailService emailService;
     @Transactional(rollbackFor = Exception.class)
-    public void generateStudents(List<StudentExcelDto> studentExcelDtoList, String deanEmail, Integer deanId) throws MessagingException, IOException {
+    public ResponseEntity<byte[]> generateStudents(List<StudentExcelDto> studentExcelDtoList, String deanEmail, Integer deanId) throws MessagingException, IOException {
 
         List<StudentResultDto> studentResultDtos = studentInitializer.initStudent(studentExcelDtoList, deanId);
-        emailService.sendEmailWithAttachment(deanEmail, studentResultDtos);
+      return  emailService.getStudentResultsExcel(studentResultDtos);
     }
 }
