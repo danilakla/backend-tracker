@@ -62,12 +62,10 @@ public class QRService {
     }
 
 
-    @Cacheable(value = "review", key = "#id")
     public Review getByIdReview(Integer id) throws BadRequestException {
         return reviewRepository.findById(id).orElseThrow(BadRequestException::new);
     }
 
-    @CacheEvict(value = "review", key = "#id")
     public void stopReviewById(Integer id) {
         reviewRepository.deleteById(id);
         studentReviewRepository.deleteAllByClassId(id);
