@@ -56,14 +56,6 @@ CREATE TABLE IF NOT EXISTS  Specialties
     FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
 );
 
-CREATE TABLE  IF NOT EXISTS  Disciplines
-(
-    id_discipline SERIAL PRIMARY KEY,
-    id_dean       INT,
-    name          VARCHAR(100),
-    FOREIGN KEY (id_dean) REFERENCES Deans (id_dean)
-);
-
 CREATE TABLE IF NOT EXISTS  ClassFormats
 (
     id_class_format SERIAL PRIMARY KEY,

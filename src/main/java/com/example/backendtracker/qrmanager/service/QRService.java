@@ -57,7 +57,6 @@ public class QRService {
         return studentReviewRepository.findAllByClassId(classId);
     }
 
-    @Cacheable(value = "classgeneral", key = "#id")
     public ClassGeneral getById(Integer id) throws BadRequestException {
         return classGeneralRepository.findById(id).orElseThrow(BadRequestException::new);
     }
