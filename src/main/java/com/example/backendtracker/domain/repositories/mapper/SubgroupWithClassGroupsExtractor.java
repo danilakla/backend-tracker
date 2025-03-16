@@ -1,6 +1,6 @@
 package com.example.backendtracker.domain.repositories.mapper;
 
-import com.example.backendtracker.entities.dean.dto.    ClassGroupInfoDean;
+import com.example.backendtracker.entities.dean.dto.ClassGroupInfoDean;
 import com.example.backendtracker.entities.dean.dto.SubgroupWithClassGroups;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -28,6 +28,7 @@ public class SubgroupWithClassGroupsExtractor implements ResultSetExtractor<List
                 subgroup = new SubgroupWithClassGroups();
                 subgroup.setIdSubgroup(idSubgroup);
                 subgroup.setSubgroupNumber(rs.getString("subgroup_number"));
+                subgroup.setAdmissionDate(rs.getDate("admission_date").toLocalDate());
                 subgroup.setClassGroups(new ArrayList<>());
                 map.put(idSubgroup, subgroup);
             }

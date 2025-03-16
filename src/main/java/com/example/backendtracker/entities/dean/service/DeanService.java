@@ -487,6 +487,7 @@ public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId)
             SELECT 
                 s.id_subgroup,
                 s.subgroup_number,
+                s.admission_date,
                 cgts.id_class_group,
                 cgts.id_class_hold,
                 cg.description,
