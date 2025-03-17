@@ -26,7 +26,6 @@ public class StudentGeneratorController {
     @PostMapping("generate-student")
     public ResponseEntity<?> registerUser(@RequestBody List<StudentExcelDto> userRegistrationRequest, @AuthenticationPrincipal UserDetails userDetails) throws MessagingException, IOException {
         Integer accountId = accountInformationRetriever.getAccountId(userDetails);
-        studentGeneratorService.generateStudents(userRegistrationRequest, userDetails.getUsername(), accountId);
-        return ResponseEntity.status(201).build();
+        return  studentGeneratorService.generateStudents(userRegistrationRequest, userDetails.getUsername(), accountId);
     }
 }
