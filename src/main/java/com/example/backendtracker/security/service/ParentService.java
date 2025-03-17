@@ -18,8 +18,8 @@ public class ParentService {
 
 
     public String getLoginForParentToken(ParentToken parentToken) {
-        Student student = studentRepository.findStudentByKeyStudentParents(parentToken.token()).orElseThrow(() -> new BadRequestException("wrong parents key, review it"));
-        UserAccount userAccount = userAccountRepository.findById(student.getIdAccount()).orElseThrow(() -> new BadRequestException("wrong account, review it"));
+        Student student = studentRepository.findStudentByKeyStudentParents(parentToken.token()).orElseThrow(() -> new BadRequestException("Некорректный ключ родителя,"));
+        UserAccount userAccount = userAccountRepository.findById(student.getIdAccount()).orElseThrow(() -> new BadRequestException("Некорректный ключ родителя"));
         return userAccount.getLogin();
     }
 }
