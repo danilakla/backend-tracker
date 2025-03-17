@@ -44,7 +44,7 @@ public class AESUtil implements SecretDataUtil {
             return new String(decryptedBytes);
         } catch (Exception e) {
             log.debug(e.getMessage());
-            throw new InvalidEncryptedDataException("Please, could you check the secure key");
+            throw new InvalidEncryptedDataException("Некорректный ключ");
         }
 
     }
