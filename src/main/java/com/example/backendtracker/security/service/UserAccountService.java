@@ -15,6 +15,7 @@ import com.example.backendtracker.security.util.PasswordGenerator;
 import com.example.backendtracker.security.util.UserPasswordManager;
 import com.example.backendtracker.util.PersonAccountManager;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,24 +33,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class UserAccountService {
-
-
     private final JwtService jwtService;
     private final UserAccountRepository userAccountRepository;
     private final RoleService roleService;
-
     private final UserPasswordManager userPasswordManager;
     private final AuthenticationManager authenticationManager;
     private final JdbcTemplate jdbcTemplate;
     private final ParentService parentService;
-
     private final UserServiceFactory userServiceFactory;
 
     @Value("${encryption.admin}")
-    private String adminKey;
+    private  String adminKey;
+
 
     public String authenticateUser(AuthenticationRequestDTO authenticationRequest) {
 
@@ -110,7 +108,7 @@ public class UserAccountService {
                 userAccount = new UserAccount(null,
                         userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
 
-            }else {
+            } else {
                 throw new BadRequestException("укажите верный ключ админа");
             }
         }

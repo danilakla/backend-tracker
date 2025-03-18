@@ -65,7 +65,6 @@ public class CommonService {
                 );
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("d");
             }
 
         }
@@ -91,7 +90,6 @@ public class CommonService {
                 );
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("d");
             }
 
         }
@@ -123,7 +121,6 @@ public class CommonService {
                 );
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("d");
             }
 
         }
@@ -149,7 +146,6 @@ public class CommonService {
                 );
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("d");
             }
 
         }
