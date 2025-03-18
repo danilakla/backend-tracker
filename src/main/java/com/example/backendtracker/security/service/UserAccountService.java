@@ -15,6 +15,7 @@ import com.example.backendtracker.security.util.PasswordGenerator;
 import com.example.backendtracker.security.util.UserPasswordManager;
 import com.example.backendtracker.util.PersonAccountManager;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -42,11 +43,13 @@ public class UserAccountService {
 
     private final UserPasswordManager userPasswordManager;
     private final AuthenticationManager authenticationManager;
-    private final PersonAccountManager personAccountManager;
     private final JdbcTemplate jdbcTemplate;
     private final ParentService parentService;
 
     private final UserServiceFactory userServiceFactory;
+
+    @Value("${encryption.admin}")
+    private String adminKey;
 
     public String authenticateUser(AuthenticationRequestDTO authenticationRequest) {
 
@@ -97,8 +100,20 @@ public class UserAccountService {
 
     public Integer createUserAccount(UserRegistrationRequestDTO userRegistrationRequest) {
         Integer roleId = roleService.getRoleIdByRoleName(userRegistrationRequest.role());
-        UserAccount userAccount = new UserAccount(null,
-                userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
+        UserAccount userAccount = null;
+        if (!userRegistrationRequest.role().toUpperCase().equals("ADMIN")) {
+            userAccount = new UserAccount(null,
+                    userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
+
+        } else {
+            if (userRegistrationRequest.adminKey().equals(this.adminKey)) {
+                userAccount = new UserAccount(null,
+                        userRegistrationRequest.login(), userPasswordManager.encode(userRegistrationRequest.password()), roleId);
+
+            }else {
+                throw new BadRequestException("укажите верный ключ админа");
+            }
+        }
 
         return userAccountRepository.save(userAccount).getIdAccount();
     }

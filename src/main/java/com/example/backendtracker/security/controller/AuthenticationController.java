@@ -8,6 +8,7 @@ import com.example.backendtracker.security.exception.InvalidEncryptedDataExcepti
 import com.example.backendtracker.security.util.JwtService;
 import com.example.backendtracker.security.service.UserAccountService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
 
 @AllArgsConstructor
 @RestController
@@ -30,6 +33,21 @@ public class AuthenticationController {
 
         String jwtAccessToken = userService.authenticateUser(authenticationRequest);
         return ResponseEntity.ok(new AuthenticationResponseDTO(jwtAccessToken));
+    }
+
+    @Data
+    public static class TimeResponse {
+        private final String currentTime;
+
+        public TimeResponse(String currentTime) {
+            this.currentTime = currentTime;
+        }
+
+    }
+
+    @GetMapping("/time")
+    public TimeResponse getCurrentTime() {
+        return new TimeResponse(Instant.now().toString());
     }
 
     @PostMapping("/authenticate/parent")

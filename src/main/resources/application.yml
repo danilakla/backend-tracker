@@ -52,3 +52,4 @@ springdoc:
 encryption:
   key: ${ENCRYPTION_KEY}
   algorithm: AES
+  admin: ${ADMIN_KEY}
