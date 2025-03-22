@@ -60,7 +60,7 @@ public class EmailService {
             ByteArrayOutputStream zipStream = new ByteArrayOutputStream();
             try (ZipOutputStream zipOutputStream = new ZipOutputStream(zipStream)) {
                 for (int i = 0; i < result.size(); i++) {
-                    String fileName = "Course_" + (i + 1) + "_" + ".xlsx";
+                    String fileName = "Course_" + (i + 1) + ".xlsx";
                     ZipEntry zipEntry = new ZipEntry(fileName);
                     zipOutputStream.putNextEntry(zipEntry);
 

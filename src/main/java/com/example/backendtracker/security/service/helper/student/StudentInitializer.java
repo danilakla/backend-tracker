@@ -48,6 +48,23 @@ public class StudentInitializer {
         return specialties.stream().collect(Collectors.toMap(Specialty::getName, Specialty::getIdSpecialty));
     }
 
+    public List<StudentResultDto> initStudent(List<StudentExcelDto> studentExcelDtos, Integer idDean) {
+        try {
+
+            // Step 1: Group students by group and specialty
+            Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos, idDean);
+
+            // Step 2: Batch insert subgroups and collect generated subgroup IDs
+            List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);
+
+            // Step 3: Batch insert students with their corresponding account IDs
+            return batchInsertStudents(map, subgroupIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
     public Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> convertListToMapWithCredentials(List<StudentExcelDto> students, Integer deanId) throws BadRequestException {
         // Собираем уникальные названия специальностей
         List<String> specialtyNames = students.stream()
@@ -66,25 +83,8 @@ public class StudentInitializer {
                                 .studentExcelDto(student).build()
                 )
                 .collect(Collectors.groupingBy(
-                        student -> new GroupAndSpecialtyKey(student.studentExcelDto().numberOfGroup(), specialtyIdMap.get(student.studentExcelDto().specialty()))
+                        student -> new GroupAndSpecialtyKey(student.studentExcelDto().numberOfGroup(), specialtyIdMap.get(student.studentExcelDto().specialty()), student.studentExcelDto().date())
                 ));
-    }
-
-    public List<StudentResultDto> initStudent(List<StudentExcelDto> studentExcelDtos, Integer idDean) {
-        try {
-
-            // Step 1: Group students by group and specialty
-            Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map = convertListToMapWithCredentials(studentExcelDtos, idDean);
-
-            // Step 2: Batch insert subgroups and collect generated subgroup IDs
-            List<Integer> subgroupIds = batchInsertSubgroups(map, idDean);
-
-            // Step 3: Batch insert students with their corresponding account IDs
-            return batchInsertStudents(map, subgroupIds);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
     }
 
     private List<Integer> batchInsertSubgroups(Map<GroupAndSpecialtyKey, List<StudentWithCredentials>> map, Integer idDean) {
@@ -99,7 +99,7 @@ public class StudentInitializer {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         GroupAndSpecialtyKey key = groupKeys.get(i);
-                        ps.setObject(1, LocalDate.now());
+                        ps.setObject(1, key.getDate());
                         ps.setInt(2, idDean);
                         ps.setInt(3, key.getIdSpecialty());
                         ps.setString(4, key.getNumberOfGroup());

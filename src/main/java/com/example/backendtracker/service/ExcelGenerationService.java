@@ -34,6 +34,7 @@ public class ExcelGenerationService {
                 "FROM Subgroups " +
                 "WHERE id_dean = ?";
         List<Integer> years = jdbcTemplate.queryForList(sqlYears, Integer.class, deanId);
+        years.sort(Collections.reverseOrder());
 
         for (Integer year : years) {
             Workbook workbook = new XSSFWorkbook();
@@ -65,7 +66,7 @@ public class ExcelGenerationService {
 
                 // Construct sheet name with subject, format, teacher, and subgroup number
                 String sheetName = sanitizeSheetName(
-                        subjectName + "_" + formatName + "_" + subgroupNumber
+                        subjectName + "_" + formatName + "_" + subgroupNumber+"_id"+classHold
                 );
 
                 // Find subgroups and students, filtered by dean (ensure unique subgroups)

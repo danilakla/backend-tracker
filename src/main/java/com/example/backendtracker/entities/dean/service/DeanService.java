@@ -377,7 +377,7 @@ public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId)
         Subject subject = getSubject(createSubjectToTeacherWithFormat.subjectId(), deanId);
         ClassFormat classFormat = getClassFormat(createSubjectToTeacherWithFormat.formatClassId(), deanId);
         Teacher teacher = teacherRepository.findByIdUniversityAndIdTeacher(universityId, createSubjectToTeacherWithFormat.teacherId()).orElseThrow(() -> new BadRequestException("there's no teacher with the following id"));
-        classGroupRepository.findByIdTeacherAndIdClassFormatAndAndIdSubject(teacher.getIdTeacher(), classFormat.getIdClassFormat(), subject.getIdSubject()).ifPresent((e) -> new BadRequestException("the subject already assing to the following teacher with the class format"));
+//        classGroupRepository.findByIdTeacherAndIdClassFormatAndAndIdSubject(teacher.getIdTeacher(), classFormat.getIdClassFormat(), subject.getIdSubject()).ifPresent((e) -> new BadRequestException("the subject already assing to the following teacher with the class format"));
         return classGroupRepository.save(ClassGroup
                 .builder()
                 .idTeacher(teacher.getIdTeacher())

@@ -1,7 +1,9 @@
 package com.example.backendtracker.security.service.helper.student;
 
 import lombok.Data;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Data
@@ -9,10 +11,12 @@ class GroupAndSpecialtyKey {
     // Геттеры, equals и hashCode
     private String numberOfGroup;
     private int idSpecialty;
+    private LocalDate date;
 
-    public GroupAndSpecialtyKey(String numberOfGroup, int idSpecialty) {
+    public GroupAndSpecialtyKey(String numberOfGroup, int idSpecialty, LocalDate date) {
         this.numberOfGroup = numberOfGroup;
         this.idSpecialty = idSpecialty;
+        this.date = date;
     }
 
     @Override
