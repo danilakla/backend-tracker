@@ -66,7 +66,7 @@ public class ExcelGenerationService {
 
                 // Construct sheet name with subject, format, teacher, and subgroup number
                 String sheetName = sanitizeSheetName(
-                        subjectName + "_" + formatName + "_" + subgroupNumber+"_id"+classHold
+                        subjectName + "_" + formatName + "_" + subgroupNumber + "_id" + classHold
                 );
 
                 // Find subgroups and students, filtered by dean (ensure unique subgroups)
@@ -109,9 +109,13 @@ public class ExcelGenerationService {
                 headers.add("Имя студента"); // "Student Name" in Russian
                 Set<String> uniqueClassNames = new HashSet<>(); // Prevent duplicates
                 for (Classes cls : classes) {
-                    String className = "(Classes)" + " id: " + cls.getIdClass() + "name: " + cls.getClassName() == null ? "Default" : cls.getClassName();
+                    String className;
                     if (cls.getIsAttestation()) {
-                        className = "(Attestation) Id:" + cls.getIdClass();
+
+                        className = "(Attestation) Id: " + cls.getIdClass()+" date-"+cls.getDateCreation();
+                    } else {
+                        className = "date: "+cls.getDateCreation() + " class:" + " id: " + cls.getIdClass() + ", name: " + (cls.getClassName() == null || cls.getClassName() == "" ? "Default" : cls.getClassName());
+
                     }
                     if (uniqueClassNames.add(className)) { // Only add if not already present
                         headers.add(className);
