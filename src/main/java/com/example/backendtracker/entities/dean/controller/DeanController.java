@@ -307,5 +307,10 @@ public class DeanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(deanService.updateStudentInfo(userInfo, id));
     }
 
+    @PutMapping("reassign/students")
+    @ResponseStatus(HttpStatus.OK)
+    public void reassignStudents(@RequestBody ReassignStudentsToNewGroup reassignStudentsToNewGroup) {
+        deanService.reassignStudents(reassignStudentsToNewGroup);
+    }
 
 }

@@ -24,9 +24,9 @@ jwt:
   expirationMs: 100000000
 logging:
   level:
-#    org.springframework.data.jdbc: debug
-#    org.springframework.jdbc: debug
-#    org.springframework.security: trace
+    #    org.springframework.data.jdbc: debug
+    #    org.springframework.jdbc: debug
+    #    org.springframework.security: trace
     org.springframework.data.redis: trace
 springdoc:
   swagger-ui:

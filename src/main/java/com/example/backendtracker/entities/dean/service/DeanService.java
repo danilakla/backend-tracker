@@ -122,7 +122,7 @@ public class DeanService {
 
     }
 
-//    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Long deanId) {
+    //    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Long deanId) {
 //        List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
 //
 //        // Group students by subgroup
@@ -144,52 +144,52 @@ public class DeanService {
 //
 //        return new ArrayList<>(groupedResults.values());
 //    }
-public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId) {
-    List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
+    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId) {
+        List<StudentDTO> students = deanRepository.findAllNotAttestedStudentWhoHasMoreThen2NotAttestationByDeanId(deanId);
 
-    Map<Integer, GroupedResultDTO> groupedResults = new HashMap<>();
-    for (StudentDTO incomingStudent : students) {
-        Integer subgroupId = incomingStudent.getSubgroup().getId();
-        GroupedResultDTO group = groupedResults.computeIfAbsent(subgroupId, k ->
-                new GroupedResultDTO(incomingStudent.getSubgroup(), new ArrayList<>())
-        );
+        Map<Integer, GroupedResultDTO> groupedResults = new HashMap<>();
+        for (StudentDTO incomingStudent : students) {
+            Integer subgroupId = incomingStudent.getSubgroup().getId();
+            GroupedResultDTO group = groupedResults.computeIfAbsent(subgroupId, k ->
+                    new GroupedResultDTO(incomingStudent.getSubgroup(), new ArrayList<>())
+            );
 
-        List<ClassGroupDTO> incomingClassGroups = incomingStudent.getClassGroups() != null
-                ? incomingStudent.getClassGroups()
-                : new ArrayList<>();
+            List<ClassGroupDTO> incomingClassGroups = incomingStudent.getClassGroups() != null
+                    ? incomingStudent.getClassGroups()
+                    : new ArrayList<>();
 
-        group.getStudents().stream()
-                .filter(s -> s.getId().equals(incomingStudent.getId()))
-                .findFirst()
-                .ifPresentOrElse(
-                        existingStudent -> {
-                            // Merge class groups
-                            incomingClassGroups.forEach(newCg -> {
-                                if (!existingStudent.getClassGroups().contains(newCg)) {
-                                    existingStudent.getClassGroups().add(newCg);
-                                }
-                            });
+            group.getStudents().stream()
+                    .filter(s -> s.getId().equals(incomingStudent.getId()))
+                    .findFirst()
+                    .ifPresentOrElse(
+                            existingStudent -> {
+                                // Merge class groups
+                                incomingClassGroups.forEach(newCg -> {
+                                    if (!existingStudent.getClassGroups().contains(newCg)) {
+                                        existingStudent.getClassGroups().add(newCg);
+                                    }
+                                });
 
-                            // Sum unattested counts
-                            existingStudent.setUnattestedCount(
-                                    existingStudent.getUnattestedCount() +
-                                            incomingStudent.getUnattestedCount()
-                            );
-                        },
-                        () -> {
-                            // Add new student with initialized data
-                            StudentDTO newStudent = new StudentDTO();
-                            newStudent.setId(incomingStudent.getId());
-                            newStudent.setName(incomingStudent.getName());
-                            newStudent.setSubgroup(incomingStudent.getSubgroup());
-                            newStudent.getClassGroups().addAll(incomingClassGroups);
-                            newStudent.setUnattestedCount(incomingStudent.getUnattestedCount());
-                            group.getStudents().add(newStudent);
-                        }
-                );
+                                // Sum unattested counts
+                                existingStudent.setUnattestedCount(
+                                        existingStudent.getUnattestedCount() +
+                                                incomingStudent.getUnattestedCount()
+                                );
+                            },
+                            () -> {
+                                // Add new student with initialized data
+                                StudentDTO newStudent = new StudentDTO();
+                                newStudent.setId(incomingStudent.getId());
+                                newStudent.setName(incomingStudent.getName());
+                                newStudent.setSubgroup(incomingStudent.getSubgroup());
+                                newStudent.getClassGroups().addAll(incomingClassGroups);
+                                newStudent.setUnattestedCount(incomingStudent.getUnattestedCount());
+                                group.getStudents().add(newStudent);
+                            }
+                    );
+        }
+        return new ArrayList<>(groupedResults.values());
     }
-    return new ArrayList<>(groupedResults.values());
-}
 //
 //    public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Long deanId) {
 //        // Fetch all students who meet the criteria
@@ -399,7 +399,7 @@ public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId)
             if (assignGroupsToClass.isMany()) {
 
 
-                    List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
+                List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
                 Integer classGroupsHoldId;
                 if (classGroups.isEmpty()) {
                     classGroupsHoldId = classGroupsHoldRepository.save(ClassGroupsHold.builder().hasApplyAttestation(assignGroupsToClass.hasApplyAttestation()).build()).getIdClassHold();
@@ -482,35 +482,40 @@ public List<GroupedResultDTO> findStudentsByDeanWithAttestations(Integer deanId)
 
     }
 
+    @Transactional
+    public void reassignStudents(ReassignStudentsToNewGroup reassignStudentsToNewGroup) {
+        studentRepository.reassignStudents(reassignStudentsToNewGroup.getSubgroupId(), reassignStudentsToNewGroup.getStudentsId().stream().toList());
+    }
+
     public List<SubgroupWithClassGroups> findSubgroupsWithClassGroupsByDeanId(Integer deanId) {
         String sql = """
-            SELECT 
-                s.id_subgroup,
-                s.subgroup_number,
-                s.admission_date,
-                cgts.id_class_group,
-                cgts.id_class_hold,
-                cg.description,
-                sub.name AS subject_name,
-                cf.format_name,
-                t.flp_name AS teacher_name
-            FROM 
-                Subgroups s
-            LEFT JOIN 
-                ClassGroupsToSubgroups cgts ON s.id_subgroup = cgts.id_subgroup
-            LEFT JOIN 
-                ClassGroups cg ON cgts.id_class_group = cg.id_class_group
-            LEFT JOIN 
-                Subjects sub ON cg.id_subject = sub.id_subject
-            LEFT JOIN 
-                ClassFormats cf ON cg.id_class_format = cf.id_class_format
-            LEFT JOIN 
-                Teachers t ON cg.id_teacher = t.id_teacher
-            WHERE 
-                s.id_dean = ?
-            ORDER BY 
-                s.id_subgroup, cgts.id_class_group
-            """;
+                SELECT 
+                    s.id_subgroup,
+                    s.subgroup_number,
+                    s.admission_date,
+                    cgts.id_class_group,
+                    cgts.id_class_hold,
+                    cg.description,
+                    sub.name AS subject_name,
+                    cf.format_name,
+                    t.flp_name AS teacher_name
+                FROM 
+                    Subgroups s
+                LEFT JOIN 
+                    ClassGroupsToSubgroups cgts ON s.id_subgroup = cgts.id_subgroup
+                LEFT JOIN 
+                    ClassGroups cg ON cgts.id_class_group = cg.id_class_group
+                LEFT JOIN 
+                    Subjects sub ON cg.id_subject = sub.id_subject
+                LEFT JOIN 
+                    ClassFormats cf ON cg.id_class_format = cf.id_class_format
+                LEFT JOIN 
+                    Teachers t ON cg.id_teacher = t.id_teacher
+                WHERE 
+                    s.id_dean = ?
+                ORDER BY 
+                    s.id_subgroup, cgts.id_class_group
+                """;
 
         return jdbcTemplate.query(sql, new SubgroupWithClassGroupsExtractor(), deanId);
     }

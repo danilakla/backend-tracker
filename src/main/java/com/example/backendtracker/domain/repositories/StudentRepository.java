@@ -5,6 +5,7 @@ import com.example.backendtracker.domain.models.Student;
 import com.example.backendtracker.domain.models.UserRole;
 import com.example.backendtracker.domain.repositories.mapper.StudentWithLogin;
 import com.example.backendtracker.domain.repositories.mapper.StudentWithLoginMapper;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.data.repository.CrudRepository;
@@ -40,6 +41,9 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
     List<StudentWithLogin> findAllByIdSubgroupWithLogin(Integer idSubgroup);
 
     List<Student> findAllByIdSubgroupIn(List<Integer> idSubgroup);
+    @Modifying
+    @Query("UPDATE students SET id_subgroup = :idSubgroup WHERE id_student in (:studentsId)")
+    void reassignStudents(@Param("idSubgroup") Integer idSubgroup, @Param("studentsId") List<Integer> studentsId);
 
     void deleteByIdAccount(Integer idAccount);
 }

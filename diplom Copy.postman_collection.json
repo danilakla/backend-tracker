@@ -96,7 +96,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzM4ODUzOTUyLCJleHAiOjE3Mzg5NTM5NTJ9.vPubCCgLzXjklrO8q3VHiyaCD5bVdk8Cejjw8Ftit74",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzQwOTI1NjA1LCJleHAiOjE3NDEwMjU2MDV9.Y4pS_Igt9tb2gvbkHTopZWKsR8b2mVRxVK5eYO6sjC8",
 										"type": "text"
 									}
 								],
@@ -135,7 +135,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzMwMTM4NTU1LCJleHAiOjE3MzAyMzg1NTV9.dhZAhlm4OKBMco79ONVpZOmRojEoA9nz9knlyzIFEfA",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6ImFkbWluQGdtYWlsLnJ1IiwiaWF0IjoxNzQwOTI1NjA1LCJleHAiOjE3NDEwMjU2MDV9.Y4pS_Igt9tb2gvbkHTopZWKsR8b2mVRxVK5eYO6sjC8",
 										"type": "text"
 									}
 								],
@@ -882,13 +882,13 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczODg1NDA0OSwiZXhwIjoxNzM4OTU0MDQ5fQ.evKPsKPn7k1J_TV3qp7C0Km7ecHOb6QjQMf7JigBmPQ",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBtYWlsLnJ1IiwiaWF0IjoxNzQyNjM2NDM2LCJleHAiOjE3NDI3MzY0MzZ9.ysZEteJylQaHJlUhunezOrOTATMEV1YKNhW9wGrLbZw",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\r\n      {\r\n        \"name\": \"Данила\",\r\n        \"lastname\": \"Картузов\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"test\"\r\n    },\r\n       {\r\n        \"name\": \"Влад\",\r\n        \"lastname\": \"Вакуленчик\",\r\n        \"surname\": \"Александрович\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"test\"\r\n    },\r\n    {\r\n        \"name\": \"Никита\",\r\n        \"lastname\": \"Шумский\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.2\",\r\n        \"specialty\": \"test\"\r\n    },\r\n\r\n      {\r\n        \"name\": \"Александр\",\r\n        \"lastname\": \"Бекишь\",\r\n        \"surname\": \"Андреевич\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"test\"\r\n    },\r\n        {\r\n        \"name\": \"Артем\",\r\n        \"lastname\": \"Абрамович\",\r\n        \"surname\": \"Пермедов\",\r\n        \"numberOfGroup\": \"2.1\",\r\n        \"specialty\": \"test\"\r\n    },\r\n    {\r\n        \"name\": \"Арсений\",\r\n        \"lastname\": \"Шилов\",\r\n        \"surname\": \"Тихон\",\r\n        \"numberOfGroup\": \"6.1\",\r\n        \"specialty\": \"test\"\r\n    }\r\n]",
+									"raw": "[\r\n      {\r\n        \"name\": \"aaДанила\",\r\n        \"lastname\": \"Картузов_3\",\r\n        \"surname\": \"Александрович_3\",\r\n        \"numberOfGroup\": \"3.2\",\r\n        \"specialty\": \"test\",\r\n        \"date\": \"2024-08-31\"\r\n    },\r\n       {\r\n        \"name\": \"aaВладaa\",\r\n        \"lastname\": \"aВакуленчик\",\r\n        \"surname\": \"aАлександрович\",\r\n        \"numberOfGroup\": \"4.1\",\r\n        \"specialty\": \"test\",\r\n                \"date\": \"2023-08-31\"\r\n\r\n    },\r\n    {\r\n        \"name\": \"aНикитаe\",\r\n        \"lastname\": \"aШумский\",\r\n        \"surname\": \"aАндреевич\",\r\n        \"numberOfGroup\": \"3.2\",\r\n        \"specialty\": \"test\",\r\n                \"date\": \"2024-08-31\"\r\n\r\n    },\r\n\r\n      {\r\n        \"name\": \"aАлександр\",\r\n        \"lastname\": \"aБекишь\",\r\n        \"surname\": \"aАндреевич\",\r\n        \"numberOfGroup\": \"3.1\",\r\n        \"specialty\": \"test\",\r\n                        \"date\": \"2022-08-31\"\r\n\r\n    },\r\n        {\r\n        \"name\": \"aАртем\",\r\n        \"lastname\": \"aАбрамович\",\r\n        \"surname\": \"aПермедов\",\r\n        \"numberOfGroup\": \"4.1\",\r\n        \"specialty\": \"test\",\r\n                        \"date\": \"2023-08-31\"\r\n\r\n    },\r\n    {\r\n        \"name\": \"aАрсений\",\r\n        \"lastname\": \"aШилов\",\r\n        \"surname\": \"aТaихон\",\r\n        \"numberOfGroup\": \"3.1\",\r\n        \"specialty\": \"test\",\r\n                                \"date\": \"2022-08-31\"\r\n\r\n    }\r\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -896,10 +896,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/dean/generate-student",
+									"raw": "http://tracker.belstu.by:8080/dean/generate-student",
 									"protocol": "http",
 									"host": [
-										"localhost"
+										"tracker",
+										"belstu",
+										"by"
 									],
 									"port": "8080",
 									"path": [
@@ -3533,9 +3535,254 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "generate excel with course info",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoidGVzdC5kZWFuQGdtYWlsLmNvbSIsImlhdCI6MTc0MjIzNzkyOCwiZXhwIjoxNzQyMzM3OTI4fQ.3ePNCk1kBsG0d_-KpsbYkWBbX9oKLRWkLhf_qDdnPeY",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://tracker.belstu.by:8080/dean/generate/info/course",
+									"protocol": "http",
+									"host": [
+										"tracker",
+										"belstu",
+										"by"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"generate",
+										"info",
+										"course"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "raw",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=\"course_info_results.zip\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/octet-stream"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3509"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 17 Mar 2025 18:59:16 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "PK\u0003\u0004\u0014\u0000\b\b\b\u0000h�qZ\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u000e\u0000\u0000\u0000Course_1_.xlsx}W\t8Tm\u001b\u001eF�� 3Y�셯\u000f}d\u001b2�2�X\"��!c��g\u001a{\"\u001a��^�Z�]���(���ƒ5\u0013\"�~��������s�s�s]�~����}��~�P@:\u0018���\u0001�y�j\u000280�{�\u001a\u000e�a�����w�u7\u0013�vv*7��6I�~{�1\"&��gx<P���=\u001dhJ���U�y\u0006u�\f$\u0017�\u001f��j}��цM�k���*ԧ�ͧE�*���\t�=k�@�jE2Gq+J�A2):��\f�.緇|�o\u0007��}y/���\b�\u000f��ɱ^�\u0018� \ng�|ܗ��hG�z�~G��no׃���O�Z��6LDl�~X��f�\u0017��3E@\u0010\u0001�9������Bn՘0)�H�I�x'�QYo�F ��L^������{�%�����[�\nl��\u000f��AY[��y���6��v|λN\u0004g���w\u0017'��\t:�~���>�qi��;�3�8�\u001du\u0002�~�����A��/�����+��\u0018\u000b_�\u0015\u0017�۽\u000f\u0004�\u0006\u001a=\u0014��v|�+�\u0006\u0000�\u0003\u0000��/�L{�����]B|�Z\u0010���,y4ĢunRnْx�2�9g�'\u001a��H���7��]��u\u0014#�����\u000fP��r(����ǁ�\u0003A����Qn�\u000bJ�>!�7ιP��\u0005��*}3������L1\u0001v�\u001d����@ZR\b��ͼ\u001c(�d��L��F��3��.}��P\u001fW�f%�g��8��3���>V�R�\u000b\"�.6�g\n�H�N\u0016@u��D@�Rɖ��\u0013�Ԉ6z��\u0016�\u001e\u001e�Vl����o*Um,Y�:��4\u0012�\t\u0004+��e�3̗����s�K�]7��9��wܰ�M\u001b���\u001b��]���e_�ڑ��{�����Q7��r�?>��ᒊ2_ָL��j�%�w��Sdɨ���\b�\u001aD�ۑ\b��\f1r��\u0005ޑ\u0005!x��\u001a�1(���#R�f\u0015i\u0017�ı~z�6�\u0004͏o\u0016��j����`iq*�C���ˈ\u0018\r��_�\\*��4��p�&4\r�o�x\u0007����Ǽ\r�O�ϭј���\u0004�.�c\u0007ӱƹ����\u001cm�j�������KH&�p�a�L\u001fDy\u0019F1ӊt.��\u000b��N\u0018P�#�\u0016r�bj��F^��ɴ��Bp�[l:��FuAg�U\u0002V�\u0002\u001c�eѰ�.�\u001f�a#��\\V��\u001c�ב����\u0005H� [��Gދ�\u0002\u0019�_o�R��͘H��&\u0005`�z����Sr�Aq\r7�K�\"�)�7\u0003a\u0001@��F`�ȷ\"���\u001f��N�S�\rzSr7���]\u0005\u0019u+e7�V��>g\u0012��ԗ�\u0010\r�G�Vւ�:��x�ј�����\t�J�^��4�j���#߄�)p����*�7n�@+\u0015������}\u0012a�\u001a��{�K\u0011��H��Mo'\tw��������=��}��\u001eC\u0015�q\u0004l�=�o���J��[�z�C\u00003�����e�)�\u00161��'�a�\u0011*�� ��\t\u0011zбMF�Ho(���J�W��a�L��w��\u0015_�*�:+�\u0015E��d�*E�\u001c\u0003�EҀ�ڗ�M�U|����k=�r�I\u0012\u001c�rá�[��\"�r���]����؜0����\u0002\u001f+� 87v���\u000b'Y�>���jLr�\u001dΡ��O��)�\u0019bv-�\u0013��N��N��8�tN@N�f}!>�P��G&\u00164mM��1��&��FO$��wȈ�\u001cL=��{�\u0007�)�!���oE/�\u001d_E�ݟ\u0016���!���y��\u0019E\u0014\u0017�����t.\u0007F\u0013��)\u001d&�ɐ'�\u0014a7�O������נ>=K��S�G�Ѓ�J\u0019+�؀�F��\u0017�Pi����|B��-ڹ˗�|O��<��w\u000b�\n�z�,L�8C�N��kCoBf�WT�(o[\u0017X�}�\\��m��Y��Q9:96��,4��\u0007,b&C�Դ�կ\u001f�?��/\u00101 C52�\n*��\u000esON�Fڰ�2�%�T�։�\u0000�|6%WK��RDe�U��q���.��)���\u0014׾T�H�/�ߓI\u000e�wR��W*\u001ex'۟\u001aYN(�i�d\r���iUg�\u001dl(�\u0004e\t̲�\ri�����t�\u0014RT�J%I�76����n���ƟȊ�\u0007Bv�W1�y��,���\u0007/O�J�N,�`類�U�ꏸ�p�Ζy\u0016\u0012,ɤ?E�\u001c���3�2�����4\u001a�1K�؂�nB�\u000b����>|��\u0017��NB�q��(�>\u0011X�.��x\u001d�ɚ}6�\rk��u�\u0019\u000f��4�a�\u0004\n��c�R\u0007�\"\u001f1M\u0007)]FŦ���5\u001c��yʵ\u0001\u0011�q{\u001a�\u000e�����S�C�!�\u001eך_G�\u000b<�/�D��V�\u000b\u000e\u0006[��\u0015�l�8=8N2Ӿy���)��d+�����\u0016a�c�XX���1���x'��K���\u0016��w�u��UK�����1J͓����m��,�\u0004��pz4\n�X�[\u0001���d����P����\u000f�4�GC\u0017��?�]��\r��b,�{K�\u000b�ݒ���d�pn�7p8��E�Щ�\u0001�c]�bt$P��\u00192ײU��Eh���.�<K]�sfs�\u0003�U\u0002\u0011������\u000f�2��q\"\bd��1�\u001e�\u001b����̵�\u00134�Wi�jc�l�hu�5�wz�+��<�bʡ��mLy���ԝZ�?}�e0��&���\u0006#�p<]MF�TF|� \u0015LQ��i��?:�l��\u0014˶�4���̎\\�k\u0016�mj\u001b�K�Ū�N�B\u0004�K�\u0004��٨�+\u001f�?N$�w*�2Ok!J�?+�\r�B�\u0012<Ϙ.?��^��.��=\u0017󐲘�i*�e>�|��uN�2BqsUy�~a\t�nf��{�cT��מ0T%JI�\u001f��'�P\"�\b�Gh�o�剿\t��a\u001c��o�\u0011����6\u0010?��|]�\u001b9\u001fc%�{\u0017�w\u0001��b\u0004�P;s\r�j��\u0011 ��\u0010�J`)��{\u0015�o\u0017\u0010��Sh��w$R\u0010�l��+�iyQI]�\\\u0006��(v��\u001c�@Y(�\u0018�\u001e-��d��\u0004\f����eU�W��\u0017K���P�o\f�'��^\u0005\b\u000f,e�)�2�N\u0002�\u0004���������_�p�[\u0014i���׎\u000f�\u001a�L^5\u0001w�xJ\u0015��M\u0005�<���=�aw��E^Ku�\u0000r�\u001c�G��Y�bc�i��\u0010 <fp/s���\u000b��掱��p��y;�Su\u000fPQ)������\u0015�(��՗\u000eFCO��<�V��К��Y\u0016�Y[\u0004q�#kL�R}�d��6Q8_Ы��$f��OYi��R�\rUc����Jlj��ye,=�\rf��\n�Xt�򕕮�A�b��R�����g\u0012wyJ�^F\u0011��ٿ�\u00054K��KNZ�\f9�ҟ練y�|f�Jd�%��WN7�9��N^�~Bo���%\u001c�y�#��b�\u0011��lf��m�w�y����\u0014x����c�:����W�\"\u0017u{+\u0017h\u0010�\t�����N~�!�|\u001d���Q[�ɽO�yM�+�I�\u0012T\u0003�.\u0001�u��d\u0003�'���ט\n�\u0006<�������Fc�&e�� 1d=:�:\fs�f\u0013\u0003o�!�'\u0005�q'�\u0007�P\u0002�%{��^���ϿI.,\u0017�\u0012\n�s�7�;0��fR�*��z�5_-kS\u001bꘌ�\u001c�qR2PK��fc�-�a��E7�h�A�v������\u000bȊO�b�YG���\u0011m�G�\u001f�t��8z����c7k���)�\u001e��\u0003�l�`�E6\n �\u001c-��9\u0019�ZF4�׽����U��A���\u001cn\u001al\u0012͟|=\u0014�O5\f��)��n�ք�˩�D?��\u0018$�\u001d\u0018#��e�\"��\u001d����S\u000e�Z�\u0018�\\\u0018^\u0006\u0004�Ŧ��uǆ4�]t���\u0011�R��\u001ef�\u0012�䠀$#b=����P\u001f��q�ž\n\r�\u001b\u0010{\n���R4�0�?:<�9�\u0002\u000e�ٌ\u001d\u000ep�A3�\u0002���eGq\u0018xЫ��\u0002L��_�}\u0018}Ф\u001d�\u0005m\u0007�\u0017w{\u0018~�q�~�?��w_w8��>\u0002�%�\b��v\u0018z�b��\u0002\rg���s\u0018|����\u0005<\u000e�]�=\u001c�(8�����ˑ\u001e�\b��;�Cy\u000f��3��\u0000PK\u0007\br�7v'\r\u0000\u0000�\u000f\u0000\u0000PK\u0001\u0002\u0014\u0000\u0014\u0000\b\b\b\u0000h�qZr�7v'\r\u0000\u0000�\u000f\u0000\u0000\u000e\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000Course_1_.xlsxPK\u0005\u0006\u0000\u0000\u0000\u0000\u0001\u0000\u0001\u0000<\u0000\u0000\u0000c\r\u0000\u0000\u0000\u0000"
+						},
+						{
+							"name": "generate excel with course info",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBtYWlsLnJ1IiwiaWF0IjoxNzQzMzIxMzUyLCJleHAiOjE3NDM0MjEzNTJ9.CsFdEcaIjoN61I7sb6h79iU8qgQC0rkZVWnwEwl2QAA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dean/generate/info/course",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dean",
+										"generate",
+										"info",
+										"course"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "raw",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=\"course_info_results.zip\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/octet-stream"
+								},
+								{
+									"key": "Content-Length",
+									"value": "13147"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 Mar 2025 09:46:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "PK\u0003\u0004\u0014\u0000\b\b\b\u0000�e~Z\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\r\u0000\u0000\u0000Course_1.xlsx}W\t8T�\u001f\u001eƾ��B\"�,q�{L��ɾ/\u0019��0&�\u0018D�ȾGW��-�$��!�d\t�\"-�R����G�������;�9�s��9��}���\u001eS\b��\u0003@CC\u0003\u0018�\f�\u0003\u001c8�I��\"\u0002�򄣜-��=\u0003\u001d�����,���2,;�=\u0013\u0012\nD�˜7.\nvs�\u0012�\u000e�T�M�G��\u001b��Ji�1t\u0001�ݯx]�^�x\u0012���\u000e{hGW�3�e\t�&,��'��k�\u0013�OM~�Z!ǘ�5��Yi7vM�����ڌ�w\u0016<�\b���\u0003�O�i>gUY�\u000b��4�{-?\u001dԋ2\u00123\u0019�K>��k+XѰ\u000b\u001a�r�<�n�R��S�X\u0015�\u001a;��y\u00182��Wɧ�\u001c#ǟ@���4T�\u0017�i�x�\t�\u0006��l�͋fcy��ng���\f>5ܺ��ơ��\u001e\u001b��\u0012���.I�9ס�ܳRb\u001fG��\u0012\u0010R��Τ%���Ya�\u0004��(�N�`_\u0013�|\n�$_�\b�����7m:vaت���\u0000���W�B��<�����&md�\u0010j����\u0000U2\u0000��\u0002\u00000�O��I�\u0019��\u0017(-��H��t�0`�;\u0017����ę�g^X��}%���7t�'Lf��\u000eH�C����E0{�#A���-fR��7��F\u0016@_m\u0011��k�?��ŉ_�\u000f�\u0012�\b��\u0014�\u0016����\u0005\u0012�\\�(p�D#�\u0006y\u0006��srQ�:�n�I���u�\"\f]�jBuOnl���R=���7��Yb�����\u00029�\u0015�m����\u0019L~�@=۞�,@�R�VP���܄��b�'�+6��\u0018E��R\u0007�F[��{�\b���\u0002 �\n�N�\u0013�b� \u0001C��Mq\\H�\u0007R����q�B\u001a\u001e\bwS$�?P���ߔF\tx:�)u�E� \u0011�!,��EB�b�!f��q�l#���|Nj�=��\u0015��\u001fzͲ�'Jқ\u001a��{��õ��E*}�\bE\u001f�)7�h�4�Y���\u0015��/q�\u001f\u001b\u0007,3Ί \u001a�\u0011o�\u0018\r�W&d^r#(>'��ıvK��0/�������\u0018��qí)�Z\"�G�\u0004�\u0017�\u0000�:�J��\u0006�q\u0005�\u001e,�\u001d��ܯ\b��\b����\u0019�`�#㌌�hq�v���{Gp\"�zK(&�'zTE�����ڽ�ٹ\u0012��\t�\u001b ky\b�hI�wȔ\u00151��h���\u0002�\u0001�W��Ә�\u0001��?\u001f�w\"�(��x~��1=\u001e\t�V�l/N\u001e�\r�5�ayTI)��\u001cʊ�\u001aϓ�\r� K������\u0016���6/9\u0002(�\u00121��r\u0007\u0015�oOUF�>���\u0013�!+�s�3����&LV�I�:�Q��?5\u001b\u0012-�r� \"���o˘�sl-\f���l�MN}��R�����\u0010�w\u0013;\";*|��]:*\"M�91���M��]�}\u0012S���S�VL\u0015�q$r��u?�@�+���\u0002��{\u0005�nWS\u0006|�\u001c�'~0u8՝h,�L��u�\t%�D���Z�\u001b0|�/R`ƒ͕/\\2��Y�!;��Zi�\u000e�\u0012&�[��d��\u0015\u00144\u0017�Vy~{�a[#�\u0004�\t�#Ϊ7���wuHKA�H�y\u0005�c�:m\u00195\u0006��%�\f�uȈ��F�0ŭ�\u000fd`�i��R��\u001b\u000e�\u0019ejL�:����\u00158�h�נ��5*�������_�򫖺\\E���i6S\u001ea���Mvj�d�%L\u001f�@5�G%]�\u0016��]g'.�y��r��=���k��PI��m.*���~���#�\u000b�\r�u��f}%Ѣ����\u001d�p\u001e\u0006FԵ3/ni�0\u000e'�'r�-�<p��A3\u0010�u%Z�[`[�m�B\u000b6���jD�Ek�W�\u0018���\u0014/�O��\u0004ܕ��\u0005�\u0011\u001e��\u001a�N�(�zO\tm�\rVό�xQ��\\PCp]����n�y�\u0013��\b���\b{W�t�ˤSm˚\u00006\u000ff_%�H֖��]\u0005RbeP\u001eݏ|�=��y����\u001b�������\u001c���r\u0000�\u00157�p��Y��\u0003�#�\u001d��|y�/��9��\u001c��\u0007���<I�%�ڸC�\u0005{Md\u001a���O.���\u0001�8�9��1#��[�\u0004�z\u00115��{\u0019\u0017N�{��n�_[��o]�\u0013\u0016�2�=��L6#��6p�\u0018��]�\u001b)�\u0016fZ�K�F˄���|\u0013�\t���k��\b�Ї=����u8xi[Je?v+?�v�\u0003�Ժ\u000b�}���\u0013\u0016�ͺV'g�kp�3O�E��#����Ef]l1�DSN��?8x��SM�����ە��-\u0017���8خ��̣����%��1�fXd��}:�\u0013FH:;�|���Q�=.��ú�U�^�A�K�C����Y����j֦�.U5�\u001f>\u0019u���\u0000E�\u0014Ȋ[�枴`�\u0012\u0015��S�.\u000f�����4[�l�7�Tf`4rm�\u0019}t\u001ee��E�I-~��\bo\b\u00168�6����#\u0016ΌY�}��k���xWc�+\u0004W�8�Y�m�w�W\u0003{~]\u001eN\u0012���8��\u000bu\r��uC |���O�ޗJo\u0003�\u0006��\u001e��2$n�HS��u\u000b��+�����\u0013oe2{8�XK�?�\bR*%?7|\u000e��\"�t.\n\u0012��\\�\u0005B̅�\u0012���\u001b��r\u001d;\n��{7�a\u0013�p�\u0001�\u0017�����k���6�\u0005A\u000b,��n��J���-�=˳W��B�n]�\u0017����`?Q��g��#��&�\u0010���\u0007�@��+�\u0012��I�G������M\u001b6���lf�u\u001d�6��h�]v~U�\u001c���{��\u0015Km?6~�.�\t�w�m7\u0010}�ɒy�\u0017~V9iŇG��){��;�\u001cn\u0011Nws�D\u000b��\u001e������� }�CB��/)$h��\u000ec\u0002F�܅pi����\u0000w�\u0000�0\u000fd{��~SǸ\u0016�*Q$n\u0019��x:l05�[�tjT�7^�2�4#�ӆ�↋����l>Ѝ\u0000\u001f�\u0014\\�)\u0012ok���\u0004.�����zI3z�\u001a\u0017�\u000e8}�eP��_\u0006N^~=�\n9\u0018!:�T\u0010Us�dV�4�\f���\u0012:lޏ+�iT�����\u001dư��\u000e\u0006\u001a�\u000fj��j�U�3���ģ�\u0007?��v�����:/-�ON�A�(���\u001a������\u0002U�_�*�;6\u0015p�m�@��'*P��M����\u001c\u00119�����\u0017M�Vg�{\u0000oJˊ\u0007>MY�\u0015�\rA3\u0000+Y�\u0013�\u001f�^9/k�uKg6�6�\u0013`\f�Sw��x���V�R](���i\u0004��\\[]\u0019%{{YP����E#�L\u000fy�T\u0000b\u0000\u0005�]�f1D|�(�-N7�q�����u��~�\u0005M�Е�x_\u0006m�\u0018��K7��\u0016�\u0010D\u001a��{�\u0007f]�\u0007U���yY��\f����\u0015Z�\u0012F�d\t�Rv3^pׯU�V�q�֩y鿚�\t�\u000f�J��f�v����\u0000�Ȗ��\u0003|��Yg�&�R\u0015�wl�-\n\f\u001c-��p��D��\u0001�r:Q/��I9*\n�z���\u001d7�S��A�RY��r�z\u000e\u0001KQ�*T�m���D�8�gRĳ5m\u00145\tM\u0005{�8����_*��ъ\u0012ġ\u0013q�)\u00158�p�ƨ<�\"�#k�#\u001c使c6��\\r\u000e��C\u001c�-ǡ~\u000e�-m�S\u0002������n��j?3�W|���J�\u00120@�)<u\f�,\"����\u000b�nźE�or�|��v\b=�퍵�\u001a�c����_��%-\b�_Q���\u0003��\u0007c4;���/�-G'8�5�\u000f�C�\u000ee������\u00100�����(�`�a=��\u0006�K\n<\n?�\u0013r\u001c�WR�{�9:��\u0016�xh�*�#��Q��&�|\bjK�~\u0014|p\u0015�\u001e\u0002��\u001e�Վ�s�\u0014܇\u0019���\u000e`\n�����tj����a��PK\u0007\b>,�xP\f\u0000\u0000�\u000e\u0000\u0000PK\u0003\u0004\u0014\u0000\b\b\b\u0000�e~Z\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\r\u0000\u0000\u0000Course_2.xlsx}Wy8�m����e\u001bd\u0017\u0006YB�)\"�e��}�}Ɩ�^ۨA�!�d)��{C\u0013e�!�D����Y\n�F��8>|���\u001c�����q_�u��}>\u0006ڤdLD\u0014\u0014\u0014D��QVD'.\u0010!�U`�@Wh��I��k��x��w�q?��$�Afτ��m\u0003S�h\u0015�n��mR��\f�=����][�\f��\u001e�ߦ�-�[�;.�~�V*ʠ�η\u0011]\"�\"�m�H1��p3�,;m��\u0001��\\=�)\n\u000bòn��k�@^�����h�\b���3�EU���\u001c}S\u0011&�\u0000���2t3VWH�/splv�]CZ�{r�C�{\r\u0013���R��I��\r8EE�Lj�\u000b\u000e�{R����\u001f.θ�����\u000f7�E�zΕƩ\u0018�=Yʾ�]\u001b\u001d9Ԣ�o*�Ȥ�\u0018��)�\u0017�I�)M�,֩��g��:���-�\u0005���\u0007���z��Q\tX��X�7��^�:\u0005d��^z��\u0016o�|�P���W�||Ǐu��$�\u0005�#\u001b���/��\u001d�\u0006�@�0d��\u001c1\u0011\u0011'\u0019\u0011���䞚\u0010����\u0001\u0012����t�g�$\r��\r~Ff�!ɰ��_x��Ub����S?�C\u0016�p@�Z��c�\"8�\u0017p$�F�&�P�qQ��јB��},G��|Ū\"3\u001a��U���3�)���)\u0014�.)\u0014�c!��h�h�F�d�Ao>,�\u0000�V8;�z��bi���-}�GRc\u0018�\u001e�&�ۯ?f�f\u000b\u001d\u000e�F8r�\"*�ST;(�^le�zۓ޴�i�&B-��\u0007�y�HM��,t��� �\u0014\u0019#��Zf#�j)Y�h\u0001�5�RHJ)�tPhG�Pǃ�$9�$)\f5K�\\��O��\u0013�\u0005�l�\u000f�\r�p��=\u0016��}4\u0015A��k1���aMa�i��\u0017b��(\u0016��st5�\u0016�s3�\u001e��6L�~�|y��|if[k\u001aI/\u001c���L��T�O\u000f&�����`�\u0004Ι\r\rl���$�|k\u001d0�\u0012\u0006Ú���$u��^�>Pw�J\u000f\u0012��\u00163t�DE\u001b�+�}c�ySy\u0017�T�\n5\u0007�B���\u001e\u0011\u001d\u0017t\u0015\u001a˛AXn3џ\nb8Y�3����\"��i�.Iz5{�o�y�c�\u0005+|}1O�?#��jt7b\u000fRU��Q\u001e������R\t��>���5��C�n\u001d�0�*'h�V�gg�[\u0012#O\u001c�;d܄��Cģ\u0005B\u001b<d\u0011訨_�\u0016.���^\f�^�.\u0010�N��y~\u0016I��([�܎��u� �W��Ȏ�g��]�=��\u001e\u0006�!�$�4,�宅��\\}b|�)Z��7���3�Y�\b�8AO�+���\u0011���\u0018=���ld���\u0019\u0001�#�؞�M\u000b\u001b����^˨�j>a�㼭���s\u0001�\u000e�ۗ��f\u001c\u001f�\b�����?l��9���\u001c\u0006�6(\u0002\b\u001b���O\u001c2\u0011\"�[\"������8��\u0003�\u0016pL�L\f�Q�\t��\u0019��k7I\u001d\\Po]k�x����\u0012�\u000e�c2�6���\u0003Eн2�\u0016�BL醖�\u0004�\u0014�h�e@t\u000f|��\u001e�P�8nA!&��\u001f�~mK�78?��8�\u000f\u001b���_�� ��\u0005 Fi,ds�\u000b\nQ�4-�l$b�\u0015�\u0007�4�e\r�\t�H\\(U0ݴ�I��eyb�v�$#��N�J�(�\u00140˻\u0001��jK�|�b�\tӨ̭\n��{\u0015��^��,���R�B�e\u0001�\u0004)�V;�E�VVm[�9�\u001cb�\\f3����;��[z*�J/#�j�$ګ��\b�zX��&ה݃a\u000e�m��Ai�aaQ���8��Ѹv�\u0001�8ue��w�ݭ\u000f\u0016�\u000b\u0013*\u000e�\u001bw�~\u0000�\u0018-W�D>\u0001|e<$��\u001c\u001ca�D\u0005�\"I]\u0010\u000b�8rK\u001c�( \"�\u001b�l\u0015ŐVޥ)\u001dj2���{1�\u001c/�O\u000b��\u0017�P�1\u0010�tڋ$��#��������2Y©�B\u0001��¨���7rJٛ�\u001bշ�^��;�\\�m\u0000�\u0015�-�b�B&KK��noo����ӵ��No1�5��ӡ\u001b$A�V>Iq�(\u001f b)�w\u001eP�s\u0013���y\u0003-���*�SG�,ܲ2s��f�i�\u000f�V\u0004$9m���r[�#\u0006$�ɏ\\���žI��\u000e�уE�\u001baB��+��l�8~@�D��B�>ճ\u001cս�?���.��\u0015�\u001c�B�'ٝ��\u0005�z����Jf�^�$=<\u0018<����\u000bRd�\u001a!.��r������c>��%J�\u0014�\u0012\u0001\u001d�W���O�w�w���\u0017\u001a��������i�$\u0016l�5�����g��;��Q\u0006�^��)i\u0003\u0001>�5n�\u0000SꜶ�\u0005�NM�\n���O��[4�y]�\u001aӬi�A�����f<�4\\��s\f�p\rh\tW�\f\u0003�j�f*��KŦjl�`*�\u0012S וo�F���\u000es=�V�y{�/&��Z\u0015�\u0018���57;�k��X`���n\u00140q����%��ŋ�qql[Q=,\u001f��-\u0015\u00068g\u0019�x��\u001d��~\n�\r0�W`����\u001c6Z\u0013�Gax�ӥ�[\u0010=u�T$�$O��\u0002��K\u0007�g@b�\u0018���;���\u0004u>�\u001e=��\u0006,�5\u0017WI\u0000�>�oI�_y\"��\u0015\u001c�Wџ�\u001e\r��C�c�j�WQ��\u0016\u001df�����M��Rz��'�\u001f�D�O��a�^N0��q����\u001e7*~W�#:G�f�/�Pf�B�\u0005Sc\u001a�>{y\r��9�o|-�Q�Q�9�6$\u00113\u001a�5(j\u000ek\u0015\u0002\u0006�Yv�c��$g�-�\\�qW�:���!՗v��v�s����L�\u001f�T.E�\u0002Bz=*G��\u000bA��h㷹���m%�T\u001a\fȇ�^\u001f&8N�]�s�5O\u0016|�K\u001b�`d��\f��}t��A�\u0004����\"\u001a��X�\u001fh��}\b�E�B��|�\u001b9��Ewb��CA�\u0010��k\u001e\n�{��\u001bR�\u0017]\u001bK3_\u0002�R\t\\kn�!yH;��\u0003���\u0003��;&�Vn��6�\u000e�\u001f�)�?��cAN���\u001dI��\"�\u0011�_\bL��\b��\b*�<�4~H�,���Ǧ�\u0013ߑ��9�\b��\u0006'�����D\re�v��gľ�@_\u0000��?Gk��/��*���\u0002R',t��Lh�\rp����T\u0019���h+JJ7�snŭ\u000b-\u0003vKu4W���~0����\u001f�[`t�0�6�+\u001b%A��T��!\u0002c�_\\��U��AJ��(���/>j#�AmǢ8�d\u00131�q\u0013U{ώ�v\u001c��񽦡��8�k�A;�����y\u0007G}�\r�T.�=�r�?�\u000f���)���50@����1=�HkX�$+|Mh�E��\u0000/�\u0003`2���-\u001b�\u0014��[\t��-�=�\u000e��K�\t�ḍ��i\u0016��>\u0015H�bjy;�\b����d�\u0018������߈�\u0010zk�Jz!��<�Z�F\u0016�!dظƑ�f1\u001f��X���\u0015\u0006~�\u0015{ٚ\u0006\u0013���hЫP�Fy���]\u0005}�!?Y��K������.�h�c2`�pSU͔�'��19�Q$>\u0019�G.#\u0007�K�\u0010�e�3t�\u000b*9ʂrJ+E�\u001c�$�Ka��Y�o�E��\b�ҨG�\u0016�P����)i\u0002�\u0017ͩċ�>��\u0013񒳞*�piLߵ��r\u0012�x��\u0013v\u0003}me��)�l~X�\bPS��r]~^Ik�*��;/�����{��\u0010\u000bІ�F�`#��ɢ@X�j\ń���F�5��ݼ�ӌ5*�(|\u0016V�\u000b�\b���\u000b=⑷+�V��������\u0012�P��>�Em���1t�&�E��M��)���kȉ�\u000b�i��\u0017�sM-�\u001d��\u0005��\u001bOx�\u0017u~\u0018h���ص���6=���ni�V߯�\u0016]V��\tM�\u001e��-:1\t\u0013��pҾ���^��t6�I�K}\n\u001cA|��\u0005�������$�m�ϢO�(�Sh\u000f�q�g�'OC�S�J�7^g3�\u001c��Ne\u0000\u0003Ϝ�g�'G\u0016�)h?������{��\u0014���O3�l���`=�����\u0003\u0003m\u0000��7���\u0006a\u0005<�K�?PK\u0007\bx\u000e��\f\u0000\u0000t\u000f\u0000\u0000PK\u0003\u0004\u0014\u0000\b\b\b\u0000�e~Z\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\r\u0000\u0000\u0000Course_3.xlsx}W\t4T\r\u001b\u001e\u0006c�5��'���dd,\u0019�,�Bdg\u0018\u0012��ǒ���T*���l\u0011�\u001b[�D�\t��L�^��?�?���}�{�{�=�>����5E\u0001\u0019x\u0000��̀aL�\r`��M��:>��\u0018o��!�\u0018��|�y�\u0007����\u00149�gu�ʨ��Z��\u0011z�{g\rhK�8�U���Һ\u001dH5��\u0012\u000bn������k-��F\u0007�\u001d��\u0015�!�$��n�\u000f���@�tʶG�+��T�\u001b�3�1��8��� a��o�V8����߹\u0016�|�����q�\u0015\f�0%�/�\u000f��\u0018I�\f�f=\u0019�^h1������W�/=\u00185 ~�O��\u0004�\b�����B'S{���i��\t�@��~����`�Z�\f��G�{Δ�꘍���^̽\u001f\u0015>P�ްP�ǣ{�;1��!>�PU��F�\u001d�Խ\\r6\tL���0��*\u0007�F0^ˍH��Y���\u0014\b9g�����z����\u0002i�x�\u0015n\u0013\u0011_�t3\u0012��%�%��D��B~\u0017�\u0012LZ�LQ ���^\u001c�\u000e\u0000\u0010`\u0000\u0000L��{\b�\u001c�0^x\u0005��kY:ٳ]�5ޡsnR��c�Y]�ѹ�I\u000bt�g\u0011h�>�Xv�V��Y\u0014\u000b�G)��g�Z\t�f3��\u0005Q\u0001��D��\r\n��ƽ����s�S�L\"�\u0011u�Dp�w&��(#�\u000b�1l\u0018m�D�g�sw�QUA�6���5�_H�󄻫&Ly�F�\u000ev\u001b�1\u0005�Md��Jn\r��9�u=�,��n+x�|5���\u0001�g�ݒ\u000bh�x#\u0010�%tl�\bMm�`y\u0013S&dF\u0018z���\u001ek�V��G�A�^!\u0002�j<߉���j!J8�67�I��Ӵ�\u0011�↓f�>.�~>�x\u0005'_���4J!�ВRw1�'��O](g�r��hI� \u00073�\u0005�5#CK���\u0019�y\u0007g�O�m�5)a\u000e�d56����\u000f\rUg]�V��k�\u0003�4\u0014vvN��\u0004�X\u000e�/3�~J�|��:[Z��a�Z�����\tJ��3\u0005���\u0017C�z,\u0013\u0011e~W��Ӻ]\u000f�>�C��b��\u001c}+�\u0007`; \u0015�\u0018�\f��>\u0004�) ��\u0001���a�#:��\n١ȩ�P���F͈�θ^&�6�lǳ\b?Z�9� 6���Ѽ�v3j��\tt�g���J������S)�)D���k�8��rԹ\u001ePA��Xj�)p_,�a@\u0017\u0011��)�Y����\u0004!\u001f\u0005(���pO\u001bT\nS2^�(g����bAZ�+��\u0000\u0013\u0010�c��)Hi��p|�\\*���8���j�\b�\u0005�HЬ�0G�C\tN��*���\u0019�IP\u001d��GEq\u0005D�(������L\u0004O咓���\u001e�����Ԣ�N\u000fd_\r\t\u0016J6���N(3�]�\u001a��m\u0017\\\r]�\u000e�S�Z*����&�j;��D��J�?��C�`/\u0005<��\u000f�z�����\u001d��ca�\u0013$P�'n��k!D�\u0002����@n�<�u�\r�<G��\u0017\u001f��\u001d��\t_�([WPcZ\u0014Y�ʢy\t:�Ȧ@����M��\u00057�7��wI7�j��}�H��Ɩ\u0003�^��\u0000t\u001d�\u000f=#\u001b��0�\f3�V�D\u0018�\u0017\u000bV�\f��\u00136�����\"O#.�L�y�*�>I��`�!�\u0003n�|�tl��W�m���\t�L7Y�& _ \u001e�@�����\u0014��ڳJ����I�y�\r����9���\u0005ˠ\u0016���6Ӊ�~�\u001c:���D�;�\u000fo������p��\u0011�T\u0019�{�\f�B�JU*��D���\\ͧS\u0013\u0007.��E����N\u0006��WQ�������t�ﶅb6Ue�t&\u0019�T���ډ��x�!Q!i�󙎱\u0015�1�E����\u0013N�V�=0x1��U\u000ef\b�|\u001e��x=��Ө�$���\u0019\\o�(�Bn�*cu�L$�^�\u000b㕷�\u0010�_�ω�{(��c�\u001f+���Z��xa~��)�l���\u0016\r�t2a((X��\n�0\u001bn2��[ٸ��q�k�\f\u0015q�;\u0013\b���\u001c��\u001e��<�z�&���$\u001b�}�\u0014���x���j\u0004���?\"<\u000b�%Ey\u0000��\u0000j���\fZO���xd����[��%D\b9�8j͙uY��\"ӷ�˻O��rI�\u0018����f�[�r���;r\u001e��\u0017&{\u0010%�\u001d/�g=2�t�\u00195N3�\u0019���?�|8S�̉��lO�\u0015\u0019�iҩ[�X/\u001e�\u0006\f�|.�<G�R\u0019��\u0018���g9:��vL4Q�0�j1a\u0001I\u00195������v*�ʂ��}\u000b1U\u001f=\u0006��2�/�\n^N��\u0017LG&v�r�\u0004�\u0011���˗/\u0014�h[8�\u001e�t�����S\u000f>,�[b�V��\u0017V�7Y9�<�'��̈́Nh\t�FH5q\\GH�Kn���ϵE�טk�f$��/��\u0015\u0001d,M\"�?\u000e(��\u0012\u0005���s��9�-Rr�6M$N�u�\t�5�*�~�Y�7�y�\u001c�xw�d�\b%�k���C�5\u001e,\u0004���B)_\u001e\u001a��:�s7�U\u0006P����TwV�k]HL����\t������� �[�\u0003B�J\u0017~\u000e�ǂ\f\u001f�ͫY\r����\u0007W�?�\u0003(\u0001�ɮ4ws�h��\u0003S��ض�\u0004�q��_�ס�\u0012y��\u0004.��u>�|�%M?��}3�8):X*p�*� \u0012��~Q�\u0004�ݑ\r�ǯ��~P�q��g_\u0016}�.�:-\u001d�y��{ŦG��J��\\6#�Ju��)��~C�Jk��\u0001�<�U\u001a\u001b>lO�~��{��d��|O3:G��?\u0013��q��|\u0005�\n.��/�\u0000.�8��AԷ��[��/N�`kbIK\u0004��Ɉ����\"�\u00191�\u001e�Ì)�l���&�uG]\r=-��@g�����!eZb��h�TU��\r�\r\u0018���Nj�����W��|�]\u0002�Y�O��\u001b� >��\u0018s��`n�\u0002�\u0014�hq\f\u001b2�#�yӠ���J��\b֯�o��?�\u00046^�i\u0016�V�<4\u001d;Z��Ga��H��\tC��S!��\u001e�\"\u0018��\u001a\u001f~��ls\u0013\u000f��=�E~����w.�\u0018�?^��M�WR���D+��/�|�Rn��I\u001cw\u0006\u0014X�\u0007V��|\u001f\u0010\u0007T~�]c�}���}�F\n[ީ��\u001aB���Ű�Y\u001d�\u001cF�ru����91�1�\t$d�#\u0017�l�i@\u0012\u0002w�|��wǙ�$J\u0019�-�H��]���\r�=�T,s2� ��b�?��h�sujĿ*E�'=kv�YR\u0018��\u001cv��G:��M��\u0005&?�|](�M\t��\u0012��Eft���/v\u0001O\u001f�\u001dk@��>\r�)Uz{�a\u001d�Ȱ�%8��2 ��]P�b��T���\u0001\u0001�P�\\�Գ\u001cV6M����w�=\u001c��7\u001dgJ\u001by���L��'�!��\u0005���6J�<\u001d\u001blE����aL\u001ap\u00054�QPz��h���n�\u000ew;P��bޯ����?r�M\u00165\u0011\u0015S���~C�\u0003��,���:�x�G~�v\\�B���2O�{\u000e����\u000e۪\r��\u001f��e��/���y\u0000�s}�\u0006�=��wa���;\u001ed\u00178�n�λ\u0017�s���\u0005̥��B�\u0017�s��څ�\u0000����\u0017�sn�삗3��ޱ��ζʶ�C(Ӟi�\u0017���p�\n2��\u000b�\u0005�,�C��F�?���~v&\u0005�n\u0002Y��|MQ�L��i�\u0016\r)ĺ��?PK\u0007\b��\u0018��\u000b\u0000\u0000t\u000e\u0000\u0000PK\u0003\u0004\u0014\u0000\b\b\b\u0000�e~Z\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\r\u0000\u0000\u0000Course_4.xlsx}W\t8T�\u001b\u001e�6C�\f�-��Bq�X�Zg����m\u0018�a0�5#K�}O�]He�DCR�v\rY�kɠ\\dl%����<\u0017����w�s�s��9����w�c�\u00042@\u0000,,,�~\f�\u0016�o��[��p^\u0004�\u0017��\"�\u001b���\r��>5��z-��#�}HZi�\u0004�\u0013�%��[�\n�\u001c�j�)Q���aǬ�fv\u001b�����j����癭�&�����o���ݧ\u001b�BN�\u000e�tʰG\n�)v1+�3���bmZ�\u0016�v��Y�dmB|����/��\u0003���iWO�r>/$�7iv[~ѣ\u0013a(i�ۑ�=0��\bW6hu�O�kv��^��}�d%�9��k\u0014ˣ��'\u0002�ɷ\u0015\u0004\u0013X;�~\u001ew�}�iU��L7���Li���@ޗ�[��a!=/\f��`G!�9�1�E�$ƣ�J�&N�h�l�Zz)\u000eT�z\\D���\u000eh5�h5�\u0018=l�5���`���A>\u00034����b�ג�M��Ĩʗ9�>���\u0011\u000e�\u0018'>a�[���Mt&Hf���\u000e\u001fU:\u0000@�\u0001\u00000��ܳ�-\u0007_\f\u0016/'K;>Ni��\"�\u0016��vn\\�/�8��w��y�-�)^B\u0018�;�G3H�]���`�\u0005)�]�>�\u000b�\b��lNaص��\u0002��o�\u0002\u0001\u001a�\u0016/�4�yO��N�\u0010��\u0014���ҚK\n�O�\u0002#��C��a�\u0019Q�oG�U��l)���b�Eʞ��Tc�l�\u00012_��s�k�?�B3%�{\u0002�;\u001d�\u0017�8>Q�\t4���u\u0000�ش7f\u0002H\u000b���|��\nC�\u0006�M\u0018wޘ���\u0003\f\u001dSe�\u0015�m䫳�q�C�\u0005@\u0010\f���e�Fx8���MI\\\u0010iz/s\u0004�����[.8g\u0013_�7^��ۛ&JÄf�(���w9}qσ8�\u0015�E�%�{9X�\u0007��\f���R���(_-��yy\u0016s�4��>��]\u0014�\\���U\f�0�)_�����6i�3�=]_\u0019���\u001b�T�e�qJ\u001cW�f5Rްg���\u001d=��r7�7���M�\u0018fV���֦EGs�\f)�zY1��s#v\u0000����\"DS�^�\u000e𫄸�'����2�L�C��C�v��C��,��<�����L�L��\u0013=������\t�ɔ�#�gղ_�PJ�V\u0012z6t�\u0014�|\u0012��W��,W}�\f\u0007�6E\bbL�U\u0005���v���>u��\u0002V������Ȍ�t<㎐�d?|\u000e�\b-Ѿe5\u0014γ��e9�,c\u0002�\u0016\u000b���\u001c~\u000b7�Е�ߢD���_��|�\u0010E*l:\u0001a3�B��7վ\u0013�[}\f�Д)]>��1��NIRN�l��\f��X��R��UKt|�u���AM��zV��<�������\u0001UD�ɡ\u001f�?`\u0002V\u000e��0�{�/� 7��� \u001a�<\u0012}�L{\u001dSI�+\u0012!{+\u0000+�ww�Ÿ�\u0013|�x��i<v[tz�_��]�\u0012֭)`E�뛝n��Ds\b�ǔ�\u0017\u000f�� ޞC0�=5��d0Cqb\u001d�<�.J,j�=�y��N�\u001dT���J�躋OL\u0014z��\f�\")�=}JMc�*�W$c�\b5ݹj�\u0000����\u0017Ou�FD\u0006\u0000c3ؤVcf�m7�\n�E\u000f�\u001bl7B�P��\u0018D^u\t���N���+E5�Zß:1�n&��?B��:1�\u0016\u001d\u0016�r1z5��븂���\u0007��\u0014�����gy�3����$ɴ����&��Xk�\f�UO\u0012@��7�U\fF,y�I��O8]���'v�����\n((^����>��{�����Eo�\u0003W뵇��H\u0018������{�\u0006��\u0010\r��a��R�2�i\u0004W\u0019�/5H�X\u0007\u0000x�Q�!\u0000�zq|�����+Q��\u0000�7\u0004����\f���y\u0007<l�\u001d�j���9&b��q�]I�/��8Ǽ3f\u0011b3�U�G�^���u��|N5�G\u00063�*\u0010n�L��˼�(\b{����\u000e[\u0004Gd�n�]ݨ�@;*��;�9\u0015j\u0011Z�H\u001e��=D\u001c7�\u0000�~?�}�M>\u001cN��#ec�[��\u001eׂC㾧\u0002f�l��N\u001a\u0015��P��ͧ�:�Z����/'���\u0010���-��ҫ�Z�9���ǛW���]���+��B\u0007}m\u001a�v�\u0015�p\u0006d�(T\"a\u00005�n�ύP��S���OOHV\u001a��M6���\u0013�:5�I\f~�����I�I�\u0007�\u001a����IZ:\u000eţX�\u001an�\u0003Z\u0010��(\u001aXϖ�na��\fm�P\u0019c\n�\u0012}��\nǯ.�1\ts�Y�����r\u0018D�\te1\"�\u000e��p�\b�ˇ\u0014\u0007��\u000e!\b����lP�j�q�}����r���F��\u0005U�.e\u001duu�)�vY�d��6\u0012s�JQ��0))��H>*���c���F���Q�p\u001c�\u0013��%Y���^\u0003�\b;Z\u0017�_\u00150G\"�r�(3��i�q\u0006�?�/��!T�)�9�*F�q�������\u000b9i0����1�_X�+��cܙ���c�-Or)�?xN�x�x����M}\u0015���5�T\u000e�PS�\u000f\u0006Z��?%�ci����2q�,�?��\u0003��y�\n\u0015��;�P:\u001b���Y�UZ\\Ҧ�^�f���\u001f��%�\u0007�\u0013����u�6x�0H\u0012%�T�%\u000f�R)w���R���G�Inl,Y��\u0018?A{%ce�5j�j�\\�=8��\b�>O\u0010ec,n�7a�\u001d�3���R˂�\u0017Z��\u0012\r��\u0012�q|\r%�R@7�ɝ�J�r����t�{8�I,e���O��\\_�\u0005��2������P�a\u0015�ĝ��\u0012\\�&�\u001fo�aV���N�\u000f\u001c�\u0012/8���\u0007��f�#�$(y�i\nR�IJĥNƤy��.\u001a�n��/X]���9�����8����O\u000f����~\"��c�O\\܍!���5C\u000b��{�\fn\u0003�e|�O�!��r\u001bZ\u0006/2����-\u0007sԎ\u0013{R\u0003�N��F<��, v��~�Xy�Q[]���| z�k�\u000f���\u0017��m\ft�T�\u000f�5ۂ@nrG܊��_t��aS��^\u0006��>����ܐ�_(���\u0015�$�\u0001\u001f\u0002\u0011����f�Ee\u0013�0�\u001f�\u0019[D���IO�>V��\u001b\u0011$�\u001aX,y:r�b��Nq��@��y��{�@���H\"C\t��n��J�&\n���~/s�_\u001a\b�?Z»c0\u0004��ߧ�4z�Ӑ�By��Xwh���L=x\u001f�t\u0014Q>�.\"�\r�_~%�袚��h��\u0017sR`�&~y6V�1��*�^�\u000fǽP�\u0016��\u001d�3z�9�x!dd�a�ZR7;�c\t\u0000_�O\u0007=I��\u0005J�a<�.3�{�\u0012䲢żY��\u001f��W�a��p-��~\u0015�#����y�eR�\u0016\u0014�Қ�ݙw'��9sa�гo�9�B��\u0016�RQ�<\u000f�\u0004Gluo.6K�~Ƥ��1qeG���,�8��a�9{d��\u0011�#�J�+�?�\\F����S\u0017�xp;/�K�\t����(K\u0015�I�`P堕\r�Qgיk\b��:J1�q)Yގ��\u0018\u0011<&<�};YqI,޸�Xj�)�\u0013bs�͐\u0004W6��\u0004W\u000ew\"\u0012�~T��x!����K\u0005�\u00056\u0004=\u0006n�B��-oM�\u001bY�*��a�6�\u0014ezn\u0012�^��Z�I}�ꢪC\t�o_���oﾹ��Lb���\u0005x�6r�\"�Q�ܫ�q����ς�\u0018g��e�b2�-�X~0�T\\��_�_���-�v��\u00024\u0005\u001c˦���ο�>\u001d=\u0004��\u0006�[on���_~u\u000e\u0007��OY\u000f���\u001d�뇁�} �\u0001`&�������\u0006��\u0000�\n�_��a��� �\u0000�\tÿ{��\u0011���#\u0007\"P�\u000e}=\u000fC�O+�\u0003�x������ۙ�\u0000�\u0004��x;\u001cg�(�\u0007⌀��(0A22ў\u0001��\u0017���\u0003\u001b��?PK\u0007\bsڑR�\f\u0000\u00000\u000f\u0000\u0000PK\u0001\u0002\u0014\u0000\u0014\u0000\b\b\b\u0000�e~Z>,�xP\f\u0000\u0000�\u000e\u0000\u0000\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000Course_1.xlsxPK\u0001\u0002\u0014\u0000\u0014\u0000\b\b\b\u0000�e~Zx\u000e��\f\u0000\u0000t\u000f\u0000\u0000\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\f\u0000\u0000Course_2.xlsxPK\u0001\u0002\u0014\u0000\u0014\u0000\b\b\b\u0000�e~Z��\u0018��\u000b\u0000\u0000t\u000e\u0000\u0000\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0019\u0000\u0000Course_3.xlsxPK\u0001\u0002\u0014\u0000\u0014\u0000\b\b\b\u0000�e~ZsڑR�\f\u0000\u00000\u000f\u0000\u0000\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�%\u0000\u0000Course_4.xlsxPK\u0005\u0006\u0000\u0000\u0000\u0000\u0004\u0000\u0004\u0000�\u0000\u0000\u0000Y2\u0000\u0000\u0000\u0000"
+						}
+					]
 				}
 			]
+		},
+		{
+			"name": "http://localhost:8080/dean/reassign/students",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBtYWlsLnJ1IiwiaWF0IjoxNzQ0NzM0NjM4LCJleHAiOjE3NDQ4MzQ2Mzh9.__w5RRXsuQVOMEVjGp8ZAR6FQka7pOaQbGTK28sOHi4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentsId\":[60,42],\r\n    \"subgroupId\":9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dean/reassign/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dean",
+						"reassign",
+						"students"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
