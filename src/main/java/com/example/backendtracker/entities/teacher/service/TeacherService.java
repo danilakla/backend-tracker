@@ -59,7 +59,7 @@ public class TeacherService {
     }
 
 
-    private List<StudentGrade> createStudentGrade(List<Integer> studentsId, Integer classesId) {
+    public List<StudentGrade> createStudentGrade(List<Integer> studentsId, Integer classesId) {
         createStudentGrateViaBatch(studentsId, classesId, "INSERT INTO StudentGrades (id_student,id_class,attendance) VALUES (?,?,?)");
         return studentGradeRepository.findAllByIdClass(classesId);
     }

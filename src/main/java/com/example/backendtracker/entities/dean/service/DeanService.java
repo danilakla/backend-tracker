@@ -8,6 +8,7 @@ import com.example.backendtracker.entities.admin.dto.*;
 import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.common.dto.SubGroupMember;
 import com.example.backendtracker.entities.dean.dto.*;
+import com.example.backendtracker.entities.teacher.service.TeacherService;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import com.example.backendtracker.security.dto.UserRegistrationRequestDTO;
 import com.example.backendtracker.security.service.UserAccountService;
@@ -48,8 +49,9 @@ public class DeanService {
     private final SubgroupRepository subgroupRepository;
     private final JdbcTemplate jdbcTemplate;
     private final ClassGroupsHoldRepository classGroupsHoldRepository;
-
+    private final ClassRepository classRepository;
     private final DeanRepository deanRepository;
+    private final TeacherService teacherService;
 
     public List<SubGroupMember> getSubGroupMembers(Integer deanId) {
 
@@ -364,9 +366,46 @@ public class DeanService {
         return classGroupRepository.save(classGroup);
     }
 
-    public void addSubGroupsToClassGroup(AssignGroupsToClass groupsToClass) {
+    public void addSubGroupsToClassGroup(AssignGroupsToClass assignGroupsToClass) {
 
-        assignGroupsToClass(groupsToClass);
+        try {
+            if (assignGroupsToClass.isMany()) {
+
+
+                List<ClassGroupsToSubgroups> classGroups = classGroupsToSubgroupsRepository.findAllByIdClassGroup(assignGroupsToClass.classGroupId());
+                Integer classGroupsHoldId;
+                if (classGroups.isEmpty()) {
+                    classGroupsHoldId = classGroupsHoldRepository.save(ClassGroupsHold.builder().hasApplyAttestation(assignGroupsToClass.hasApplyAttestation()).build()).getIdClassHold();
+
+                } else {
+                    classGroupsHoldId = classGroups.get(0).getIdClassHold();
+                }
+                manageStudentGroupsToAssign(classGroupsHoldId, assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
+                updateStudentsGrateAfterAddToNewClassGroup(classGroupsHoldId, assignGroupsToClass.studentGroupIds());
+
+            } else {
+                manageStudentGroupsToAssignOne(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.hasApplyAttestation(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateStudentsGrateAfterAddToNewClassGroup(Integer holdId, List<Integer> subgroupsId) {
+        List<Integer> studensIds = studentRepository.selectByAllSubgrIds(subgroupsId);
+        generateStudentGrate(holdId, studensIds);
+
+    }
+
+    public void generateStudentGrate(Integer holdId, List<Integer> studentsId) {
+        List<Classes> classesEntity = classRepository.findAllByIdClassHold(holdId);
+        if (!classesEntity.isEmpty()) {
+            for (Classes cl : classesEntity
+            ) {
+                teacherService.createStudentGrade(studentsId, cl.getIdClass());
+            }
+        }
     }
 
     public void removeSubGroupsToClassGroup(RemoveGroupsToClass removeGroupsToClass) {
@@ -408,6 +447,7 @@ public class DeanService {
                     classGroupsHoldId = classGroups.get(0).getIdClassHold();
                 }
                 manageStudentGroupsToAssign(classGroupsHoldId, assignGroupsToClass.studentGroupIds(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
+
             } else {
                 manageStudentGroupsToAssignOne(assignGroupsToClass.studentGroupIds(), assignGroupsToClass.hasApplyAttestation(), assignGroupsToClass.classGroupId(), "INSERT INTO ClassGroupsToSubgroups (id_subgroup, id_class_group, id_class_hold ) VALUES (?, ?, ?)");
 

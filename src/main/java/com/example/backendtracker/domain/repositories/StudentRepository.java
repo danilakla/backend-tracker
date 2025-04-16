@@ -44,6 +44,7 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
     @Modifying
     @Query("UPDATE students SET id_subgroup = :idSubgroup WHERE id_student in (:studentsId)")
     void reassignStudents(@Param("idSubgroup") Integer idSubgroup, @Param("studentsId") List<Integer> studentsId);
-
+    @Query("SELECT  id_student from students WHERE students.id_subgroup in (:subgroupsIds)")
+    List<Integer> selectByAllSubgrIds( @Param("subgroupsIds") List<Integer> subgroupsIds);
     void deleteByIdAccount(Integer idAccount);
 }
