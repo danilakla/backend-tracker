@@ -83,8 +83,9 @@ public class DeanService {
                 .keyStudentParents(PasswordGenerator.generateParentPassword())
                 .flpName(NameConverter.convertNameToDb(studentAddDto.lastname(), studentAddDto.name(), studentAddDto.surname()))
                 .idSubgroup(studentAddDto.numberOfGroupId()).build();
-
-        return studentRepository.save(student);
+        Student created = studentRepository.save(student);
+        createStudentGrades(List.of(created.getIdStudent()), created.getIdSubgroup());
+        return created;
 
     }
 
@@ -525,6 +526,8 @@ public class DeanService {
     @Transactional
     public void reassignStudents(ReassignStudentsToNewGroup reassignStudentsToNewGroup) {
         studentRepository.reassignStudents(reassignStudentsToNewGroup.getSubgroupId(), reassignStudentsToNewGroup.getStudentsId().stream().toList());
+
+        createStudentGrades(reassignStudentsToNewGroup.getStudentsId().stream().toList(), reassignStudentsToNewGroup.getSubgroupId());
     }
 
     public List<SubgroupWithClassGroups> findSubgroupsWithClassGroupsByDeanId(Integer deanId) {
@@ -560,4 +563,47 @@ public class DeanService {
         return jdbcTemplate.query(sql, new SubgroupWithClassGroupsExtractor(), deanId);
     }
 
+    @Transactional
+    public void createStudentGrades(List<Integer> studentIds, Integer subgroupId) {
+        // Step 1: Fetch all class IDs and their attestation flags
+        List<ClassDto> classDtos = classRepository.findClassIdsBySubgroupId(subgroupId);
+
+        if (classDtos.isEmpty() || studentIds.isEmpty()) {
+            return; // No classes or students to process
+        }
+
+        // Step 2: Split classes into attestation and regular classes
+        Map<Boolean, List<Integer>> classIdsByAttestation = classDtos.stream()
+                .collect(Collectors.partitioningBy(
+                        ClassDto::getIsAttestation,
+                        Collectors.mapping(ClassDto::getIdClass, Collectors.toList())
+                ));
+
+        List<Integer> regularClassIds = classIdsByAttestation.get(false);
+        List<Integer> attestationClassIds = classIdsByAttestation.get(true);
+
+        // Step 3: Batch insert into StudentGrades for regular classes
+        if (!regularClassIds.isEmpty()) {
+            String sql = "INSERT INTO StudentGrades (id_student, id_class, attendance) VALUES (?, ?, 0)";
+            jdbcTemplate.batchUpdate(sql, studentIds, regularClassIds.size(), (PreparedStatement ps, Integer studentId) -> {
+                for (int i = 0; i < regularClassIds.size(); i++) {
+                    ps.setInt(1, studentId);
+                    ps.setInt(2, regularClassIds.get(i));
+                    ps.addBatch();
+                }
+            });
+        }
+
+        // Step 4: Batch insert into AttestationStudentGrades for attestation classes
+        if (!attestationClassIds.isEmpty()) {
+            String sql = "INSERT INTO AttestationStudentGrades (id_student, id_class) VALUES (?, ?)";
+            jdbcTemplate.batchUpdate(sql, studentIds, attestationClassIds.size(), (PreparedStatement ps, Integer studentId) -> {
+                for (int i = 0; i < attestationClassIds.size(); i++) {
+                    ps.setInt(1, studentId);
+                    ps.setInt(2, attestationClassIds.get(i));
+                    ps.addBatch();
+                }
+            });
+        }
+    }
 }

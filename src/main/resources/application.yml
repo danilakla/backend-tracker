@@ -1,3 +1,10 @@
+server:
+  tomcat:
+    threads:
+      max: 1000  # Макс потоков обработки
+      min-spare: 100  # Минимальное количество рабочих потоков
+    accept-count: 1000  # Макс длина очереди входящих соединений
+    connection-timeout: 5000  # Таймаут соединения (мс)
 spring:
   data:
     redis:
@@ -9,6 +16,13 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 100  # Рекомендуется 100-200 для высоконагруженных систем
+      minimum-idle: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: SpringBootHikariCP
 
 
     init:
