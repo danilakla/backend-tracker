@@ -2697,13 +2697,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGFuaWxha2FydHV6b3Y1QGdtYWlsLmNvbSIsImlhdCI6MTczNTk3ODMwMiwiZXhwIjoxNzM2MDc4MzAyfQ.77xDarW6OPaIgMQR2OXDYZxef8vnBmqF0lPS646Ev6c",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBtYWlsLnJ1IiwiaWF0IjoxNzQ0NzM0MzE0LCJleHAiOjE3NDQ4MzQzMTR9.XEmk8gG96siTdipAvGyM0qoMaJPaPPH4GwnLqqdV-Go",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"classGroupId\":\"3\",\r\n    \"studentGroupIds\":[\r\n8,9\r\n    ],\r\n    \"isMany\":false\r\n}",
+							"raw": "{\r\n   \"classGroupId\":\"12\",\r\n    \"studentGroupIds\":[\r\n13\r\n    ],\r\n    \"isMany\":true,\r\n    \"hasApplyAttestation\":true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2711,7 +2711,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/dean/assign/groups",
+							"raw": "http://localhost:8080/dean/add/groups-to-class",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2719,8 +2719,8 @@
 							"port": "8080",
 							"path": [
 								"dean",
-								"assign",
-								"groups"
+								"add",
+								"groups-to-class"
 							]
 						}
 					},
@@ -3749,7 +3749,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/dean/reassign/students",
+			"name": "reassign one student",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -3779,6 +3779,78 @@
 						"dean",
 						"reassign",
 						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBtYWlsLnJ1IiwiaWF0IjoxNzQ0NzM0MzE0LCJleHAiOjE3NDQ4MzQzMTR9.XEmk8gG96siTdipAvGyM0qoMaJPaPPH4GwnLqqdV-Go",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"classGroupId\":19,\r\n    \"studentGroupIds\":[7,8,9,14]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dean/remove/groups-from-class",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dean",
+						"remove",
+						"groups-from-class"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(DEAN) add subgroup to classgroup Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9ERUFOIiwic3ViIjoiZGVhbkBtYWlsLnJ1IiwiaWF0IjoxNzQ0NzM0MzE0LCJleHAiOjE3NDQ4MzQzMTR9.XEmk8gG96siTdipAvGyM0qoMaJPaPPH4GwnLqqdV-Go",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"classGroupId\":\"19\",\r\n    \"studentGroupIds\":[\r\n13,14\r\n    ],\r\n    \"isMany\":true,\r\n    \"hasApplyAttestation\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dean/add/groups-to-class",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dean",
+						"add",
+						"groups-to-class"
 					]
 				}
 			},
