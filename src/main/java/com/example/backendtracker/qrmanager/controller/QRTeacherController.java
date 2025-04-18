@@ -1,5 +1,7 @@
 package com.example.backendtracker.qrmanager.controller;
 
+import com.example.backendtracker.domain.models.StudentGrade;
+import com.example.backendtracker.domain.repositories.StudentGradeRepository;
 import com.example.backendtracker.qrmanager.dto.ReviewDto;
 import com.example.backendtracker.qrmanager.entity.ClassGeneral;
 import com.example.backendtracker.qrmanager.entity.StudentReview;
@@ -18,7 +20,8 @@ import static org.springframework.http.ResponseEntity.noContent;
 @RestController
 @RequestMapping("qr/teacher")
 public class QRTeacherController {
-
+@Autowired
+private StudentGradeRepository studentGradeRepository;
     @Autowired
     private QRService userService;
 
@@ -31,6 +34,7 @@ public class QRTeacherController {
     public ResponseEntity<Void> startQrProcess(@RequestBody ReviewDto reviewDto) {
         userService.delete(reviewDto.classId());
         userService.initProcessOfQrManagement(reviewDto);
+        studentGradeRepository.updateAttanceStartqr(reviewDto.classId());
         return noContent().build();
     }
 

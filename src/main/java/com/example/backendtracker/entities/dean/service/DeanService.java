@@ -582,6 +582,26 @@ public class DeanService {
         List<Integer> regularClassIds = classIdsByAttestation.get(false);
         List<Integer> attestationClassIds = classIdsByAttestation.get(true);
 
+        if (!regularClassIds.isEmpty()) {
+            String sql = "DELETE FROM StudentGrades WHERE id_student = ? and id_class =?";
+            jdbcTemplate.batchUpdate(sql, studentIds, regularClassIds.size(), (PreparedStatement ps, Integer studentId) -> {
+                for (int i = 0; i < regularClassIds.size(); i++) {
+                    ps.setInt(1, studentId);
+                    ps.setInt(2, regularClassIds.get(i));
+                    ps.addBatch();
+                }
+            });
+        }
+        if (!regularClassIds.isEmpty()) {
+            String sql = "DELETE FROM attestationstudentgrades WHERE id_student = ? and id_class =?";
+            jdbcTemplate.batchUpdate(sql, studentIds, regularClassIds.size(), (PreparedStatement ps, Integer studentId) -> {
+                for (int i = 0; i < regularClassIds.size(); i++) {
+                    ps.setInt(1, studentId);
+                    ps.setInt(2, regularClassIds.get(i));
+                    ps.addBatch();
+                }
+            });
+        }
         // Step 3: Batch insert into StudentGrades for regular classes
         if (!regularClassIds.isEmpty()) {
             String sql = "INSERT INTO StudentGrades (id_student, id_class, attendance) VALUES (?, ?, 0)";

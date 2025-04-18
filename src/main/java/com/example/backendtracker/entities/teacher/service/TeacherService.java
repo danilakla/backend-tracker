@@ -9,6 +9,7 @@ import com.example.backendtracker.entities.common.CommonService;
 import com.example.backendtracker.entities.teacher.dto.*;
 import com.example.backendtracker.reliability.exception.BadRequestException;
 import lombok.AllArgsConstructor;
+import org.apache.commons.math3.dfp.DfpField;
 import org.springframework.expression.ExpressionException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.crypto.BadPaddingException;
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -134,9 +136,8 @@ public class TeacherService {
     @Transactional
     public List<AttestationStudentGrade> calculateAvgForAttestationProp(
             AttestationCalculationDto attestationCalculationDto) {
-
-        List<StudentGradeSummary> studentGrades = studentGradeRepository.findStudentGradeSummaryByClassHold(attestationCalculationDto.holdId());
-        List<AttestationStudentGrade> attestationStudentGrades = attestationStudentGradeRepository.findAllByIdClassAndIdStudentIn(
+        List<StudentGradeSummary> studentGrades = studentGradeRepository.findStudentGradeSummaryByClassHold(attestationCalculationDto.holdId(), attestationCalculationDto.classId());
+        List<AttestationStudentGrade> attestationStudentGrades = attestationStudentGradeRepository.getattesifs(
                 attestationCalculationDto.classId(),
                 attestationCalculationDto.studentId()
         );
@@ -155,6 +156,13 @@ public class TeacherService {
                 })
                 .collect(Collectors.toList());
         attestationStudentGradeRepository.saveAll(updatedGrades);
+        updatedGrades.forEach(e -> {
+            if (e.getAvgGrade() != null && e.getHour() != null) {
+                e.setAvgGrade(Math.round(e.getAvgGrade() * 100) / 100.0);
+                e.setHour(Math.round(e.getHour() * 100) / 100.0);
+            }
+
+        });
         return updatedGrades;
     }
 
