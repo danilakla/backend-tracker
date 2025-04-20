@@ -364,6 +364,23 @@ public class DeanService {
         classGroup.setDescription(updateClassGroupDto.description());
         classGroup.setIdSubject(updateClassGroupDto.subjectId());
         classGroup.setIdClassFormat(updateClassGroupDto.classFormatId());
+
+        jdbcTemplate.batchUpdate("INSERT INTO classgroupshold (id_class_hold, has_apply_attestation) VALUES (?,?) ",
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        Integer idClassHold = updateClassGroupDto.idClassId().get(i);
+                        ps.setInt(1, idClassHold);
+                        ps.setBoolean(2, updateClassGroupDto.hasApplyAttestation());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return updateClassGroupDto.idClassId().size();
+                    }
+                }
+        );
+
         return classGroupRepository.save(classGroup);
     }
 
